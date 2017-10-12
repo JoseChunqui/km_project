@@ -1,6 +1,5 @@
-@extends('admin.layouts.layout-admin')
+@extends('layouts.admin')
 
 @section('content')
-  Logeado
-
+Hola
 @endsection

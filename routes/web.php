@@ -11,10 +11,17 @@
 |
 */
 
-Route::get('/cuestionario', function () {
-    return view('questionnaire');
+Route::get('/', function(){
+  return view('welcome');
 });
+
+Route::get('/questionnaire_save', 'QuestionnaireController@store');
+Route::post('/getAccess', 'QuestionnaireController@SendQuestionnaire')->name('getAccess');
+Route::get('/cuestionario/{token}', 'QuestionnaireController@create');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/respuestas', 'Admin\FormController@index');
+Route::get('/respuestas/{id}', 'Admin\FormController@show');

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Form;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,12 @@ class DatabaseSeeder extends Seeder
         $user->email = 'jose.chunqui.v@uni.pe';
         $user->password = bcrypt('159159');
         $user->save();
+
+        $path = storage_path()."/../json/questionnaire.json";
+        $data = file_get_contents($path);
+        $form = new Form();
+        $form->data = $data;
+        $form->save();
+
     }
 }

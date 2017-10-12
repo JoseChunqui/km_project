@@ -1,0 +1,923 @@
+[
+{
+  "section": "IDENTIFICACIÓN",
+  "questions": [
+    {
+      "statement": "Apellidos",
+      "type": "text",
+      "answer": "",
+      "required": true
+    },
+    {
+      "statement": "Nombres",
+      "type": "text",
+      "answer": "",
+      "required": true
+    },
+    {
+      "statement": "Código",
+      "type": "text",
+      "answer": "",
+      "required": true
+    },
+    {
+      "statement": "Especialidad",
+      "type": "text",
+      "answer": "",
+      "required": true
+    },
+    {
+      "statement": "Ciclo Relativo",
+      "type": "select",
+      "options": [
+        {
+          "text": "1",
+          "value": "1"
+        },
+        {
+          "text": "2",
+          "value": "2"
+        },
+        {
+          "text": "3",
+          "value": "3"
+        },
+        {
+          "text": "4",
+          "value": "4"
+        },
+        {
+          "text": "5",
+          "value": "5"
+        },
+        {
+          "text": "6",
+          "value": "6"
+        },
+        {
+          "text": "7",
+          "value": "7"
+        },
+        {
+          "text": "8",
+          "value": "8"
+        },
+        {
+          "text": "9",
+          "value": "9"
+        },
+        {
+          "text": "10",
+          "value": "10"
+        }
+      ],
+      "answer": "",
+      "required": true
+    },
+    {
+      "statement": "Edad",
+      "type": "number",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Teléfono (casa/trabajo)",
+      "type": "number",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Teléfono Celular",
+      "type": "number",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "E-mail",
+      "type": "e-mail",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Otros datos (pagina web, blogs, Facebook, skype, etc)",
+      "type": "textarea",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Distrito donde vive",
+      "type": "text",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Colegio de Procedencia",
+      "type": "text",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Academia Pre-Universitaria",
+      "type": "text",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Orden de Mérito de Ingreso a la UNI",
+      "type": "text",
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Promedio ponderado acumulado",
+      "type": "text",
+      "answer": "",
+      "required": false
+    }
+  ]
+},
+{
+  "section": "OPINION SOBRE CURSOS Y PROFESORES",
+  "questions": [
+    {
+      "statement": "Indique los tres mejores cursos que hasta ahora haya llevado en la UNI-FIIS (incluya el profesor q lo dictó)",
+      "type": "table",
+      "files": [
+        {
+          "columns": [
+            {
+              "value": "Nro.",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Curso",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Profesor",
+              "editable": false,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "1",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "2",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "3",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "statement": "Indique cuatro principales cualidades que en su opinión debe poseer un buen profesor (sustente brevemente por qué)",
+      "type": "table",
+      "files": [
+        {
+          "columns": [
+            {
+              "value": "Nro.",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Cualidad",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Sustento",
+              "editable": false,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "1",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "2",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "3",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "4",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "statement": "¿Qué expectativas tiene del curso?",
+      "type": "textarea",
+      "answer": "",
+      "required": false
+    }
+  ]
+},
+{
+  "section": "FORMACIÓN EXTRA-ACADEMICA",
+  "questions": [
+    {
+      "statement": "Nivel de Inglés",
+      "type": "select",
+      "options": [
+        {
+          "text": "Elemental",
+          "value": "Elemental"
+        },
+        {
+          "text": "Básico",
+          "value": "Básico"
+        },
+        {
+          "text": "Intermedio",
+          "value": "Intermedio"
+        },
+        {
+          "text": "Avanzado",
+          "value": "Avanzado"
+        }
+      ],
+      "answer": "",
+      "required": false
+    },
+    {
+      "statement": "Actividades Extra-académicas",
+      "type": "table",
+      "files": [
+        {
+          "columns": [
+            {
+              "value": "Actividad",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Descripción",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Lugar",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Fecha Inicio",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Fecha Fin",
+              "editable": false,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "Prácticas",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "Ayudantía",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "Maratones/Concursos de Programación (Hackathon, IEEEXtreme Programming, etc)",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "Otros (Centros Culturales,etc)",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        }
+      ]
+
+    }
+  ]
+},
+{
+  "section":"CONOCIMIENTO Y USO DE HERRAMIENTAS",
+  "questions":[
+    {
+      "statement": "Conocimiento de Herramientas",
+      "type": "multiquestion",
+      "questions":[
+        {
+          "statement": "Lenguajes de Programación (Ejemplo: Java, PHP, etc). Autocalifique su nivel",
+          "type":"table",
+          "files":[
+            {
+              "columns": [
+                {
+                  "value": "Lenguaje de Programación",
+                  "editable": false,
+                  "answer": "",
+                  "required": false
+                },
+                {
+                  "value": "Auto calificación (escala de 0 a 20)",
+                  "editable": false,
+                  "answer": "",
+                  "required": false
+                }
+              ]
+            },
+          {
+            "columns": [
+              {
+                "value": "Java",
+                "editable": false,
+                "answer": "",
+                "required": false
+              },
+              {
+                "value": "",
+                "editable": true,
+                "answer": "",
+                "required": false
+              }
+            ]
+          },
+          {
+            "columns": [
+              {
+                "value": "PHP",
+                "editable": false,
+                "answer": "",
+                "required": false
+              },
+              {
+                "value": "",
+                "editable": true,
+                "answer": "",
+                "required": false
+              }
+            ]
+          },
+          {
+            "columns": [
+              {
+                "value": "Python",
+                "editable": false,
+                "answer": "",
+                "required": false
+              },
+              {
+                "value": "",
+                "editable": true,
+                "answer": "",
+                "required": false
+              }
+            ]
+          },
+          {
+            "columns": [
+              {
+                "value": "Otros",
+                "editable": true,
+                "answer": "",
+                "required": false
+              },
+              {
+                "value": "",
+                "editable": true,
+                "answer": "",
+                "required": false
+              }
+            ]
+          },
+          {
+            "columns": [
+              {
+                "value": "Otros",
+                "editable": true,
+                "answer": "",
+                "required": false
+              },
+              {
+                "value": "",
+                "editable": true,
+                "answer": "",
+                "required": false
+              }
+            ]
+          }
+        ]
+        },
+        {
+          "statement": "Gestores de Base de Datos (Ejem: Oracle, MySQL, etc).Autocalifique su nivel.",
+          "type":"table",
+          "files":[
+            {
+              "columns": [
+                {
+                  "value": "Gestor de Base de Datos",
+                  "editable": false,
+                  "answer": "",
+                  "required": false
+                },
+                {
+                  "value": "Auto calificación (escala de 0 a 20)",
+                  "editable": false,
+                  "answer": "",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "columns": [
+                {
+                  "value": "MySql",
+                  "editable": false,
+                  "answer": "",
+                  "required": false
+                },
+                {
+                  "value": "",
+                  "editable": true,
+                  "answer": "",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "columns": [
+                {
+                  "value": "Oracle",
+                  "editable": false,
+                  "answer": "",
+                  "required": false
+                },
+                {
+                  "value": "",
+                  "editable": true,
+                  "answer": "",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "columns": [
+                {
+                  "value": "Informix",
+                  "editable": false,
+                  "answer": "",
+                  "required": false
+                },
+                {
+                  "value": "",
+                  "editable": true,
+                  "answer": "",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "columns": [
+                {
+                  "value": "Otros",
+                  "editable": true,
+                  "answer": "",
+                  "required": false
+                },
+                {
+                  "value": "",
+                  "editable": true,
+                  "answer": "",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "columns": [
+                {
+                  "value": "Otros",
+                  "editable": true,
+                  "answer": "",
+                  "required": false
+                },
+                {
+                  "value": "",
+                  "editable": true,
+                  "answer": "",
+                  "required": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "statement": "Lenguajes de Programación (Ejemplo: Java, PHP, etc). Autocalifique su nivel",
+      "type":"table",
+      "files":[
+        {
+          "columns": [
+            {
+              "value": "Sistema Informático o Prototipo",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Breve descripción de la funcionalidad",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Herramienta de programación utilizada (Java, PHP, etc.)",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Gestor de Base de Datos (MySql, Oracle, etc.)",
+              "editable": false,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "Fines: académicos o extra-académicos",
+              "editable": false,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            },
+            {
+              "value": "",
+              "editable": true,
+              "answer": "",
+              "required": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+]

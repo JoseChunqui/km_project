@@ -197,10 +197,9 @@
         this.active = this.tabs[(this.tabs.indexOf(this.active) + 1) % this.tabs.length]
       },
       save () {
-        axios.get('/form_save', {
+        axios.get('/questionnaire_save', {
           params:{
-            name: 'questionnaire',
-            description: 'description',
+            token: window.location.pathname.split("/").pop(),
             data: JSON.stringify(this.range)
           }
         })
@@ -222,6 +221,9 @@
     props: {
       dataRange : Array,
       functionForm: String
+    },
+    mounted: function() {
+      console.log('mounted');
     }
   }
 </script>

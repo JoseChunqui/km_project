@@ -1,7 +1,18 @@
 @extends('layouts.login')
 
 @section('content')
-<div class="container">
+  <reset-form
+    action-form="{{ route('password.request') }}"
+    method-form="POST"
+    token="{{ $token }}"
+    csrf-token="{{ csrf_token() }}"
+    error-email-form="{{ $errors->has('email') ? $errors->first('email'): '' }}"
+    error-password-form="{{ $errors->has('password') ? $errors->first('password') : ''}}"
+    error-password-confirm-form="{{ $errors->has('password_confirmation') ? $errors->first('password_confirmation'): '' }}"
+    old-email="{{ old('email') }}"
+  >
+</reset-form>
+{{-- <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -66,5 +77,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
