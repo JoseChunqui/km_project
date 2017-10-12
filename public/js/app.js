@@ -60287,24 +60287,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       drawer: true,
-      items: [{ icon: 'contacts', text: 'Contacts' }, { icon: 'history', text: 'Frequently contacted' }, { icon: 'content_copy', text: 'Duplicates' }, {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'Labels',
-        model: true,
-        children: [{ icon: 'add', text: 'Create label' }]
-      }, {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'More',
-        model: false,
-        children: [{ text: 'Import' }, { text: 'Export' }, { text: 'Print' }, { text: 'Undo changes' }, { text: 'Other contacts' }]
-      }, { icon: 'settings', text: 'Settings' }, { icon: 'chat_bubble', text: 'Send feedback' }, { icon: 'help', text: 'Help' }, { icon: 'phonelink', text: 'App downloads' }, { icon: 'keyboard', text: 'Go to the old version' }]
+      items: [{ icon: 'contacts', text: 'Respuestas', link: '/respuestas' }]
     };
   },
   methods: {
     logout: function logout() {
       document.getElementById("logout-form").submit();
+    },
+    redirect: function redirect(link) {
+      window.location.href = link;
     }
   },
   props: {
@@ -60463,7 +60454,13 @@ var render = function() {
                         )
                       : _c(
                           "v-list-tile",
-                          { on: { click: function($event) {} } },
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.redirect(item.link)
+                              }
+                            }
+                          },
                           [
                             _c(
                               "v-list-tile-action",
