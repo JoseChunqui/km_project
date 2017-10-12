@@ -4,7 +4,7 @@
   <reset-form
     action-form="{{ route('password.request') }}"
     method-form="POST"
-    token="{{ $token }}"
+    token-form="{{ $token }}"
     csrf-token="{{ csrf_token() }}"
     error-email-form="{{ $errors->has('email') ? $errors->first('email'): '' }}"
     error-password-form="{{ $errors->has('password') ? $errors->first('password') : ''}}"

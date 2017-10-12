@@ -6,7 +6,7 @@
         <v-form :method="this.methodForm" id="login-form" autocomplete="off" class="container" :action="this.actionForm">
           <div>
             <input type="hidden" name="_token" :value="this.csrfToken">
-            <input type="token" name="" :value="this.token">
+            <input type="hidden" name="token" :value="this.tokenForm">
           </div>
           <v-card color="blue-grey darken-2" class="white--text">
             <v-card-title primary-title>
@@ -25,11 +25,6 @@
             <v-card-text v-if="this.errorPasswordConfirmForm != ''">
               <v-alert color="error" icon="warning" value="true">
                 {{this.errorPasswordConfirmForm}}
-              </v-alert>
-            </v-card-text>
-            <v-card-text v-if="this.statusForm != ''">
-              <v-alert color="success" icon="check_circle" value="true">
-                {{this.statusForm}}
               </v-alert>
             </v-card-text>
             <v-card-text>
@@ -59,6 +54,7 @@
               @input="$v.password.$touch()"
               @blur="$v.password.$touch()"
               required
+              dark
               type="password"
               ></v-text-field>
             </v-card-text>
@@ -71,6 +67,7 @@
               @input="$v.password.$touch()"
               @blur="$v.password.$touch()"
               required
+              dark
               type="password"
               ></v-text-field>
             </v-card-text>
@@ -97,6 +94,8 @@ export default {
   },
   data () {
     return {
+      password : '',
+      confirmPassword : '',
       email: this.oldEmail
     }
   },
@@ -142,7 +141,6 @@ export default {
     oldEmail: String
   },
   mounted () {
-    console.log(this.errorsForm);
   }
 }
 </script>

@@ -24,8 +24,12 @@ class QuestionnaireController extends Controller
     public function create($token, Request $request)
     {
       if($this->validateToken($token)){
+        $token_expired = false;
+        if(Questionnaire::where('token','=',$token)->exists()){
+          $token_expired = true;
+        };
         $form = Form::findOrFail(1);
-        return view('questionnaire', compact('form'));
+        return view('questionnaire', compact('form', 'token_expired'));
       }else{
         abort(401);
       }

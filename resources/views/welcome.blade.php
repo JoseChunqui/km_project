@@ -2,7 +2,7 @@
 
 @section('content')
     <v-app id="inspire">
-      <div class="container">
+      <div class="container mt-5">
         <v-layout row wrap>
           <v-flex xs12 sm12 md6 lg4 offset-md3 offset-lg4>
             <form action="{{route('getAccess')}}" method="post">

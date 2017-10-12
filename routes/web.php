@@ -24,4 +24,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/respuestas', 'Admin\FormController@index');
-Route::get('/respuestas/{id}', 'Admin\FormController@show');
+Route::get('/respuestas/{id}', 'Admin\FormController@show')->name('view_questionnaire');

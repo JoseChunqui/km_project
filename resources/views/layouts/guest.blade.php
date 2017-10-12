@@ -10,7 +10,9 @@
   </head>
   <body>
     <div id="app">
+      <guest-layout>
         @yield('content')
+      </guest-layout>
     </div>
     <script src="{{asset('js/app.js')}}" charset="utf-8"></script>
     @stack('js')
