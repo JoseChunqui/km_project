@@ -15,7 +15,7 @@ Route::get('/', function(){
   return view('welcome');
 });
 
-Route::get('/questionnaire_save', 'QuestionnaireController@store')->name('save_q');
+Route::post('/questionnaire_save', 'QuestionnaireController@store')->name('save_q');
 Route::post('/getAccess', 'QuestionnaireController@SendQuestionnaire')->name('getAccess');
 Route::get('/cuestionario/{token}', 'QuestionnaireController@create');
 

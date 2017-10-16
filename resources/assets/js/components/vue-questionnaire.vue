@@ -321,11 +321,10 @@
         if(this.vee_errors.items['length'] == 0){
           console.log("valido");
           const vm = this;
-          axios.get(this.saveLink, {
-            params:{
+          axios.post(this.saveLink, {
+              csrf_token: vm.csrfToken,
               token: window.location.pathname.split("/").pop(),
               data: JSON.stringify(this.range)
-            }
           })
           .then(function (response) {
             vm.questionnaire_completed = true
@@ -350,7 +349,8 @@
     props: {
       dataRange : Array,
       functionForm: String,
-      saveLink: String
+      saveLink: String,
+      csrfToken: String
     },
     mounted: function() {
 
