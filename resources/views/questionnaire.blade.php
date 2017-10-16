@@ -12,7 +12,7 @@
       </v-card-title>
     </v-card>
   @else
-    <vue-questionnaire :data-range='{{$form->data}}' function-form="create">
+    <vue-questionnaire :data-range='{{$form->data}}' save-link="{{ route('save_q')}}" function-form="create">
 
     </vue-questionnaire>
 

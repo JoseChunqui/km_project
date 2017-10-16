@@ -3,7 +3,7 @@
     <v-toolbar card color="white" prominent>
       <v-toolbar-title class="body-2 grey--text">Administración del Conocimiento</v-toolbar-title>
       <v-spacer></v-spacer>
-      <div class="mr-4">
+      <div class="mr-4" v-if="!view()">
         <v-btn @click.native="next">Siguiente</v-btn>
         <v-btn  :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length && !allow" @click.native="save">Guardar</v-btn>
       </div>
@@ -321,7 +321,7 @@
         if(this.vee_errors.items['length'] == 0){
           console.log("valido");
           const vm = this;
-          axios.get('/questionnaire_save', {
+          axios.get(this.saveLink, {
             params:{
               token: window.location.pathname.split("/").pop(),
               data: JSON.stringify(this.range)
@@ -349,7 +349,8 @@
     },
     props: {
       dataRange : Array,
-      functionForm: String
+      functionForm: String,
+      saveLink: String
     },
     mounted: function() {
 

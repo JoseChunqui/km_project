@@ -41,7 +41,7 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else @click="redirect(item.link)">
+          <v-list-tile v-else @click="goto">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -91,7 +91,7 @@
       dialog: false,
       drawer: true,
       items: [
-        { icon: 'contacts', text: 'Respuestas', link:'/respuestas' },
+        { icon: 'contacts', text: 'Respuestas', link: this.respuestasLink },
       ]
     }),
     methods: {
@@ -101,12 +101,17 @@
       redirect(link)
       {
         window.location.href = link;
+      },
+      goto()
+      {
+        window.location.href = this.respuestasLink;
       }
     },
     props: {
       source: String,
       logoutLink: String,
-      lCsrfToken: String
+      lCsrfToken: String,
+      respuestasLink: String
     }
   }
 </script>

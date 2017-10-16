@@ -48,7 +48,7 @@ class QuestionnaireController extends Controller
     {
         $email = $request->email;
         Mail::to($email)->send(new Cuestionario($this->generateToken($email)));
-
+        echo "Formulario enviado a su correo electrónico. Revise su bandeja de entrada";  
     }
     function generateToken($email)
     {
