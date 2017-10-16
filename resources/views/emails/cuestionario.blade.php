@@ -1,12 +1,12 @@
 @component('mail::message')
-# Introduction
+# Cuestionario KM
 
-The body of your message.
+Ingresa al siguiente link para llenar el formulario.
 
 @component('mail::button', ['url' => $url])
-Button Text
+Link del cuestionario
 @endcomponent
 
-Thanks,<br>
+Gracias,<br>
 {{ config('app.name') }}
 @endcomponent
