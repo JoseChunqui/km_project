@@ -26,4 +26,12 @@ class FormController extends Controller
         $questionnaire = Questionnaire::findOrFail($id);
         return view('admin.show_questionnaire', compact('questionnaire'));
     }
+
+    public function update($id, Request $request){
+        $form = Form::findOrFail($id);
+        $form->key = $request->clave;
+        $form->save();
+
+        return redirect()->route('courses.index');
+    }
 }

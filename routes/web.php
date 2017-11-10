@@ -25,3 +25,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/respuestas', 'Admin\FormController@index')->name('view_index_q');
 Route::get('/respuestas/{id}', 'Admin\FormController@show')->name('view_questionnaire');
+
+
+Route::get('/instituciones', 'Admin\InstitutionController@index')->name('institutions.index');
+Route::post('/instituciones/store', 'Admin\InstitutionController@store')->name('institutions.store');
+
+Route::get('/cursos', 'Admin\CourseController@index')->name('courses.index');
+Route::post('/cursos/store', 'Admin\CourseController@store')->name('courses.store');
+
+Route::get('/forms/edit/{id}', 'Admin\FormController@update');

@@ -48,6 +48,8 @@ require('./libraries');
  Vue.component('admin-layout', require('./components/admin-layout.vue'));
  Vue.component('guest-layout', require('./components/guest-layout.vue'));
 
+ Vue.component('vue-institutions', require('./components/vue-institutions.vue'));
+ Vue.component('vue-courses', require('./components/vue-courses.vue'));
 
  const app = new Vue({
    el: '#app'

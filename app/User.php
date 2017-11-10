@@ -28,8 +28,26 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function role(){
+      return $this->belongsto('App\User');
+    }
+    public function institution(){
+      return $this->belongsto('App\Institution');
+    }
+
+    public function courses(){
+      return $this->hasMany('App\Course');
+    }
+
     public function sendPasswordResetNotification($token)
     {
       $this->notify(new ResetPasswordNotification($token));
     }
+
+    //roles
+    public function isAdmin(){
+      return $this->role->name == 'admin' ? true : false;
+    }
+
 }

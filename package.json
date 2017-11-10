@@ -18,11 +18,11 @@
     "lodash": "^4.17.4",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "vue": "^2.1.10"
+    "vue": "^2.5.3"
   },
   "dependencies": {
     "vee-validate": "^2.0.0-rc.19",
     "vuelidate": "^0.6.0",
-    "vuetify": "^0.16.5"
+    "vuetify": "^0.16.9"
   }
 }

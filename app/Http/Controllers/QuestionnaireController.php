@@ -28,7 +28,8 @@ class QuestionnaireController extends Controller
         if(Questionnaire::where('token','=',$token)->exists()){
           $token_expired = true;
         };
-        $form = Form::findOrFail(1);
+        $form_id = $this->getFormFromToken($token);
+        $form = Form::findOrFail($form_id);
         return view('questionnaire', compact('form', 'token_expired'));
       }else{
         abort(401);
@@ -38,21 +39,27 @@ class QuestionnaireController extends Controller
     {
       $questionnaire = new Questionnaire();
       $questionnaire->token = $request->token;
-      $questionnaire->form_id = '1';
+      $questionnaire->form_id = $this->getFormFromToken($request->token);
       $questionnaire->data = $request->data;
       $questionnaire->save();
-
     }
 
     public function SendQuestionnaire(Request $request)
     {
         $email = $request->email;
-        Mail::to($email)->send(new Cuestionario($this->generateToken($email)));
-        echo "Formulario enviado a su correo electrónico. Revise su bandeja de entrada";  
+        $key = $request->clave;
+        //Búsqueda en DB del formulario
+        $form = Form::where('key', $key)->first();
+        if($form){
+          Mail::to($email)->send(new Cuestionario($this->generateToken($email, $form->id)));
+          echo "Formulario enviado a su correo electrónico. Revise su bandeja de entrada";
+        }else{
+          echo "La clave de formulario ingresada es incorrecta";
+        }
     }
-    function generateToken($email)
+    function generateToken($email, $form_id)
     {
-        $to_be_encrypted = $email.'|'.($this->app_passport);
+        $to_be_encrypted = $email.'|'.($this->app_passport).'|'.($form_id);
         return encrypt($to_be_encrypted);
     }
 
@@ -72,5 +79,12 @@ class QuestionnaireController extends Controller
         }
 
         return $to_be_encrypted;
+    }
+
+    //After valdate
+    function getFormFromToken($token){
+      $decrypted = decrypt($token);
+      $array_decrypted = explode("|", $decrypted);
+      return $array_decrypted[2];
     }
 }

@@ -12,10 +12,17 @@
                   <div class="headline">Accede al cuestionario</div>
                 </v-card-title>
                 <v-card-text>
-                  <div>
-                    Ingresa tu correo electrónico
+                  <div class="mt-4">
+                    <div>
+                      Ingresa la clave del cuestionario
+                    </div>
+                    <v-text-field label="Clave" class="white--text" name="clave" dark>
+                    </v-text-field>
                   </div>
                   <div class="mt-4">
+                    <div>
+                      Ingresa tu correo electrónico
+                    </div>
                     <v-text-field label="E-mail" class="white--text" name="email" dark>
                     </v-text-field>
                   </div>
