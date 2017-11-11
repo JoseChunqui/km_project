@@ -31,42 +31,21 @@
         </v-form>
       </v-dialog>
     </div>
-    <div class="table__overflow elevation-10">
-      <table class="datatable table">
-        <thead>
-          <tr>
-            <th>
-              Nombre de la Institución
-            </th>
-            <th>
-              Abreviatura
-            </th>
-            <th>
-              Número de usuarios
-            </th>
-            <th>
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="institution in dataInstitutions">
-            <td>
-              {{institution.name}}
-            </td>
-            <td>
-              {{institution.abbreviation}}
-            </td>
-            <td>
-              {{institution.users.length}}
-            </td>
-            <td>
-              <v-btn>Ver</v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <v-data-table hide-actions v-bind:headers="headers" :items="this.dataInstitutions" class="elevation-1">
+      <template slot="headerCell" slot-scope="props">
+        <span slot="activator">
+          {{ props.header.text }}
+        </span>
+      </template>
+      <template slot="items" slot-scope="props">
+        <td class="text-xs-left">{{ props.item.name }}</td>
+        <td class="text-xs-left">{{ props.item.abbreviation }}</td>
+        <td class="text-xs-left">{{ props.item.users.length }}</td>
+        <td class="text-xs-center">
+          <v-btn>Ver</v-btn>
+        </td>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
@@ -74,7 +53,13 @@
   export default {
     data () {
       return {
-        dialog: false
+        dialog: false,
+        headers:[
+          { text: 'Nombre de la Institución', align: 'left'},
+          { text: 'Abreviatura', align: 'left'},
+          { text: 'Número de usuarios', align: 'left'},
+          { text: 'Acciones', align: 'center'}
+        ]
       }
     },
     methods: {

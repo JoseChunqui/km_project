@@ -1957,7 +1957,7 @@ function withParams(paramsOrClosure, maybeValidator) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(93);
+module.exports = __webpack_require__(96);
 
 
 /***/ }),
@@ -2019,7 +2019,7 @@ Vue.component('admin-layout', __webpack_require__(81));
 Vue.component('guest-layout', __webpack_require__(84));
 
 Vue.component('vue-institutions', __webpack_require__(90));
-Vue.component('vue-courses', __webpack_require__(95));
+Vue.component('vue-courses', __webpack_require__(93));
 
 var app = new Vue({
   el: '#app'
@@ -30034,7 +30034,7 @@ module.exports.default = axios;
 /*!
  * Determine if an object is a Buffer
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
 
@@ -68482,32 +68482,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dialog: false
+      dialog: false,
+      headers: [{ text: 'Nombre de la Institución', align: 'left' }, { text: 'Abreviatura', align: 'left' }, { text: 'Número de usuarios', align: 'left' }, { text: 'Acciones', align: 'center' }]
     };
   },
 
@@ -68527,220 +68507,220 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "mb-4" },
-      [
-        _c(
-          "v-dialog",
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "mb-4" },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "", "max-width": "500px" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { slot: "activator", color: "primary", dark: "" },
+                  slot: "activator"
+                },
+                [_vm._v("Añadir Institución")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-form",
+                {
+                  staticClass: "container",
+                  attrs: {
+                    method: "POST",
+                    autocomplete: "off",
+                    action: this.actionNewInstitution
+                  }
+                },
+                [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: this.csrfToken }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-title", [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v("Nueva Institución")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { "grid-list-md": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                { attrs: { wrap: "" } },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Nombre de la Institución",
+                                          name: "name",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Abreviatura",
+                                          type: "text",
+                                          name: "abbreviation"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("small", [
+                            _vm._v("*Indica que son campos requeridos")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Cancelar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                color: "blue darken-1",
+                                flat: "",
+                                type: "submit"
+                              },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Guardar")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          "hide-actions": "",
+          headers: _vm.headers,
+          items: this.dataInstitutions
+        },
+        scopedSlots: _vm._u([
           {
-            attrs: { persistent: "", "max-width": "500px" },
-            model: {
-              value: _vm.dialog,
-              callback: function($$v) {
-                _vm.dialog = $$v
-              },
-              expression: "dialog"
+            key: "headerCell",
+            fn: function(props) {
+              return [
+                _c(
+                  "span",
+                  { attrs: { slot: "activator" }, slot: "activator" },
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(props.header.text) + "\n      "
+                    )
+                  ]
+                )
+              ]
             }
           },
-          [
-            _c(
-              "v-btn",
-              {
-                attrs: { slot: "activator", color: "primary", dark: "" },
-                slot: "activator"
-              },
-              [_vm._v("Añadir Institución")]
-            ),
-            _vm._v(" "),
-            _c(
-              "v-form",
-              {
-                staticClass: "container",
-                attrs: {
-                  method: "POST",
-                  autocomplete: "off",
-                  action: this.actionNewInstitution
-                }
-              },
-              [
-                _c("input", {
-                  attrs: { type: "hidden", name: "_token" },
-                  domProps: { value: this.csrfToken }
-                }),
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.name))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.abbreviation))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.users.length))
+                ]),
                 _vm._v(" "),
                 _c(
-                  "v-card",
-                  [
-                    _c("v-card-title", [
-                      _c("span", { staticClass: "headline" }, [
-                        _vm._v("Nueva Institución")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-text",
-                      [
-                        _c(
-                          "v-container",
-                          { attrs: { "grid-list-md": "" } },
-                          [
-                            _c(
-                              "v-layout",
-                              { attrs: { wrap: "" } },
-                              [
-                                _c(
-                                  "v-flex",
-                                  { attrs: { xs12: "" } },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "Nombre de la Institución",
-                                        name: "name",
-                                        required: ""
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-flex",
-                                  { attrs: { xs12: "" } },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "Abreviatura",
-                                        type: "text",
-                                        name: "abbreviation"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("small", [
-                          _vm._v("*Indica que son campos requeridos")
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      [
-                        _c("v-spacer"),
-                        _vm._v(" "),
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: { color: "blue darken-1", flat: "" },
-                            nativeOn: {
-                              click: function($event) {
-                                _vm.dialog = false
-                              }
-                            }
-                          },
-                          [_vm._v("Cancelar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              color: "blue darken-1",
-                              flat: "",
-                              type: "submit"
-                            },
-                            nativeOn: {
-                              click: function($event) {
-                                _vm.dialog = false
-                              }
-                            }
-                          },
-                          [_vm._v("Guardar")]
-                        )
-                      ],
-                      1
-                    )
-                  ],
+                  "td",
+                  { staticClass: "text-xs-center" },
+                  [_c("v-btn", [_vm._v("Ver")])],
                   1
                 )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "table__overflow elevation-10" }, [
-      _c("table", { staticClass: "datatable table" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.dataInstitutions, function(institution) {
-            return _c("tr", [
-              _c("td", [
-                _vm._v(
-                  "\n            " + _vm._s(institution.name) + "\n          "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(institution.abbreviation) +
-                    "\n          "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(institution.users.length) +
-                    "\n          "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_c("v-btn", [_vm._v("Ver")])], 1)
-            ])
-          })
-        )
-      ])
-    ])
-  ])
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [
-          _vm._v("\n            Nombre de la Institución\n          ")
-        ]),
-        _vm._v(" "),
-        _c("th", [_vm._v("\n            Abreviatura\n          ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("\n            Número de usuarios\n          ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("\n            Acciones\n          ")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -68752,21 +68732,14 @@ if (false) {
 
 /***/ }),
 /* 93 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 94 */,
-/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(96)
+var __vue_script__ = __webpack_require__(94)
 /* template */
-var __vue_template__ = __webpack_require__(97)
+var __vue_template__ = __webpack_require__(95)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68806,11 +68779,30 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 96 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -68895,24 +68887,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       dialog_details: false,
-      headers: [{ text: 'Nombre de la Institución', align: 'left' }, { text: 'Nombre del curso', align: 'left' }, { text: 'Código del curso', align: 'left' }, { text: 'Acciones', align: 'center' }]
+      institution_select: null,
+      view_users_select: false,
+      users_select: null,
+      users_select_items: [],
+      headers: [{ text: 'Nombre de la Institución', align: 'left', value: 'user.institution.name' }, { text: 'Nombre del curso', align: 'left', value: 'name' }, { text: 'Código del curso', align: 'left', value: 'code' }, { text: 'Acciones', align: 'center', value: '' }]
     };
   },
 
   methods: {
+    setInstitution: function setInstitution() {
+      var vue = this;
+      vue.users_select_items = this.dataInstitutions.find(function (element) {
+        return element = vue.institution_select;
+      }).users;
+      vue.view_users_select = true;
+    },
+    log: function log(item) {
+      console.log(item);
+      console.log(this.institution_select);
+    },
     getFormEditUrl: function getFormEditUrl(id) {
       return '/forms/edit/' + id;
     }
   },
   props: {
     dataCourses: Array,
+    dataInstitutions: Array,
     actionNewCourse: String,
     csrfToken: String
+  },
+  mounted: function mounted() {
+    console.log(this.dataInstitutions);
   }
 });
 
 /***/ }),
-/* 97 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68969,7 +68980,7 @@ var render = function() {
                     [
                       _c("v-card-title", [
                         _c("span", { staticClass: "headline" }, [
-                          _vm._v("Nueva Institución")
+                          _vm._v("Nuevo Curso")
                         ])
                       ]),
                       _vm._v(" "),
@@ -68984,6 +68995,59 @@ var render = function() {
                                 "v-layout",
                                 { attrs: { wrap: "" } },
                                 [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: this.dataInstitutions,
+                                          label: "Institución",
+                                          name: "institution",
+                                          "item-text": "name"
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            _vm.setInstitution()
+                                          }
+                                        },
+                                        model: {
+                                          value: _vm.institution_select,
+                                          callback: function($$v) {
+                                            _vm.institution_select = $$v
+                                          },
+                                          expression: "institution_select"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.view_users_select
+                                    ? _c(
+                                        "v-flex",
+                                        { attrs: { xs12: "" } },
+                                        [
+                                          _c("v-select", {
+                                            attrs: {
+                                              items: _vm.users_select_items,
+                                              label: "Usuario",
+                                              name: "user",
+                                              "item-text": "name"
+                                            },
+                                            model: {
+                                              value: _vm.users_select,
+                                              callback: function($$v) {
+                                                _vm.users_select = $$v
+                                              },
+                                              expression: "users_select"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
                                   _c(
                                     "v-flex",
                                     { attrs: { xs12: "" } },
@@ -69007,7 +69071,7 @@ var render = function() {
                                         attrs: {
                                           label: "Codigo del Curso",
                                           type: "text",
-                                          name: "abbreviation"
+                                          name: "code"
                                         }
                                       })
                                     ],
@@ -69309,6 +69373,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-4515f4ac", module.exports)
   }
 }
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

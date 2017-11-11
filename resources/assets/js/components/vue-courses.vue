@@ -7,16 +7,35 @@
           <input type="hidden" name="_token" :value="this.csrfToken">
           <v-card>
             <v-card-title>
-              <span class="headline">Nueva Institución</span>
+              <span class="headline">Nuevo Curso</span>
             </v-card-title>
             <v-card-text>
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12>
+                    <v-select
+                    :items="this.dataInstitutions"
+                    label="Institución"
+                    v-model="institution_select"
+                    name="institution"
+                    item-text="name"
+                    @input="setInstitution()"
+                    ></v-select>
+                  </v-flex>
+                  <v-flex xs12 v-if="view_users_select">
+                    <v-select
+                    :items="users_select_items"
+                    label="Usuario"
+                    name="user"
+                    v-model="users_select"
+                    item-text="name"
+                    ></v-select>
+                  </v-flex>
+                  <v-flex xs12>
                     <v-text-field label="Nombre del Curso" name="name" required></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field label="Codigo del Curso" type="text" name="abbreviation"></v-text-field>
+                    <v-text-field label="Codigo del Curso" type="text" name="code"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -82,23 +101,42 @@
       return {
         dialog: false,
         dialog_details: false,
+        institution_select:null,
+        view_users_select: false,
+        users_select: null,
+        users_select_items: [],
         headers: [
-          { text: 'Nombre de la Institución', align: 'left'},
-          { text: 'Nombre del curso', align: 'left'},
-          { text: 'Código del curso', align: 'left'},
-          { text: 'Acciones', align: 'center'}
+          { text: 'Nombre de la Institución', align: 'left', value: 'user.institution.name'},
+          { text: 'Nombre del curso', align: 'left', value: 'name'},
+          { text: 'Código del curso', align: 'left', value: 'code'},
+          { text: 'Acciones', align: 'center', value:''}
         ],
       }
     },
     methods: {
+      setInstitution(){
+        var vue = this;
+        vue.users_select_items = this.dataInstitutions.find(function(element){
+          return element = vue.institution_select;
+        }).users;
+        vue.view_users_select = true;
+      },
+      log(item){
+        console.log(item);
+        console.log(this.institution_select);
+      },
       getFormEditUrl(id){
         return '/forms/edit/'+id;
       }
     },
     props: {
       dataCourses: Array,
+      dataInstitutions: Array,
       actionNewCourse: String,
       csrfToken: String
+    },
+    mounted: function(){
+      console.log(this.dataInstitutions);
     }
   }
 </script>
