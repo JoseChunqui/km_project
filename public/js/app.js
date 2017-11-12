@@ -30034,7 +30034,7 @@ module.exports.default = axios;
 /*!
  * Determine if an object is a Buffer
  *
- * @author   Feross Aboukhadijeh <https://feross.org>
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
  * @license  MIT
  */
 
@@ -68487,7 +68487,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       dialog: false,
-      headers: [{ text: 'Nombre de la Institución', align: 'left' }, { text: 'Abreviatura', align: 'left' }, { text: 'Número de usuarios', align: 'left' }, { text: 'Acciones', align: 'center' }]
+      headers: [{ text: 'Nombre de la Institución', align: 'left', value: 'name' }, { text: 'Abreviatura', align: 'left', value: 'abbreviation' }, { text: 'Número de usuarios', align: 'left', value: 'users.length' }, { text: 'Acciones', align: 'center' }]
     };
   },
 
@@ -68881,17 +68881,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
-      dialog_details: false,
+      dialog_details: [],
       institution_select: null,
       view_users_select: false,
       users_select: null,
       users_select_items: [],
-      headers: [{ text: 'Nombre de la Institución', align: 'left', value: 'user.institution.name' }, { text: 'Nombre del curso', align: 'left', value: 'name' }, { text: 'Código del curso', align: 'left', value: 'code' }, { text: 'Acciones', align: 'center', value: '' }]
+      headers: [{ text: 'Nombre de la Institución', align: 'left', value: 'user.institution.name' }, { text: 'Docente', align: 'left', value: 'user.name' }, { text: 'Nombre del curso', align: 'left', value: 'name' }, { text: 'Código del curso', align: 'left', value: 'code' }, { text: 'Acciones', align: 'center', value: '' }]
     };
   },
 
@@ -68899,7 +68903,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setInstitution: function setInstitution() {
       var vue = this;
       vue.users_select_items = this.dataInstitutions.find(function (element) {
-        return element = vue.institution_select;
+        return element == vue.institution_select;
       }).users;
       vue.view_users_select = true;
     },
@@ -68918,7 +68922,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     csrfToken: String
   },
   mounted: function mounted() {
-    console.log(this.dataInstitutions);
+    var vue = this;
+    vue.dataCourses.forEach(function (course) {
+      vue.dialog_details.push(false);
+    });
+    console.log(this.dataCourses);
   }
 });
 
@@ -69170,6 +69178,10 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.user.name))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
                   _vm._v(_vm._s(props.item.name))
                 ]),
                 _vm._v(" "),
@@ -69186,11 +69198,11 @@ var render = function() {
                       {
                         attrs: { persistent: "", "max-width": "500px" },
                         model: {
-                          value: _vm.dialog_details,
+                          value: _vm.dialog_details[props.index],
                           callback: function($$v) {
-                            _vm.dialog_details = $$v
+                            _vm.$set(_vm.dialog_details, props.index, $$v)
                           },
-                          expression: "dialog_details"
+                          expression: "dialog_details[props.index]"
                         }
                       },
                       [
@@ -69207,150 +69219,171 @@ var render = function() {
                           [_vm._v("Detalles de Formularios")]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "v-form",
-                          {
-                            staticClass: "container",
-                            attrs: {
-                              method: "GET",
-                              autocomplete: "off",
-                              action: _vm.getFormEditUrl(props.item.forms[0].id)
-                            }
-                          },
-                          [
-                            _c(
-                              "v-card",
-                              [
-                                _c("v-card-title", [
-                                  _c("span", { staticClass: "headline" }, [
-                                    _vm._v("Formularios asignados")
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "v-card-text",
-                                  [
-                                    _c(
-                                      "v-container",
-                                      { attrs: { "grid-list-md": "" } },
-                                      [
+                        _vm._l(props.item.forms, function(form) {
+                          return _c(
+                            "div",
+                            [
+                              _c(
+                                "v-form",
+                                {
+                                  staticClass: "container",
+                                  attrs: {
+                                    method: "POST",
+                                    autocomplete: "off",
+                                    action: _vm.getFormEditUrl(form.id)
+                                  }
+                                },
+                                [
+                                  _c("input", {
+                                    attrs: { type: "hidden", name: "_token" },
+                                    domProps: { value: _vm.csrfToken }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-card",
+                                    [
+                                      _c("v-card-title", [
                                         _c(
-                                          "v-layout",
-                                          { attrs: { wrap: "" } },
-                                          [
-                                            _c(
-                                              "v-flex",
-                                              {
-                                                attrs: {
-                                                  xs12: "",
-                                                  sm6: "",
-                                                  md6: ""
-                                                }
-                                              },
-                                              [
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label:
-                                                      "Nombre del formulario",
-                                                    name: "name",
-                                                    required: "",
-                                                    readonly: "",
-                                                    value:
-                                                      props.item.forms[0].name
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-flex",
-                                              {
-                                                attrs: {
-                                                  xs12: "",
-                                                  sm6: "",
-                                                  md6: ""
-                                                }
-                                              },
-                                              [
-                                                _c("v-text-field", {
-                                                  attrs: {
-                                                    label:
-                                                      "Clave del formulario",
-                                                    type: "text",
-                                                    required: "",
-                                                    name: "clave",
-                                                    value:
-                                                      props.item.forms[0].key
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
+                                          "span",
+                                          { staticClass: "headline" },
+                                          [_vm._v("Formularios asignados")]
                                         )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c("small", [
-                                      _vm._v(
-                                        "*Indica que son campos requeridos"
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-card-text",
+                                        [
+                                          _c(
+                                            "v-container",
+                                            { attrs: { "grid-list-md": "" } },
+                                            [
+                                              _c(
+                                                "v-layout",
+                                                { attrs: { wrap: "" } },
+                                                [
+                                                  _c(
+                                                    "v-flex",
+                                                    {
+                                                      attrs: {
+                                                        xs12: "",
+                                                        sm6: "",
+                                                        md6: ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label:
+                                                            "Nombre del formulario",
+                                                          name: "name",
+                                                          required: "",
+                                                          readonly: "",
+                                                          value: form.name
+                                                        }
+                                                      })
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-flex",
+                                                    {
+                                                      attrs: {
+                                                        xs12: "",
+                                                        sm6: "",
+                                                        md6: ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label:
+                                                            "Clave del formulario",
+                                                          type: "text",
+                                                          required: "",
+                                                          name: "clave",
+                                                          value: form.key
+                                                        }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c("small", [
+                                            _vm._v(
+                                              "*Indica que son campos requeridos"
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-card-actions",
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "blue darken-1",
+                                                flat: ""
+                                              },
+                                              nativeOn: {
+                                                click: function($event) {
+                                                  _vm.dialog_details.splice(
+                                                    props.index,
+                                                    1,
+                                                    false
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancelar")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "blue darken-1",
+                                                flat: "",
+                                                type: "submit"
+                                              },
+                                              nativeOn: {
+                                                click: function($event) {
+                                                  _vm.dialog_details.splice(
+                                                    props.index,
+                                                    1,
+                                                    false
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Guardar Cambios")]
+                                          )
+                                        ],
+                                        1
                                       )
-                                    ])
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-card-actions",
-                                  [
-                                    _c("v-spacer"),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: {
-                                          color: "blue darken-1",
-                                          flat: ""
-                                        },
-                                        nativeOn: {
-                                          click: function($event) {
-                                            _vm.dialog_details = false
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Cancelar")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: {
-                                          color: "blue darken-1",
-                                          flat: "",
-                                          type: "submit"
-                                        },
-                                        nativeOn: {
-                                          click: function($event) {
-                                            _vm.dialog_details = false
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Guardar Cambios")]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        })
                       ],
-                      1
+                      2
                     )
                   ],
                   1

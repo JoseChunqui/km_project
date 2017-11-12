@@ -58,36 +58,40 @@
       </template>
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.user.institution.name }}</td>
+        <td class="text-xs-left">{{ props.item.user.name }}</td>
         <td class="text-xs-left">{{ props.item.name }}</td>
         <td class="text-xs-left">{{ props.item.code }}</td>
         <td class="text-xs-center">
-          <v-dialog v-model="dialog_details" persistent max-width="500px">
+          <v-dialog v-model="dialog_details[props.index]" persistent max-width="500px">
             <v-btn color="primary" dark slot="activator">Detalles de Formularios</v-btn>
-            <v-form method="GET" autocomplete="off" class="container" :action="getFormEditUrl(props.item.forms[0].id)">
-              <v-card>
-                <v-card-title>
-                  <span class="headline">Formularios asignados</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs12 sm6 md6>
-                        <v-text-field label="Nombre del formulario" name="name" required readonly :value="props.item.forms[0].name"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm6 md6>
-                        <v-text-field label="Clave del formulario" type="text" required name="clave" :value="props.item.forms[0].key"></v-text-field>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                  <small>*Indica que son campos requeridos</small>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" flat @click.native="dialog_details = false">Cancelar</v-btn>
-                  <v-btn color="blue darken-1" flat @click.native="dialog_details = false" type="submit">Guardar Cambios</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-form>
+            <div v-for="form in props.item.forms">
+              <v-form method="POST" autocomplete="off" class="container" :action="getFormEditUrl(form.id)">
+                <input type="hidden" name="_token" :value="csrfToken">
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Formularios asignados</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container grid-list-md>
+                      <v-layout wrap>
+                        <v-flex xs12 sm6 md6>
+                          <v-text-field label="Nombre del formulario" name="name" required readonly :value="form.name"></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6 md6>
+                          <v-text-field label="Clave del formulario" type="text" required name="clave" :value="form.key"></v-text-field>
+                        </v-flex>
+                      </v-layout>
+                    </v-container>
+                    <small>*Indica que son campos requeridos</small>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click.native="dialog_details.splice(props.index,1,false)">Cancelar</v-btn>
+                    <v-btn color="blue darken-1" flat @click.native="dialog_details.splice(props.index,1,false)" type="submit">Guardar Cambios</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-form>
+            </div>
           </v-dialog>
         </td>
       </template>
@@ -100,24 +104,25 @@
     data () {
       return {
         dialog: false,
-        dialog_details: false,
+        dialog_details: [],
         institution_select:null,
         view_users_select: false,
         users_select: null,
         users_select_items: [],
         headers: [
           { text: 'Nombre de la Institución', align: 'left', value: 'user.institution.name'},
+          { text: 'Docente', align: 'left', value: 'user.name'},
           { text: 'Nombre del curso', align: 'left', value: 'name'},
           { text: 'Código del curso', align: 'left', value: 'code'},
           { text: 'Acciones', align: 'center', value:''}
-        ],
+        ]
       }
     },
     methods: {
       setInstitution(){
         var vue = this;
         vue.users_select_items = this.dataInstitutions.find(function(element){
-          return element = vue.institution_select;
+          return element == vue.institution_select;
         }).users;
         vue.view_users_select = true;
       },
@@ -136,7 +141,11 @@
       csrfToken: String
     },
     mounted: function(){
-      console.log(this.dataInstitutions);
+      const vue = this;
+      vue.dataCourses.forEach(function(course){
+        vue.dialog_details.push(false);
+      });
+      console.log(this.dataCourses);
     }
   }
 </script>

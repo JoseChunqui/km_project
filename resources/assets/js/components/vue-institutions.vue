@@ -55,9 +55,9 @@
       return {
         dialog: false,
         headers:[
-          { text: 'Nombre de la Institución', align: 'left'},
-          { text: 'Abreviatura', align: 'left'},
-          { text: 'Número de usuarios', align: 'left'},
+          { text: 'Nombre de la Institución', align: 'left', value: 'name'},
+          { text: 'Abreviatura', align: 'left', value: 'abbreviation'},
+          { text: 'Número de usuarios', align: 'left', value: 'users.length'},
           { text: 'Acciones', align: 'center'}
         ]
       }

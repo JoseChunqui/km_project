@@ -54,7 +54,7 @@ class CourseController extends Controller
         $form->name = 'Prueba de Entrada';
         $form->data = $data;
         $form->course_id = $course->id;
-        $form->key = 'ST265U-20172';
+        $form->key = ($request->code).'20171';
         $form->save();
 
 

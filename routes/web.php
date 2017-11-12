@@ -33,4 +33,4 @@ Route::post('/instituciones/store', 'Admin\InstitutionController@store')->name('
 Route::get('/cursos', 'Admin\CourseController@index')->name('courses.index');
 Route::post('/cursos/store', 'Admin\CourseController@store')->name('courses.store');
 
-Route::get('/forms/edit/{id}', 'Admin\FormController@update');
+Route::post('/forms/edit/{id}', 'Admin\FormController@update');
