@@ -50,6 +50,8 @@ require('./libraries');
 
  Vue.component('vue-institutions', require('./components/vue-institutions.vue'));
  Vue.component('vue-courses', require('./components/vue-courses.vue'));
+ Vue.component('vue-users', require('./components/vue-users.vue'));
+ Vue.component('vue-forms', require('./components/vue-forms.vue'));
 
  const app = new Vue({
    el: '#app'

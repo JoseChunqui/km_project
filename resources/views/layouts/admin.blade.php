@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="app">
-      <admin-layout respuestas-link="{{ route('view_index_q') }}" logout-link="{{ route('logout') }}" l-csrf-token="{{ csrf_token() }}">
+      <admin-layout logout-link="{{ route('logout') }}" l-csrf-token="{{ csrf_token() }}">
         @yield('content')
       </admin-layout>
     </div>

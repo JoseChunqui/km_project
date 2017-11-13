@@ -17,7 +17,6 @@
                     :items="this.dataInstitutions"
                     label="Institución"
                     v-model="institution_select"
-                    name="institution"
                     item-text="name"
                     @input="setInstitution()"
                     ></v-select>
@@ -25,17 +24,18 @@
                   <v-flex xs12 v-if="view_users_select">
                     <v-select
                     :items="users_select_items"
-                    label="Usuario"
-                    name="user"
+                    label="Docente"
                     v-model="users_select"
                     item-text="name"
+                    item-value="id"
                     ></v-select>
+                    <input type="hidden" name="user" :value="users_select">
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field label="Nombre del Curso" name="name" required></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field label="Codigo del Curso" type="text" name="code"></v-text-field>
+                    <v-text-field label="Código del Curso" type="text" name="code"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -57,7 +57,7 @@
         </span>
       </template>
       <template slot="items" slot-scope="props">
-        <td class="text-xs-left">{{ props.item.user.institution.name }}</td>
+        <td class="text-xs-left">{{ props.item.user.institution ? props.item.user.institution.name : 'Administrador'}}</td>
         <td class="text-xs-left">{{ props.item.user.name }}</td>
         <td class="text-xs-left">{{ props.item.name }}</td>
         <td class="text-xs-left">{{ props.item.code }}</td>
@@ -125,10 +125,6 @@
           return element == vue.institution_select;
         }).users;
         vue.view_users_select = true;
-      },
-      log(item){
-        console.log(item);
-        console.log(this.institution_select);
       },
       getFormEditUrl(id){
         return '/forms/edit/'+id;

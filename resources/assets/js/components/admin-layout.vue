@@ -60,10 +60,10 @@
       items: [
         { icon: 'domain', text: 'Instituciones', link: '/instituciones' },
         { icon: 'import_contacts', text: 'Cursos', link: '/cursos' },
-        { icon: 'contacts', text: 'Respuestas', link: '/respuestas' }
+        { icon: 'people', text: 'Docentes', link: '/docentes' },
+        { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
       ]
     }),
-
 
     methods: {
       logout() {

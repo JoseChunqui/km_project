@@ -42,8 +42,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $course = new Course();
-        $user = User::where('name', $request->user)->first();
-        $course->user_id = 2;
+        $course->user_id = $request->user;
         $course->name = $request->name;
         $course->code = $request->code;
         $course->save();

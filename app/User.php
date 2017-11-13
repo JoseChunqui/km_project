@@ -30,7 +30,7 @@ class User extends Authenticatable
 
 
     public function role(){
-      return $this->belongsto('App\User');
+      return $this->belongsto('App\Role');
     }
     public function institution(){
       return $this->belongsto('App\Institution');

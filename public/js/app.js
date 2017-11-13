@@ -1957,7 +1957,7 @@ function withParams(paramsOrClosure, maybeValidator) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(96);
+module.exports = __webpack_require__(102);
 
 
 /***/ }),
@@ -2020,6 +2020,8 @@ Vue.component('guest-layout', __webpack_require__(84));
 
 Vue.component('vue-institutions', __webpack_require__(90));
 Vue.component('vue-courses', __webpack_require__(93));
+Vue.component('vue-users', __webpack_require__(96));
+Vue.component('vue-forms', __webpack_require__(99));
 
 var app = new Vue({
   el: '#app'
@@ -67780,7 +67782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       drawer: true,
-      items: [{ icon: 'domain', text: 'Instituciones', link: '/instituciones' }, { icon: 'import_contacts', text: 'Cursos', link: '/cursos' }, { icon: 'contacts', text: 'Respuestas', link: '/respuestas' }]
+      items: [{ icon: 'domain', text: 'Instituciones', link: '/instituciones' }, { icon: 'import_contacts', text: 'Cursos', link: '/cursos' }, { icon: 'people', text: 'Docentes', link: '/docentes' }, { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }]
     };
   },
 
@@ -68907,10 +68909,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).users;
       vue.view_users_select = true;
     },
-    log: function log(item) {
-      console.log(item);
-      console.log(this.institution_select);
-    },
     getFormEditUrl: function getFormEditUrl(id) {
       return '/forms/edit/' + id;
     }
@@ -69011,7 +69009,6 @@ var render = function() {
                                         attrs: {
                                           items: this.dataInstitutions,
                                           label: "Institución",
-                                          name: "institution",
                                           "item-text": "name"
                                         },
                                         on: {
@@ -69039,9 +69036,9 @@ var render = function() {
                                           _c("v-select", {
                                             attrs: {
                                               items: _vm.users_select_items,
-                                              label: "Usuario",
-                                              name: "user",
-                                              "item-text": "name"
+                                              label: "Docente",
+                                              "item-text": "name",
+                                              "item-value": "id"
                                             },
                                             model: {
                                               value: _vm.users_select,
@@ -69049,6 +69046,16 @@ var render = function() {
                                                 _vm.users_select = $$v
                                               },
                                               expression: "users_select"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            attrs: {
+                                              type: "hidden",
+                                              name: "user"
+                                            },
+                                            domProps: {
+                                              value: _vm.users_select
                                             }
                                           })
                                         ],
@@ -69077,7 +69084,7 @@ var render = function() {
                                     [
                                       _c("v-text-field", {
                                         attrs: {
-                                          label: "Codigo del Curso",
+                                          label: "Código del Curso",
                                           type: "text",
                                           name: "code"
                                         }
@@ -69174,7 +69181,13 @@ var render = function() {
             fn: function(props) {
               return [
                 _c("td", { staticClass: "text-xs-left" }, [
-                  _vm._v(_vm._s(props.item.user.institution.name))
+                  _vm._v(
+                    _vm._s(
+                      props.item.user.institution
+                        ? props.item.user.institution.name
+                        : "Administrador"
+                    )
+                  )
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "text-xs-left" }, [
@@ -69409,6 +69422,1091 @@ if (false) {
 
 /***/ }),
 /* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(97)
+/* template */
+var __vue_template__ = __webpack_require__(98)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/vue-users.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5273d67a", Component.options)
+  } else {
+    hotAPI.reload("data-v-5273d67a", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialog: false,
+      institution_select: null,
+      headers: [{ text: 'Nombre del Docente', align: 'left', value: 'name' }, { text: 'Institución', align: 'left', value: 'institution.name' }, { text: 'Email', align: 'left', value: 'email' }, { text: 'Acciones', align: 'center', value: '' }]
+    };
+  },
+
+  methods: {
+    //
+  },
+  props: {
+    dataUsers: Array,
+    dataInstitutions: Array,
+    actionNewUser: String,
+    csrfToken: String
+  },
+  mounted: function mounted() {
+    console.log(this.dataUsers);
+  }
+});
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "mb-4" },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "", "max-width": "500px" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { slot: "activator", color: "primary", dark: "" },
+                  slot: "activator"
+                },
+                [_vm._v("Añadir Docente")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-form",
+                {
+                  staticClass: "container",
+                  attrs: {
+                    method: "POST",
+                    autocomplete: "off",
+                    action: this.actionNewUser
+                  }
+                },
+                [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: this.csrfToken }
+                  }),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("input", {
+                      staticStyle: { display: "none" },
+                      attrs: {
+                        id: "username",
+                        type: "text",
+                        name: "fakeusernameremembered"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticStyle: { display: "none" },
+                      attrs: {
+                        id: "password",
+                        type: "password",
+                        name: "fakepasswordremembered"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-title", [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v("Nuevo Docente")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { "grid-list-md": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                { attrs: { wrap: "" } },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: this.dataInstitutions,
+                                          label: "Institución",
+                                          "item-text": "name",
+                                          "item-value": "id",
+                                          "single-line": ""
+                                        },
+                                        model: {
+                                          value: _vm.institution_select,
+                                          callback: function($$v) {
+                                            _vm.institution_select = $$v
+                                          },
+                                          expression: "institution_select"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "institution"
+                                        },
+                                        domProps: {
+                                          value: _vm.institution_select
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Nombre del Docente",
+                                          name: "name",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Email",
+                                          type: "email",
+                                          name: "email",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Contraseña",
+                                          type: "password",
+                                          name: "password",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("small", [
+                            _vm._v("*Indica que son campos requeridos")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Cancelar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                color: "blue darken-1",
+                                flat: "",
+                                type: "submit"
+                              },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Guardar")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          "hide-actions": "",
+          headers: _vm.headers,
+          items: this.dataUsers
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "headerCell",
+            fn: function(props) {
+              return [
+                _c(
+                  "span",
+                  { attrs: { slot: "activator" }, slot: "activator" },
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(props.header.text) + "\n      "
+                    )
+                  ]
+                )
+              ]
+            }
+          },
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.name))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.institution.name))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.email))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "text-xs-center" },
+                  [_c("v-btn", [_vm._v("Ver")])],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5273d67a", module.exports)
+  }
+}
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(100)
+/* template */
+var __vue_template__ = __webpack_require__(101)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/vue-forms.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-abd52dbe", Component.options)
+  } else {
+    hotAPI.reload("data-v-abd52dbe", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 100 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialog: false
+    };
+  },
+  methods: {
+    getFormShowUrl: function getFormShowUrl(id) {
+      return '/respuestas/' + id;
+    }
+  },
+  props: {
+    dataCourses: Array,
+    actionNewForm: String,
+    csrfToken: String
+  },
+  mounted: function mounted() {
+    console.log(this.dataForms);
+  }
+});
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-md": "" } },
+    [
+      _c(
+        "v-layout",
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm8: "", "offset-sm2": "" } },
+            [
+              _c(
+                "div",
+                { staticClass: "mb-4" },
+                [
+                  _c("v-btn", { attrs: { light: "", disabled: "" } }, [
+                    _vm._v("Añadir Cuestionario")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-dialog",
+                    {
+                      attrs: { persistent: "", "max-width": "500px" },
+                      model: {
+                        value: _vm.dialog,
+                        callback: function($$v) {
+                          _vm.dialog = $$v
+                        },
+                        expression: "dialog"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-form",
+                        {
+                          staticClass: "container",
+                          attrs: {
+                            method: "POST",
+                            autocomplete: "off",
+                            action: this.actionNewForm
+                          }
+                        },
+                        [
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: this.csrfToken }
+                          }),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c("input", {
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "username",
+                                type: "text",
+                                name: "fakeusernameremembered"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "password",
+                                type: "password",
+                                name: "fakepasswordremembered"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-card",
+                            [
+                              _c("v-card-title", [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v("Nuevo Docente")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-text",
+                                [
+                                  _c(
+                                    "v-container",
+                                    { attrs: { "grid-list-md": "" } },
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        { attrs: { wrap: "" } },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            { attrs: { xs12: "" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Nombre del Docente",
+                                                  name: "name",
+                                                  required: ""
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            { attrs: { xs12: "" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Email",
+                                                  type: "email",
+                                                  name: "email",
+                                                  required: ""
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            { attrs: { xs12: "" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Contraseña",
+                                                  type: "password",
+                                                  name: "password",
+                                                  required: ""
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("small", [
+                                    _vm._v("*Indica que son campos requeridos")
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-actions",
+                                [
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "blue darken-1",
+                                        flat: ""
+                                      },
+                                      nativeOn: {
+                                        click: function($event) {
+                                          _vm.dialog = false
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Cancelar")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "blue darken-1",
+                                        flat: "",
+                                        type: "submit"
+                                      },
+                                      nativeOn: {
+                                        click: function($event) {
+                                          _vm.dialog = false
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Guardar")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._l(this.dataCourses, function(course) {
+                return _c(
+                  "div",
+                  [
+                    _c(
+                      "v-container",
+                      { attrs: { "grid-list-md": "" } },
+                      [
+                        _c("span", { staticClass: "subheading" }, [
+                          _vm._v(_vm._s(course.name))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-container",
+                          { attrs: { "grid-list-md": "" } },
+                          [
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "" } },
+                              _vm._l(course.forms, function(form) {
+                                return _c(
+                                  "v-flex",
+                                  { key: form.id },
+                                  [
+                                    _c(
+                                      "v-card",
+                                      { staticClass: "elevation-5" },
+                                      [
+                                        _c(
+                                          "v-card-title",
+                                          [
+                                            _c(
+                                              "v-layout",
+                                              { attrs: { wrap: "", row: "" } },
+                                              [
+                                                _c("v-flex", [
+                                                  _c(
+                                                    "span",
+                                                    { staticClass: "title" },
+                                                    [_vm._v(_vm._s(form.name))]
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    staticClass: "text-xs-right"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "v-tooltip",
+                                                      { attrs: { bottom: "" } },
+                                                      [
+                                                        _c(
+                                                          "v-btn",
+                                                          {
+                                                            attrs: {
+                                                              slot: "activator",
+                                                              small: "",
+                                                              flat: ""
+                                                            },
+                                                            slot: "activator"
+                                                          },
+                                                          [_vm._v("Activo")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c("span", [
+                                                          _vm._v("Desactivar")
+                                                        ])
+                                                      ],
+                                                      1
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-card-text",
+                                          [
+                                            _c(
+                                              "v-container",
+                                              [
+                                                _c(
+                                                  "v-layout",
+                                                  { attrs: { wrap: "" } },
+                                                  [
+                                                    _c(
+                                                      "v-flex",
+                                                      {
+                                                        attrs: {
+                                                          xs12: "",
+                                                          sm4: ""
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-2"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                            Clave: " +
+                                                                _vm._s(
+                                                                  form.key
+                                                                ) +
+                                                                "\n                          "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-flex",
+                                                      {
+                                                        attrs: {
+                                                          xs12: "",
+                                                          sm4: ""
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass: "mt-2"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                            # de Respuestas: " +
+                                                                _vm._s(
+                                                                  form
+                                                                    .questionnaires
+                                                                    .length
+                                                                ) +
+                                                                "\n                          "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-flex",
+                                                      {
+                                                        attrs: {
+                                                          xs12: "",
+                                                          sm4: ""
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "text-xs-center"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "v-btn",
+                                                              {
+                                                                attrs: {
+                                                                  small: "",
+                                                                  color:
+                                                                    "primary",
+                                                                  dark: "",
+                                                                  href: _vm.getFormShowUrl(
+                                                                    form.id
+                                                                  )
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Ver Respuestas"
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "v-btn",
+                                                              {
+                                                                attrs: {
+                                                                  small: "",
+                                                                  light: "",
+                                                                  disabled: ""
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Administrar"
+                                                                )
+                                                              ]
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              })
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-abd52dbe", module.exports)
+  }
+}
+
+/***/ }),
+/* 102 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

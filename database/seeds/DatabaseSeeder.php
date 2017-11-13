@@ -32,8 +32,14 @@ class DatabaseSeeder extends Seeder
 
         $course = new Course();
         $course->name = 'Administración del Conocimiento';
-        $course->user_id = 2;
+        $course->user_id = 1;
         $course->code = 'ST265U';
+        $course->save();
+
+        $course = new Course();
+        $course->name = 'Administración del Conocimiento';
+        $course->user_id = 2;
+        $course->code = 'ST267U';
         $course->save();
 
         $user = new User();

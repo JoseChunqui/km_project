@@ -43,7 +43,7 @@
                   {{$data_decoded->questions[3]->answer}}
                 </td>
                 <td>
-                  <v-btn href="{{route('view_questionnaire', [$questionnaire->form->id,$questionnaire->id])}}">Ver</v-btn>
+                  {{-- <v-btn href="{{route('view_questionnaire', $questionnaire->id)}}">Ver</v-btn> --}}
                 </td>
               </tr>
             @endforeach
