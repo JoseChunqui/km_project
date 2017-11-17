@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -75,7 +75,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.regex = exports.ref = exports.len = exports.req = exports.withParams = undefined;
 
-var _withParams = __webpack_require__(53);
+var _withParams = __webpack_require__(54);
 
 var _withParams2 = _interopRequireDefault(_withParams);
 
@@ -134,7 +134,7 @@ var regex = exports.regex = function regex(type, expr) {
 
 
 var bind = __webpack_require__(8);
-var isBuffer = __webpack_require__(27);
+var isBuffer = __webpack_require__(28);
 
 /*global toString:true*/
 
@@ -549,6 +549,88 @@ module.exports = function normalizeComponent (
 /* 3 */
 /***/ (function(module, exports) {
 
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
 var g;
 
 // This works in non-strict mode
@@ -573,14 +655,14 @@ module.exports = g;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(29);
+var normalizeHeaderName = __webpack_require__(30);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -673,7 +755,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -686,7 +768,7 @@ exports.withParams = exports.validationMixin = exports.Vuelidate = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _vval = __webpack_require__(51);
+var _vval = __webpack_require__(52);
 
 var _params = __webpack_require__(14);
 
@@ -1219,7 +1301,7 @@ exports.withParams = _params.withParams;
 exports.default = Vuelidate;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1230,75 +1312,75 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.maxValue = exports.minValue = exports.and = exports.or = exports.url = exports.sameAs = exports.requiredUnless = exports.requiredIf = exports.required = exports.minLength = exports.maxLength = exports.macAddress = exports.ipAddress = exports.email = exports.between = exports.numeric = exports.alphaNum = exports.alpha = undefined;
 
-var _alpha = __webpack_require__(52);
+var _alpha = __webpack_require__(53);
 
 var _alpha2 = _interopRequireDefault(_alpha);
 
-var _alphaNum = __webpack_require__(54);
+var _alphaNum = __webpack_require__(55);
 
 var _alphaNum2 = _interopRequireDefault(_alphaNum);
 
-var _numeric = __webpack_require__(55);
+var _numeric = __webpack_require__(56);
 
 var _numeric2 = _interopRequireDefault(_numeric);
 
-var _between = __webpack_require__(56);
+var _between = __webpack_require__(57);
 
 var _between2 = _interopRequireDefault(_between);
 
-var _email = __webpack_require__(57);
+var _email = __webpack_require__(58);
 
 var _email2 = _interopRequireDefault(_email);
 
-var _ipAddress = __webpack_require__(58);
+var _ipAddress = __webpack_require__(59);
 
 var _ipAddress2 = _interopRequireDefault(_ipAddress);
 
-var _macAddress = __webpack_require__(59);
+var _macAddress = __webpack_require__(60);
 
 var _macAddress2 = _interopRequireDefault(_macAddress);
 
-var _maxLength = __webpack_require__(60);
+var _maxLength = __webpack_require__(61);
 
 var _maxLength2 = _interopRequireDefault(_maxLength);
 
-var _minLength = __webpack_require__(61);
+var _minLength = __webpack_require__(62);
 
 var _minLength2 = _interopRequireDefault(_minLength);
 
-var _required = __webpack_require__(62);
+var _required = __webpack_require__(63);
 
 var _required2 = _interopRequireDefault(_required);
 
-var _requiredIf = __webpack_require__(63);
+var _requiredIf = __webpack_require__(64);
 
 var _requiredIf2 = _interopRequireDefault(_requiredIf);
 
-var _requiredUnless = __webpack_require__(64);
+var _requiredUnless = __webpack_require__(65);
 
 var _requiredUnless2 = _interopRequireDefault(_requiredUnless);
 
-var _sameAs = __webpack_require__(65);
+var _sameAs = __webpack_require__(66);
 
 var _sameAs2 = _interopRequireDefault(_sameAs);
 
-var _url = __webpack_require__(66);
+var _url = __webpack_require__(67);
 
 var _url2 = _interopRequireDefault(_url);
 
-var _or = __webpack_require__(67);
+var _or = __webpack_require__(68);
 
 var _or2 = _interopRequireDefault(_or);
 
-var _and = __webpack_require__(68);
+var _and = __webpack_require__(69);
 
 var _and2 = _interopRequireDefault(_and);
 
-var _minValue = __webpack_require__(69);
+var _minValue = __webpack_require__(70);
 
 var _minValue2 = _interopRequireDefault(_minValue);
 
-var _maxValue = __webpack_require__(70);
+var _maxValue = __webpack_require__(71);
 
 var _maxValue2 = _interopRequireDefault(_maxValue);
 
@@ -1322,88 +1404,6 @@ exports.or = _or2.default;
 exports.and = _and2.default;
 exports.minValue = _minValue2.default;
 exports.maxValue = _maxValue2.default;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
 
 /***/ }),
 /* 8 */
@@ -1621,12 +1621,12 @@ process.umask = function() { return 0; };
 
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(30);
-var buildURL = __webpack_require__(32);
-var parseHeaders = __webpack_require__(33);
-var isURLSameOrigin = __webpack_require__(34);
+var settle = __webpack_require__(31);
+var buildURL = __webpack_require__(33);
+var parseHeaders = __webpack_require__(34);
+var isURLSameOrigin = __webpack_require__(35);
 var createError = __webpack_require__(11);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(35);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(36);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1723,7 +1723,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(36);
+      var cookies = __webpack_require__(37);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1807,7 +1807,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(31);
+var enhanceError = __webpack_require__(32);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1956,17 +1956,238 @@ function withParams(paramsOrClosure, maybeValidator) {
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
-module.exports = __webpack_require__(102);
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(82)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction) {
+  isProduction = _isProduction
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
 
 
 /***/ }),
 /* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(17);
+module.exports = __webpack_require__(104);
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuetify_dist_vuetify_min_css__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuetify_dist_vuetify_min_css__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuetify_dist_vuetify_min_css__);
 
 /**
@@ -1976,16 +2197,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 
-__webpack_require__(21);
+__webpack_require__(22);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-window.Vue = __webpack_require__(44);
-window.Vuetify = __webpack_require__(47);
-window.VeeValidate = __webpack_require__(48);
+window.Vue = __webpack_require__(45);
+window.Vuetify = __webpack_require__(48);
+window.VeeValidate = __webpack_require__(49);
 var config = {
   errorBagName: 'vee_errors', // change if property conflicts.
   fieldsBagName: 'fields',
@@ -2011,30 +2232,30 @@ var config = {
 Vue.use(VeeValidate, config);
 Vue.use(Vuetify);
 
-Vue.component('login-form', __webpack_require__(49));
-Vue.component('email-form', __webpack_require__(72));
-Vue.component('reset-form', __webpack_require__(75));
-Vue.component('vue-questionnaire', __webpack_require__(78));
-Vue.component('admin-layout', __webpack_require__(81));
-Vue.component('guest-layout', __webpack_require__(84));
+Vue.component('login-form', __webpack_require__(50));
+Vue.component('email-form', __webpack_require__(73));
+Vue.component('reset-form', __webpack_require__(76));
+Vue.component('vue-questionnaire', __webpack_require__(79));
+Vue.component('admin-layout', __webpack_require__(85));
+Vue.component('guest-layout', __webpack_require__(88));
 
-Vue.component('vue-institutions', __webpack_require__(90));
-Vue.component('vue-courses', __webpack_require__(93));
-Vue.component('vue-users', __webpack_require__(96));
-Vue.component('vue-forms', __webpack_require__(99));
+Vue.component('vue-institutions', __webpack_require__(92));
+Vue.component('vue-courses', __webpack_require__(95));
+Vue.component('vue-users', __webpack_require__(98));
+Vue.component('vue-forms', __webpack_require__(101));
 
 var app = new Vue({
   el: '#app'
 });
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(18);
+var content = __webpack_require__(19);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -2042,7 +2263,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(19)(content, options);
+var update = __webpack_require__(20)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -2059,10 +2280,10 @@ if(false) {
 }
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(3)(undefined);
 // imports
 
 
@@ -2073,7 +2294,7 @@ exports.push([module.i, "/*!\n* Vuetify v0.16.9\n* Forged by John Leider\n* Rele
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -2119,7 +2340,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(20);
+var	fixUrls = __webpack_require__(21);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2432,7 +2653,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 
@@ -2527,11 +2748,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(22);
+window._ = __webpack_require__(23);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -2540,7 +2761,7 @@ window._ = __webpack_require__(22);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(24);
+  window.$ = window.jQuery = __webpack_require__(25);
 
   // require('bootstrap-sass');
 } catch (e) {}
@@ -2551,7 +2772,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(25);
+window.axios = __webpack_require__(26);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -2585,7 +2806,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -19674,10 +19895,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(23)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(24)(module)))
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -19705,7 +19926,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -29965,13 +30186,13 @@ return jQuery;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(26);
+module.exports = __webpack_require__(27);
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29979,8 +30200,8 @@ module.exports = __webpack_require__(26);
 
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(8);
-var Axios = __webpack_require__(28);
-var defaults = __webpack_require__(4);
+var Axios = __webpack_require__(29);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -30014,14 +30235,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(13);
-axios.CancelToken = __webpack_require__(42);
+axios.CancelToken = __webpack_require__(43);
 axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(43);
+axios.spread = __webpack_require__(44);
 
 module.exports = axios;
 
@@ -30030,7 +30251,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 /*!
@@ -30057,18 +30278,18 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(37);
-var dispatchRequest = __webpack_require__(38);
-var isAbsoluteURL = __webpack_require__(40);
-var combineURLs = __webpack_require__(41);
+var InterceptorManager = __webpack_require__(38);
+var dispatchRequest = __webpack_require__(39);
+var isAbsoluteURL = __webpack_require__(41);
+var combineURLs = __webpack_require__(42);
 
 /**
  * Create a new instance of Axios
@@ -30150,7 +30371,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30169,7 +30390,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30202,7 +30423,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30230,7 +30451,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30305,7 +30526,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30349,7 +30570,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30424,7 +30645,7 @@ module.exports = (
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30467,7 +30688,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30527,7 +30748,7 @@ module.exports = (
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30586,16 +30807,16 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(39);
+var transformData = __webpack_require__(40);
 var isCancel = __webpack_require__(12);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -30672,7 +30893,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30699,7 +30920,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30720,7 +30941,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30741,7 +30962,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30805,7 +31026,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30839,7 +31060,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41459,10 +41680,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(45).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(46).setImmediate))
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -41515,13 +41736,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(46);
+__webpack_require__(47);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -41711,10 +41932,10 @@ exports.clearImmediate = clearImmediate;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(9)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(9)))
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -57822,7 +58043,7 @@ function unbind(el, binding) {
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64502,15 +64723,15 @@ var index_esm = {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(50)
+var __vue_script__ = __webpack_require__(51)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(72)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64550,14 +64771,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__);
 //
 //
@@ -64682,7 +64903,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64837,7 +65058,7 @@ function h(tag, key, args) {
 }
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64852,7 +65073,7 @@ var _common = __webpack_require__(0);
 exports.default = (0, _common.regex)('alpha', /^[a-zA-Z]*$/);
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64867,7 +65088,7 @@ var withParams =  false ? require('./withParamsBrowser').withParams : __webpack_
 exports.default = withParams;
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64882,7 +65103,7 @@ var _common = __webpack_require__(0);
 exports.default = (0, _common.regex)('alphaNum', /^[a-zA-Z0-9]*$/);
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64897,7 +65118,7 @@ var _common = __webpack_require__(0);
 exports.default = (0, _common.regex)('numeric', /^[0-9]*$/);
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64916,7 +65137,7 @@ exports.default = function (min, max) {
 };
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64933,7 +65154,7 @@ var emailRegex = /(^$|^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+")
 exports.default = (0, _common.regex)('email', emailRegex);
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64977,7 +65198,7 @@ var nibbleValid = function nibbleValid(nibble) {
 };
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65011,7 +65232,7 @@ var hexValid = function hexValid(hex) {
 };
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65030,7 +65251,7 @@ exports.default = function (length) {
 };
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65049,7 +65270,7 @@ exports.default = function (length) {
 };
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65064,7 +65285,7 @@ var _common = __webpack_require__(0);
 exports.default = (0, _common.withParams)({ type: 'required' }, _common.req);
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65083,7 +65304,7 @@ exports.default = function (prop) {
 };
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65102,7 +65323,7 @@ exports.default = function (prop) {
 };
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65121,7 +65342,7 @@ exports.default = function (equalTo) {
 };
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65138,7 +65359,7 @@ var urlRegex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\
 exports.default = (0, _common.regex)('url', urlRegex);
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65169,7 +65390,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65200,7 +65421,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65219,7 +65440,7 @@ exports.default = function (min) {
 };
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65238,7 +65459,7 @@ exports.default = function (max) {
 };
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65423,15 +65644,15 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(73)
+var __vue_script__ = __webpack_require__(74)
 /* template */
-var __vue_template__ = __webpack_require__(74)
+var __vue_template__ = __webpack_require__(75)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -65471,14 +65692,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__);
 //
 //
@@ -65578,7 +65799,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65781,15 +66002,15 @@ if (false) {
 }
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(76)
+var __vue_script__ = __webpack_require__(77)
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -65829,14 +66050,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__);
 //
 //
@@ -65985,7 +66206,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -66285,19 +66506,23 @@ if (false) {
 }
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(80)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(79)
+var __vue_script__ = __webpack_require__(83)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(84)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -66333,11 +66558,91 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(81);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(15)("1b7fed63", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-70bc9695\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./vue-questionnaire.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-70bc9695\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./vue-questionnaire.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\ntable.bordered tbody tr{\n  border: 1px solid black;\n}\ntable.bordered tbody tr td{\n  border: 1px solid black;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -66690,7 +66995,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 80 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -66775,24 +67080,28 @@ var render = function() {
                     [
                       _c(
                         "v-tabs-bar",
-                        { staticClass: "cyan" },
+                        { attrs: { color: "blue darken-2" } },
                         [
                           _vm._l(_vm.range, function(section) {
-                            return _c(
-                              "v-tabs-item",
-                              {
-                                key: section.section,
-                                attrs: {
-                                  href: "#" + section.section,
-                                  ripple: ""
-                                }
-                              },
-                              [
-                                _c("span", { staticClass: "caption" }, [
-                                  _vm._v(" " + _vm._s(section.section) + " ")
-                                ])
-                              ]
-                            )
+                            return section.active
+                              ? _c(
+                                  "v-tabs-item",
+                                  {
+                                    key: section.section,
+                                    attrs: {
+                                      href: "#" + section.section,
+                                      ripple: ""
+                                    }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "caption" }, [
+                                      _vm._v(
+                                        " " + _vm._s(section.section) + " "
+                                      )
+                                    ])
+                                  ]
+                                )
+                              : _vm._e()
                           }),
                           _vm._v(" "),
                           _c("v-tabs-slider", { attrs: { color: "yellow" } })
@@ -66806,30 +67115,512 @@ var render = function() {
                           _c(
                             "v-form",
                             _vm._l(_vm.range, function(section) {
-                              return _c(
-                                "v-tabs-content",
-                                {
-                                  key: section.section,
-                                  attrs: { id: section.section }
-                                },
-                                [
-                                  _c(
-                                    "v-container",
-                                    { attrs: { fluid: "" } },
+                              return section.active
+                                ? _c(
+                                    "v-tabs-content",
+                                    {
+                                      key: section.section,
+                                      attrs: { id: section.section }
+                                    },
                                     [
                                       _c(
-                                        "v-card",
-                                        { attrs: { flat: "" } },
+                                        "v-container",
+                                        { attrs: { fluid: "" } },
                                         [
                                           _c(
-                                            "v-card-text",
-                                            _vm._l(section.questions, function(
-                                              question
-                                            ) {
-                                              return _c("div", [
-                                                question.type == "text"
-                                                  ? _c("div", [
-                                                      !_vm.view()
+                                            "v-card",
+                                            { attrs: { flat: "" } },
+                                            [
+                                              _c(
+                                                "v-card-text",
+                                                _vm._l(
+                                                  section.questions,
+                                                  function(question) {
+                                                    return _c("div", [
+                                                      question.type == "text"
+                                                        ? _c("div", [
+                                                            !_vm.view()
+                                                              ? _c("div", [
+                                                                  question.required
+                                                                    ? _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-text-field",
+                                                                            {
+                                                                              directives: [
+                                                                                {
+                                                                                  name:
+                                                                                    "validate",
+                                                                                  rawName:
+                                                                                    "v-validate",
+                                                                                  value:
+                                                                                    "required",
+                                                                                  expression:
+                                                                                    "'required'"
+                                                                                }
+                                                                              ],
+                                                                              attrs: {
+                                                                                label:
+                                                                                  question.statement,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                counter: 100,
+                                                                                readonly: _vm.view(),
+                                                                                value:
+                                                                                  question.answer,
+                                                                                "data-vv-name": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                "error-messages": _vm.vee_errors.collect(
+                                                                                  _vm.slugify(
+                                                                                    question.statement
+                                                                                  )
+                                                                                ),
+                                                                                required:
+                                                                                  ""
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                    : _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-text-field",
+                                                                            {
+                                                                              attrs: {
+                                                                                label:
+                                                                                  question.statement,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                counter: 100,
+                                                                                value: [
+                                                                                  _vm.view()
+                                                                                    ? question.answer ==
+                                                                                      ""
+                                                                                      ? "-"
+                                                                                      : question.answer
+                                                                                    : ""
+                                                                                ],
+                                                                                readonly: _vm.view()
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                ])
+                                                              : _c(
+                                                                  "div",
+                                                                  [
+                                                                    _c(
+                                                                      "v-text-field",
+                                                                      {
+                                                                        attrs: {
+                                                                          label:
+                                                                            question.statement,
+                                                                          "v-model": _vm.slugify(
+                                                                            question.statement
+                                                                          ),
+                                                                          value:
+                                                                            question.answer,
+                                                                          readonly:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                          ])
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      question.type == "select"
+                                                        ? _c("div", [
+                                                            !_vm.view()
+                                                              ? _c("div", [
+                                                                  question.required
+                                                                    ? _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-select",
+                                                                            {
+                                                                              directives: [
+                                                                                {
+                                                                                  name:
+                                                                                    "validate",
+                                                                                  rawName:
+                                                                                    "v-validate",
+                                                                                  value:
+                                                                                    "required",
+                                                                                  expression:
+                                                                                    "'required'"
+                                                                                }
+                                                                              ],
+                                                                              attrs: {
+                                                                                items:
+                                                                                  question.options,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                label:
+                                                                                  question.statement,
+                                                                                value:
+                                                                                  question.answer,
+                                                                                "data-vv-name": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                "error-messages": _vm.vee_errors.collect(
+                                                                                  _vm.slugify(
+                                                                                    question.statement
+                                                                                  )
+                                                                                ),
+                                                                                "single-line":
+                                                                                  "",
+                                                                                required:
+                                                                                  "",
+                                                                                bottom:
+                                                                                  ""
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                    : _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-select",
+                                                                            {
+                                                                              attrs: {
+                                                                                items:
+                                                                                  question.options,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                label:
+                                                                                  question.statement,
+                                                                                "single-line":
+                                                                                  "",
+                                                                                bottom:
+                                                                                  ""
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                ])
+                                                              : _c(
+                                                                  "div",
+                                                                  [
+                                                                    _c(
+                                                                      "v-text-field",
+                                                                      {
+                                                                        attrs: {
+                                                                          type:
+                                                                            "text",
+                                                                          label:
+                                                                            question.statement,
+                                                                          value:
+                                                                            question.answer ==
+                                                                            ""
+                                                                              ? "-"
+                                                                              : question.answer,
+                                                                          readonly:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                          ])
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      question.type == "number"
+                                                        ? _c("div", [
+                                                            !_vm.view()
+                                                              ? _c("div", [
+                                                                  question.required
+                                                                    ? _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-text-field",
+                                                                            {
+                                                                              directives: [
+                                                                                {
+                                                                                  name:
+                                                                                    "validate",
+                                                                                  rawName:
+                                                                                    "v-validate",
+                                                                                  value:
+                                                                                    "required",
+                                                                                  expression:
+                                                                                    "'required'"
+                                                                                }
+                                                                              ],
+                                                                              attrs: {
+                                                                                type:
+                                                                                  "number",
+                                                                                label:
+                                                                                  question.statement,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                value:
+                                                                                  question.answer,
+                                                                                "data-vv-name": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                "error-messages": _vm.vee_errors.collect(
+                                                                                  _vm.slugify(
+                                                                                    question.statement
+                                                                                  )
+                                                                                ),
+                                                                                required:
+                                                                                  ""
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                    : _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-text-field",
+                                                                            {
+                                                                              attrs: {
+                                                                                type:
+                                                                                  "number",
+                                                                                label:
+                                                                                  question.statement,
+                                                                                value:
+                                                                                  question.answer,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                )
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                ])
+                                                              : _c(
+                                                                  "div",
+                                                                  [
+                                                                    _c(
+                                                                      "v-text-field",
+                                                                      {
+                                                                        attrs: {
+                                                                          type:
+                                                                            "text",
+                                                                          label:
+                                                                            question.statement,
+                                                                          value:
+                                                                            question.answer ==
+                                                                            ""
+                                                                              ? "-"
+                                                                              : question.answer,
+                                                                          readonly:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                          ])
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      question.type == "e-mail"
+                                                        ? _c("div", [
+                                                            !_vm.view()
+                                                              ? _c("div", [
+                                                                  question.required
+                                                                    ? _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-text-field",
+                                                                            {
+                                                                              directives: [
+                                                                                {
+                                                                                  name:
+                                                                                    "validate",
+                                                                                  rawName:
+                                                                                    "v-validate",
+                                                                                  value:
+                                                                                    "required|email",
+                                                                                  expression:
+                                                                                    "'required|email'"
+                                                                                }
+                                                                              ],
+                                                                              attrs: {
+                                                                                type:
+                                                                                  "email",
+                                                                                label:
+                                                                                  question.statement,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                value:
+                                                                                  question.answer,
+                                                                                "error-messages": _vm.vee_errors.collect(
+                                                                                  _vm.slugify(
+                                                                                    question.statement
+                                                                                  )
+                                                                                ),
+                                                                                "data-vv-name": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                required:
+                                                                                  ""
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                    : _c(
+                                                                        "div",
+                                                                        [
+                                                                          _c(
+                                                                            "v-text-field",
+                                                                            {
+                                                                              directives: [
+                                                                                {
+                                                                                  name:
+                                                                                    "validate",
+                                                                                  rawName:
+                                                                                    "v-validate",
+                                                                                  value:
+                                                                                    "email",
+                                                                                  expression:
+                                                                                    "'email'"
+                                                                                }
+                                                                              ],
+                                                                              attrs: {
+                                                                                type:
+                                                                                  "email",
+                                                                                label:
+                                                                                  question.statement,
+                                                                                "v-model": _vm.slugify(
+                                                                                  question.statement
+                                                                                ),
+                                                                                value:
+                                                                                  question.answer,
+                                                                                "error-messages": _vm.vee_errors.collect(
+                                                                                  _vm.slugify(
+                                                                                    question.statement
+                                                                                  )
+                                                                                ),
+                                                                                "data-vv-name": _vm.slugify(
+                                                                                  question.statement
+                                                                                )
+                                                                              },
+                                                                              on: {
+                                                                                input: function(
+                                                                                  value
+                                                                                ) {
+                                                                                  question.answer = value
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                ])
+                                                              : _c(
+                                                                  "div",
+                                                                  [
+                                                                    _c(
+                                                                      "v-text-field",
+                                                                      {
+                                                                        attrs: {
+                                                                          type:
+                                                                            "text",
+                                                                          label:
+                                                                            question.statement,
+                                                                          value:
+                                                                            question.answer ==
+                                                                            ""
+                                                                              ? "-"
+                                                                              : question.answer,
+                                                                          readonly:
+                                                                            ""
+                                                                        }
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                          ])
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      question.type ==
+                                                      "textarea"
                                                         ? _c("div", [
                                                             question.required
                                                               ? _c(
@@ -66857,9 +67648,14 @@ var render = function() {
                                                                             question.statement
                                                                           ),
                                                                           counter: 100,
-                                                                          readonly: _vm.view(),
-                                                                          value:
-                                                                            question.answer,
+                                                                          value: [
+                                                                            _vm.view()
+                                                                              ? question.answer ==
+                                                                                ""
+                                                                                ? "-"
+                                                                                : question.answer
+                                                                              : ""
+                                                                          ],
                                                                           "data-vv-name": _vm.slugify(
                                                                             question.statement
                                                                           ),
@@ -66868,6 +67664,9 @@ var render = function() {
                                                                               question.statement
                                                                             )
                                                                           ),
+                                                                          readonly: _vm.view(),
+                                                                          "multi-line":
+                                                                            "",
                                                                           required:
                                                                             ""
                                                                         },
@@ -66904,122 +67703,8 @@ var render = function() {
                                                                                 : question.answer
                                                                               : ""
                                                                           ],
-                                                                          readonly: _vm.view()
-                                                                        },
-                                                                        on: {
-                                                                          input: function(
-                                                                            value
-                                                                          ) {
-                                                                            question.answer = value
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                          ])
-                                                        : _c(
-                                                            "div",
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
-                                                                      question.statement,
-                                                                    "v-model": _vm.slugify(
-                                                                      question.statement
-                                                                    ),
-                                                                    value:
-                                                                      question.answer,
-                                                                    readonly: ""
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                    ])
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                question.type == "select"
-                                                  ? _c("div", [
-                                                      !_vm.view()
-                                                        ? _c("div", [
-                                                            question.required
-                                                              ? _c(
-                                                                  "div",
-                                                                  [
-                                                                    _c(
-                                                                      "v-select",
-                                                                      {
-                                                                        directives: [
-                                                                          {
-                                                                            name:
-                                                                              "validate",
-                                                                            rawName:
-                                                                              "v-validate",
-                                                                            value:
-                                                                              "required",
-                                                                            expression:
-                                                                              "'required'"
-                                                                          }
-                                                                        ],
-                                                                        attrs: {
-                                                                          items:
-                                                                            question.options,
-                                                                          "v-model": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          label:
-                                                                            question.statement,
-                                                                          value:
-                                                                            question.answer,
-                                                                          "data-vv-name": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          "error-messages": _vm.vee_errors.collect(
-                                                                            _vm.slugify(
-                                                                              question.statement
-                                                                            )
-                                                                          ),
-                                                                          "single-line":
-                                                                            "",
-                                                                          required:
-                                                                            "",
-                                                                          bottom:
-                                                                            ""
-                                                                        },
-                                                                        on: {
-                                                                          input: function(
-                                                                            value
-                                                                          ) {
-                                                                            question.answer = value
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _c(
-                                                                  "div",
-                                                                  [
-                                                                    _c(
-                                                                      "v-select",
-                                                                      {
-                                                                        attrs: {
-                                                                          items:
-                                                                            question.options,
-                                                                          "v-model": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          label:
-                                                                            question.statement,
-                                                                          "single-line":
-                                                                            "",
-                                                                          bottom:
+                                                                          readonly: _vm.view(),
+                                                                          "multi-line":
                                                                             ""
                                                                         },
                                                                         on: {
@@ -67035,599 +67720,270 @@ var render = function() {
                                                                   1
                                                                 )
                                                           ])
-                                                        : _c(
-                                                            "div",
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    type:
-                                                                      "text",
-                                                                    label:
-                                                                      question.statement,
-                                                                    value:
-                                                                      question.answer ==
-                                                                      ""
-                                                                        ? "-"
-                                                                        : question.answer,
-                                                                    readonly: ""
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                    ])
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                question.type == "number"
-                                                  ? _c("div", [
-                                                      !_vm.view()
-                                                        ? _c("div", [
-                                                            question.required
-                                                              ? _c(
-                                                                  "div",
-                                                                  [
-                                                                    _c(
-                                                                      "v-text-field",
-                                                                      {
-                                                                        directives: [
-                                                                          {
-                                                                            name:
-                                                                              "validate",
-                                                                            rawName:
-                                                                              "v-validate",
-                                                                            value:
-                                                                              "required",
-                                                                            expression:
-                                                                              "'required'"
-                                                                          }
-                                                                        ],
-                                                                        attrs: {
-                                                                          type:
-                                                                            "number",
-                                                                          label:
-                                                                            question.statement,
-                                                                          "v-model": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          value:
-                                                                            question.answer,
-                                                                          "data-vv-name": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          "error-messages": _vm.vee_errors.collect(
-                                                                            _vm.slugify(
-                                                                              question.statement
-                                                                            )
-                                                                          ),
-                                                                          required:
-                                                                            ""
-                                                                        },
-                                                                        on: {
-                                                                          input: function(
-                                                                            value
-                                                                          ) {
-                                                                            question.answer = value
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _c(
-                                                                  "div",
-                                                                  [
-                                                                    _c(
-                                                                      "v-text-field",
-                                                                      {
-                                                                        attrs: {
-                                                                          type:
-                                                                            "number",
-                                                                          label:
-                                                                            question.statement,
-                                                                          value:
-                                                                            question.answer,
-                                                                          "v-model": _vm.slugify(
-                                                                            question.statement
-                                                                          )
-                                                                        },
-                                                                        on: {
-                                                                          input: function(
-                                                                            value
-                                                                          ) {
-                                                                            question.answer = value
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                          ])
-                                                        : _c(
-                                                            "div",
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    type:
-                                                                      "text",
-                                                                    label:
-                                                                      question.statement,
-                                                                    value:
-                                                                      question.answer ==
-                                                                      ""
-                                                                        ? "-"
-                                                                        : question.answer,
-                                                                    readonly: ""
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                    ])
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                question.type == "e-mail"
-                                                  ? _c("div", [
-                                                      !_vm.view()
-                                                        ? _c("div", [
-                                                            question.required
-                                                              ? _c(
-                                                                  "div",
-                                                                  [
-                                                                    _c(
-                                                                      "v-text-field",
-                                                                      {
-                                                                        directives: [
-                                                                          {
-                                                                            name:
-                                                                              "validate",
-                                                                            rawName:
-                                                                              "v-validate",
-                                                                            value:
-                                                                              "required|email",
-                                                                            expression:
-                                                                              "'required|email'"
-                                                                          }
-                                                                        ],
-                                                                        attrs: {
-                                                                          type:
-                                                                            "email",
-                                                                          label:
-                                                                            question.statement,
-                                                                          "v-model": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          value:
-                                                                            question.answer,
-                                                                          "error-messages": _vm.vee_errors.collect(
-                                                                            _vm.slugify(
-                                                                              question.statement
-                                                                            )
-                                                                          ),
-                                                                          "data-vv-name": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          required:
-                                                                            ""
-                                                                        },
-                                                                        on: {
-                                                                          input: function(
-                                                                            value
-                                                                          ) {
-                                                                            question.answer = value
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _c(
-                                                                  "div",
-                                                                  [
-                                                                    _c(
-                                                                      "v-text-field",
-                                                                      {
-                                                                        directives: [
-                                                                          {
-                                                                            name:
-                                                                              "validate",
-                                                                            rawName:
-                                                                              "v-validate",
-                                                                            value:
-                                                                              "email",
-                                                                            expression:
-                                                                              "'email'"
-                                                                          }
-                                                                        ],
-                                                                        attrs: {
-                                                                          type:
-                                                                            "email",
-                                                                          label:
-                                                                            question.statement,
-                                                                          "v-model": _vm.slugify(
-                                                                            question.statement
-                                                                          ),
-                                                                          value:
-                                                                            question.answer,
-                                                                          "error-messages": _vm.vee_errors.collect(
-                                                                            _vm.slugify(
-                                                                              question.statement
-                                                                            )
-                                                                          ),
-                                                                          "data-vv-name": _vm.slugify(
-                                                                            question.statement
-                                                                          )
-                                                                        },
-                                                                        on: {
-                                                                          input: function(
-                                                                            value
-                                                                          ) {
-                                                                            question.answer = value
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                          ])
-                                                        : _c(
-                                                            "div",
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    type:
-                                                                      "text",
-                                                                    label:
-                                                                      question.statement,
-                                                                    value:
-                                                                      question.answer ==
-                                                                      ""
-                                                                        ? "-"
-                                                                        : question.answer,
-                                                                    readonly: ""
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                    ])
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                question.type == "textarea"
-                                                  ? _c("div", [
-                                                      question.required
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      question.type == "table"
                                                         ? _c(
                                                             "div",
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  directives: [
-                                                                    {
-                                                                      name:
-                                                                        "validate",
-                                                                      rawName:
-                                                                        "v-validate",
-                                                                      value:
-                                                                        "required",
-                                                                      expression:
-                                                                        "'required'"
-                                                                    }
-                                                                  ],
-                                                                  attrs: {
-                                                                    label:
-                                                                      question.statement,
-                                                                    "v-model": _vm.slugify(
-                                                                      question.statement
-                                                                    ),
-                                                                    counter: 100,
-                                                                    value: [
-                                                                      _vm.view()
-                                                                        ? question.answer ==
-                                                                          ""
-                                                                          ? "-"
-                                                                          : question.answer
-                                                                        : ""
-                                                                    ],
-                                                                    "data-vv-name": _vm.slugify(
-                                                                      question.statement
-                                                                    ),
-                                                                    "error-messages": _vm.vee_errors.collect(
-                                                                      _vm.slugify(
-                                                                        question.statement
-                                                                      )
-                                                                    ),
-                                                                    readonly: _vm.view(),
-                                                                    "multi-line":
-                                                                      "",
-                                                                    required: ""
-                                                                  },
-                                                                  on: {
-                                                                    input: function(
-                                                                      value
-                                                                    ) {
-                                                                      question.answer = value
-                                                                    }
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        : _c(
-                                                            "div",
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
-                                                                      question.statement,
-                                                                    "v-model": _vm.slugify(
-                                                                      question.statement
-                                                                    ),
-                                                                    counter: 100,
-                                                                    value: [
-                                                                      _vm.view()
-                                                                        ? question.answer ==
-                                                                          ""
-                                                                          ? "-"
-                                                                          : question.answer
-                                                                        : ""
-                                                                    ],
-                                                                    readonly: _vm.view(),
-                                                                    "multi-line":
-                                                                      ""
-                                                                  },
-                                                                  on: {
-                                                                    input: function(
-                                                                      value
-                                                                    ) {
-                                                                      question.answer = value
-                                                                    }
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                    ])
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                question.type == "table"
-                                                  ? _c("div", [
-                                                      _c("label", [
-                                                        _vm._v(
-                                                          "\n                            " +
-                                                            _vm._s(
-                                                              question.statement
-                                                            ) +
-                                                            "\n                          "
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "table__overflow elevation-10"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "table",
                                                             {
                                                               staticClass:
-                                                                "datatable table"
+                                                                "mb-4 mt-4"
                                                             },
                                                             [
                                                               _c(
-                                                                "tbody",
-                                                                _vm._l(
-                                                                  question.files,
-                                                                  function(
-                                                                    file
-                                                                  ) {
-                                                                    return _c(
-                                                                      "tr",
-                                                                      _vm._l(
-                                                                        file.columns,
-                                                                        function(
-                                                                          column
-                                                                        ) {
-                                                                          return _c(
-                                                                            "td",
-                                                                            [
-                                                                              column.editable
-                                                                                ? _c(
-                                                                                    "div",
-                                                                                    [
-                                                                                      _c(
-                                                                                        "v-text-field",
-                                                                                        {
-                                                                                          attrs: {
-                                                                                            label:
-                                                                                              column.value,
-                                                                                            value: [
-                                                                                              _vm.view()
-                                                                                                ? column.answer
-                                                                                                : ""
-                                                                                            ],
-                                                                                            readonly: _vm.view(),
-                                                                                            required:
-                                                                                              question.required
-                                                                                          },
-                                                                                          on: {
-                                                                                            input: function(
-                                                                                              value
-                                                                                            ) {
-                                                                                              column.answer = value
-                                                                                            }
-                                                                                          }
-                                                                                        }
-                                                                                      )
-                                                                                    ],
-                                                                                    1
-                                                                                  )
-                                                                                : _c(
-                                                                                    "div",
-                                                                                    [
-                                                                                      _c(
-                                                                                        "span",
-                                                                                        [
-                                                                                          _vm._v(
-                                                                                            _vm._s(
-                                                                                              column.value
-                                                                                            )
-                                                                                          )
-                                                                                        ]
-                                                                                      )
-                                                                                    ]
-                                                                                  )
-                                                                            ]
-                                                                          )
-                                                                        }
-                                                                      )
-                                                                    )
-                                                                  }
-                                                                )
-                                                              )
-                                                            ]
-                                                          )
-                                                        ]
-                                                      )
-                                                    ])
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                question.type == "multiquestion"
-                                                  ? _c(
-                                                      "div",
-                                                      _vm._l(
-                                                        question.questions,
-                                                        function(sub_question) {
-                                                          return _c("div", [
-                                                            sub_question.type ==
-                                                            "table"
-                                                              ? _c("div", [
-                                                                  _c("label", [
-                                                                    _vm._v(
-                                                                      "\n                                " +
-                                                                        _vm._s(
-                                                                          sub_question.statement
-                                                                        ) +
-                                                                        "\n                              "
-                                                                    )
-                                                                  ]),
-                                                                  _vm._v(" "),
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "mb-2 mt-2"
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "\n                            " +
+                                                                      _vm._s(
+                                                                        question.statement
+                                                                      ) +
+                                                                      "\n                          "
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "table__overflow elevation-1 mb-4 mt-4"
+                                                                },
+                                                                [
                                                                   _c(
-                                                                    "div",
+                                                                    "table",
                                                                     {
                                                                       staticClass:
-                                                                        "table__overflow elevation-10"
+                                                                        "datatable table bordered"
                                                                     },
                                                                     [
                                                                       _c(
-                                                                        "table",
-                                                                        {
-                                                                          staticClass:
-                                                                            "datatable table"
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "tbody",
-                                                                            _vm._l(
-                                                                              sub_question.files,
-                                                                              function(
-                                                                                file
-                                                                              ) {
-                                                                                return _c(
-                                                                                  "tr",
-                                                                                  _vm._l(
-                                                                                    file.columns,
-                                                                                    function(
-                                                                                      column
-                                                                                    ) {
-                                                                                      return _c(
-                                                                                        "td",
-                                                                                        [
-                                                                                          column.editable
-                                                                                            ? _c(
-                                                                                                "div",
-                                                                                                [
-                                                                                                  _c(
-                                                                                                    "v-text-field",
-                                                                                                    {
-                                                                                                      attrs: {
-                                                                                                        label:
-                                                                                                          column.value,
-                                                                                                        value: [
-                                                                                                          _vm.view()
-                                                                                                            ? column.answer
-                                                                                                            : ""
-                                                                                                        ],
-                                                                                                        readonly: _vm.view(),
-                                                                                                        required:
-                                                                                                          question.required
-                                                                                                      },
-                                                                                                      on: {
-                                                                                                        input: function(
-                                                                                                          value
-                                                                                                        ) {
-                                                                                                          column.answer = value
-                                                                                                        }
-                                                                                                      }
+                                                                        "tbody",
+                                                                        _vm._l(
+                                                                          question.files,
+                                                                          function(
+                                                                            file
+                                                                          ) {
+                                                                            return _c(
+                                                                              "tr",
+                                                                              _vm._l(
+                                                                                file.columns,
+                                                                                function(
+                                                                                  column
+                                                                                ) {
+                                                                                  return _c(
+                                                                                    "td",
+                                                                                    [
+                                                                                      column.editable
+                                                                                        ? _c(
+                                                                                            "div",
+                                                                                            [
+                                                                                              _c(
+                                                                                                "v-text-field",
+                                                                                                {
+                                                                                                  attrs: {
+                                                                                                    label:
+                                                                                                      column.value,
+                                                                                                    value: [
+                                                                                                      _vm.view()
+                                                                                                        ? column.answer
+                                                                                                        : ""
+                                                                                                    ],
+                                                                                                    readonly: _vm.view(),
+                                                                                                    required:
+                                                                                                      question.required
+                                                                                                  },
+                                                                                                  on: {
+                                                                                                    input: function(
+                                                                                                      value
+                                                                                                    ) {
+                                                                                                      column.answer = value
                                                                                                     }
-                                                                                                  )
-                                                                                                ],
-                                                                                                1
+                                                                                                  }
+                                                                                                }
                                                                                               )
-                                                                                            : _c(
-                                                                                                "div",
+                                                                                            ],
+                                                                                            1
+                                                                                          )
+                                                                                        : _c(
+                                                                                            "div",
+                                                                                            [
+                                                                                              _c(
+                                                                                                "span",
                                                                                                 [
-                                                                                                  _c(
-                                                                                                    "span",
-                                                                                                    [
-                                                                                                      _vm._v(
-                                                                                                        _vm._s(
-                                                                                                          column.value
-                                                                                                        )
-                                                                                                      )
-                                                                                                    ]
+                                                                                                  _vm._v(
+                                                                                                    _vm._s(
+                                                                                                      column.value
+                                                                                                    )
                                                                                                   )
                                                                                                 ]
                                                                                               )
-                                                                                        ]
-                                                                                      )
-                                                                                    }
+                                                                                            ]
+                                                                                          )
+                                                                                    ]
                                                                                   )
-                                                                                )
-                                                                              }
+                                                                                }
+                                                                              )
                                                                             )
-                                                                          )
-                                                                        ]
+                                                                          }
+                                                                        )
                                                                       )
                                                                     ]
                                                                   )
-                                                                ])
-                                                              : _vm._e()
-                                                          ])
-                                                        }
-                                                      )
-                                                    )
-                                                  : _vm._e()
-                                              ])
-                                            })
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      question.type ==
+                                                      "multiquestion"
+                                                        ? _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "mb-4 mt-4"
+                                                            },
+                                                            _vm._l(
+                                                              question.questions,
+                                                              function(
+                                                                sub_question
+                                                              ) {
+                                                                return _c(
+                                                                  "div",
+                                                                  [
+                                                                    sub_question.type ==
+                                                                    "table"
+                                                                      ? _c(
+                                                                          "div",
+                                                                          [
+                                                                            _c(
+                                                                              "label",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "mb-4 mt-4"
+                                                                              },
+                                                                              [
+                                                                                _vm._v(
+                                                                                  "\n                                " +
+                                                                                    _vm._s(
+                                                                                      sub_question.statement
+                                                                                    ) +
+                                                                                    "\n                              "
+                                                                                )
+                                                                              ]
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "table__overflow elevation-1 mb-4 mt-4"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "table",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "datatable table bordered"
+                                                                                  },
+                                                                                  [
+                                                                                    _c(
+                                                                                      "tbody",
+                                                                                      _vm._l(
+                                                                                        sub_question.files,
+                                                                                        function(
+                                                                                          file
+                                                                                        ) {
+                                                                                          return _c(
+                                                                                            "tr",
+                                                                                            _vm._l(
+                                                                                              file.columns,
+                                                                                              function(
+                                                                                                column
+                                                                                              ) {
+                                                                                                return _c(
+                                                                                                  "td",
+                                                                                                  [
+                                                                                                    column.editable
+                                                                                                      ? _c(
+                                                                                                          "div",
+                                                                                                          [
+                                                                                                            _c(
+                                                                                                              "v-text-field",
+                                                                                                              {
+                                                                                                                attrs: {
+                                                                                                                  label:
+                                                                                                                    column.value,
+                                                                                                                  value: [
+                                                                                                                    _vm.view()
+                                                                                                                      ? column.answer
+                                                                                                                      : ""
+                                                                                                                  ],
+                                                                                                                  readonly: _vm.view(),
+                                                                                                                  required:
+                                                                                                                    question.required
+                                                                                                                },
+                                                                                                                on: {
+                                                                                                                  input: function(
+                                                                                                                    value
+                                                                                                                  ) {
+                                                                                                                    column.answer = value
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              }
+                                                                                                            )
+                                                                                                          ],
+                                                                                                          1
+                                                                                                        )
+                                                                                                      : _c(
+                                                                                                          "div",
+                                                                                                          [
+                                                                                                            _c(
+                                                                                                              "span",
+                                                                                                              [
+                                                                                                                _vm._v(
+                                                                                                                  _vm._s(
+                                                                                                                    column.value
+                                                                                                                  )
+                                                                                                                )
+                                                                                                              ]
+                                                                                                            )
+                                                                                                          ]
+                                                                                                        )
+                                                                                                  ]
+                                                                                                )
+                                                                                              }
+                                                                                            )
+                                                                                          )
+                                                                                        }
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ]
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ]
+                                                                )
+                                                              }
+                                                            )
+                                                          )
+                                                        : _vm._e()
+                                                    ])
+                                                  }
+                                                )
+                                              )
+                                            ],
+                                            1
                                           )
                                         ],
                                         1
@@ -67635,9 +67991,7 @@ var render = function() {
                                     ],
                                     1
                                   )
-                                ],
-                                1
-                              )
+                                : _vm._e()
                             })
                           )
                         ],
@@ -67669,15 +68023,15 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(82)
+var __vue_script__ = __webpack_require__(86)
 /* template */
-var __vue_template__ = __webpack_require__(83)
+var __vue_template__ = __webpack_require__(87)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67717,7 +68071,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 82 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67805,7 +68159,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 83 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67984,19 +68338,19 @@ if (false) {
 }
 
 /***/ }),
-/* 84 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(85)
+  __webpack_require__(89)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(89)
+var __vue_template__ = __webpack_require__(91)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68036,17 +68390,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 85 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(86);
+var content = __webpack_require__(90);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(87)("489a1f98", content, false);
+var update = __webpack_require__(15)("489a1f98", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68062,10 +68416,10 @@ if(false) {
 }
 
 /***/ }),
-/* 86 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(3)(undefined);
 // imports
 
 
@@ -68076,261 +68430,7 @@ exports.push([module.i, "\n.card--flex-toolbar {\n  margin-top: -64px;\n}\n", ""
 
 
 /***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(88)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction) {
-  isProduction = _isProduction
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68380,15 +68480,15 @@ if (false) {
 }
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(91)
+var __vue_script__ = __webpack_require__(93)
 /* template */
-var __vue_template__ = __webpack_require__(92)
+var __vue_template__ = __webpack_require__(94)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68428,7 +68528,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68502,7 +68602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68733,15 +68833,15 @@ if (false) {
 }
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(94)
+var __vue_script__ = __webpack_require__(96)
 /* template */
-var __vue_template__ = __webpack_require__(95)
+var __vue_template__ = __webpack_require__(97)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68781,7 +68881,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68929,7 +69029,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69421,15 +69521,15 @@ if (false) {
 }
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(97)
+var __vue_script__ = __webpack_require__(99)
 /* template */
-var __vue_template__ = __webpack_require__(98)
+var __vue_template__ = __webpack_require__(100)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69469,7 +69569,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69569,7 +69669,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69871,15 +69971,15 @@ if (false) {
 }
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(100)
+var __vue_script__ = __webpack_require__(102)
 /* template */
-var __vue_template__ = __webpack_require__(101)
+var __vue_template__ = __webpack_require__(103)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69919,7 +70019,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70023,16 +70123,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dialog: false
+      dialog: false,
+      course_select: null,
+      dialog_manage: false,
+      dataCoursesLocale: this.dataCourses,
+      check_sections: []
     };
   },
+
   methods: {
     getFormShowUrl: function getFormShowUrl(id) {
       return '/respuestas/' + id;
+    },
+    show_code_course_selected: function show_code_course_selected() {
+      var vue = this;
+      var code_to_return = '';
+      if (vue.course_select) {
+        code_to_return = vue.dataCourses.find(function (course) {
+          return course.id = vue.course_select;
+        }).code;
+        code_to_return += '-';
+      }
+      return code_to_return;
     }
   },
   props: {
@@ -70041,12 +70189,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     csrfToken: String
   },
   mounted: function mounted() {
-    console.log(this.dataForms);
+    console.log(this.dataCourses);
   }
 });
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -70068,10 +70216,6 @@ var render = function() {
                 "div",
                 { staticClass: "mb-4" },
                 [
-                  _c("v-btn", { attrs: { light: "", disabled: "" } }, [
-                    _vm._v("Añadir Cuestionario")
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "v-dialog",
                     {
@@ -70085,6 +70229,19 @@ var render = function() {
                       }
                     },
                     [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            slot: "activator",
+                            color: "primary",
+                            dark: ""
+                          },
+                          slot: "activator"
+                        },
+                        [_vm._v("Añadir Cuestionario")]
+                      ),
+                      _vm._v(" "),
                       _c(
                         "v-form",
                         {
@@ -70101,32 +70258,12 @@ var render = function() {
                             domProps: { value: this.csrfToken }
                           }),
                           _vm._v(" "),
-                          _c("div", [
-                            _c("input", {
-                              staticStyle: { display: "none" },
-                              attrs: {
-                                id: "username",
-                                type: "text",
-                                name: "fakeusernameremembered"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticStyle: { display: "none" },
-                              attrs: {
-                                id: "password",
-                                type: "password",
-                                name: "fakepasswordremembered"
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
                           _c(
                             "v-card",
                             [
                               _c("v-card-title", [
                                 _c("span", { staticClass: "headline" }, [
-                                  _vm._v("Nuevo Docente")
+                                  _vm._v("Nuevo Cuestionario")
                                 ])
                               ]),
                               _vm._v(" "),
@@ -70145,9 +70282,44 @@ var render = function() {
                                             "v-flex",
                                             { attrs: { xs12: "" } },
                                             [
+                                              _c("v-select", {
+                                                attrs: {
+                                                  items: this.dataCourses,
+                                                  label: "Curso",
+                                                  "item-text": "name",
+                                                  "item-value": "id",
+                                                  required: ""
+                                                },
+                                                model: {
+                                                  value: _vm.course_select,
+                                                  callback: function($$v) {
+                                                    _vm.course_select = $$v
+                                                  },
+                                                  expression: "course_select"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("input", {
+                                                attrs: {
+                                                  type: "hidden",
+                                                  name: "course"
+                                                },
+                                                domProps: {
+                                                  value: _vm.course_select
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            { attrs: { xs12: "" } },
+                                            [
                                               _c("v-text-field", {
                                                 attrs: {
-                                                  label: "Nombre del Docente",
+                                                  label:
+                                                    "Nombre del Cuestionario",
                                                   name: "name",
                                                   required: ""
                                                 }
@@ -70158,14 +70330,12 @@ var render = function() {
                                           _vm._v(" "),
                                           _c(
                                             "v-flex",
-                                            { attrs: { xs12: "" } },
+                                            { attrs: { xs4: "" } },
                                             [
                                               _c("v-text-field", {
                                                 attrs: {
-                                                  label: "Email",
-                                                  type: "email",
-                                                  name: "email",
-                                                  required: ""
+                                                  value: _vm.show_code_course_selected(),
+                                                  disabled: ""
                                                 }
                                               })
                                             ],
@@ -70174,13 +70344,13 @@ var render = function() {
                                           _vm._v(" "),
                                           _c(
                                             "v-flex",
-                                            { attrs: { xs12: "" } },
+                                            { attrs: { xs8: "" } },
                                             [
                                               _c("v-text-field", {
                                                 attrs: {
-                                                  label: "Contraseña",
-                                                  type: "password",
-                                                  name: "password",
+                                                  label:
+                                                    "Clave del cuestionario",
+                                                  name: "key",
                                                   required: ""
                                                 }
                                               })
@@ -70254,7 +70424,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm._l(this.dataCourses, function(course) {
+              _vm._l(_vm.dataCoursesLocale, function(course) {
                 return _c(
                   "div",
                   [
@@ -70439,19 +70609,303 @@ var render = function() {
                                                             ),
                                                             _vm._v(" "),
                                                             _c(
-                                                              "v-btn",
+                                                              "v-dialog",
                                                               {
                                                                 attrs: {
-                                                                  small: "",
-                                                                  light: "",
-                                                                  disabled: ""
+                                                                  persistent:
+                                                                    "",
+                                                                  "max-width":
+                                                                    "500px"
+                                                                },
+                                                                model: {
+                                                                  value:
+                                                                    _vm.dialog_manage,
+                                                                  callback: function(
+                                                                    $$v
+                                                                  ) {
+                                                                    _vm.dialog_manage = $$v
+                                                                  },
+                                                                  expression:
+                                                                    "dialog_manage"
                                                                 }
                                                               },
                                                               [
-                                                                _vm._v(
-                                                                  "Administrar"
+                                                                _c(
+                                                                  "v-btn",
+                                                                  {
+                                                                    attrs: {
+                                                                      slot:
+                                                                        "activator",
+                                                                      color:
+                                                                        "primary",
+                                                                      dark: "",
+                                                                      small: ""
+                                                                    },
+                                                                    slot:
+                                                                      "activator"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "Administrar"
+                                                                    )
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "v-form",
+                                                                  {
+                                                                    staticClass:
+                                                                      "container",
+                                                                    attrs: {
+                                                                      method:
+                                                                        "POST",
+                                                                      autocomplete:
+                                                                        "off",
+                                                                      action: this
+                                                                        .actionNewForm
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "input",
+                                                                      {
+                                                                        attrs: {
+                                                                          type:
+                                                                            "hidden",
+                                                                          name:
+                                                                            "_token"
+                                                                        },
+                                                                        domProps: {
+                                                                          value: this
+                                                                            .csrfToken
+                                                                        }
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "v-card",
+                                                                      [
+                                                                        _c(
+                                                                          "v-card-title",
+                                                                          [
+                                                                            _c(
+                                                                              "span",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "headline"
+                                                                              },
+                                                                              [
+                                                                                _vm._v(
+                                                                                  "Administrar Formulario"
+                                                                                )
+                                                                              ]
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "v-card-text",
+                                                                          [
+                                                                            _c(
+                                                                              "v-container",
+                                                                              {
+                                                                                attrs: {
+                                                                                  "grid-list-md":
+                                                                                    ""
+                                                                                }
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "div",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      hidden:
+                                                                                        ""
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _c(
+                                                                                      "textarea",
+                                                                                      {
+                                                                                        attrs: {
+                                                                                          hidden:
+                                                                                            "",
+                                                                                          name:
+                                                                                            "data"
+                                                                                        },
+                                                                                        domProps: {
+                                                                                          value: JSON.stringify(
+                                                                                            form.data
+                                                                                          )
+                                                                                        }
+                                                                                      }
+                                                                                    ),
+                                                                                    _vm._v(
+                                                                                      " "
+                                                                                    ),
+                                                                                    _c(
+                                                                                      "input",
+                                                                                      {
+                                                                                        attrs: {
+                                                                                          hidden:
+                                                                                            "",
+                                                                                          type:
+                                                                                            "text",
+                                                                                          name:
+                                                                                            "form"
+                                                                                        },
+                                                                                        domProps: {
+                                                                                          value:
+                                                                                            form.id
+                                                                                        }
+                                                                                      }
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "v-layout",
+                                                                                  {
+                                                                                    attrs: {
+                                                                                      wrap:
+                                                                                        ""
+                                                                                    }
+                                                                                  },
+                                                                                  _vm._l(
+                                                                                    form.data,
+                                                                                    function(
+                                                                                      section
+                                                                                    ) {
+                                                                                      return _c(
+                                                                                        "v-flex",
+                                                                                        {
+                                                                                          key:
+                                                                                            section.section,
+                                                                                          attrs: {
+                                                                                            xs12:
+                                                                                              "",
+                                                                                            id:
+                                                                                              section.section
+                                                                                          }
+                                                                                        },
+                                                                                        [
+                                                                                          _c(
+                                                                                            "v-checkbox",
+                                                                                            {
+                                                                                              attrs: {
+                                                                                                label:
+                                                                                                  section.section,
+                                                                                                light:
+                                                                                                  "",
+                                                                                                disabled:
+                                                                                                  section.section ==
+                                                                                                  "IDENTIFICACIÓN"
+                                                                                              },
+                                                                                              model: {
+                                                                                                value:
+                                                                                                  section.active,
+                                                                                                callback: function(
+                                                                                                  $$v
+                                                                                                ) {
+                                                                                                  _vm.$set(
+                                                                                                    section,
+                                                                                                    "active",
+                                                                                                    $$v
+                                                                                                  )
+                                                                                                },
+                                                                                                expression:
+                                                                                                  "section.active"
+                                                                                              }
+                                                                                            }
+                                                                                          )
+                                                                                        ],
+                                                                                        1
+                                                                                      )
+                                                                                    }
+                                                                                  )
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ],
+                                                                          1
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "v-card-actions",
+                                                                          [
+                                                                            _c(
+                                                                              "v-spacer"
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "v-btn",
+                                                                              {
+                                                                                attrs: {
+                                                                                  color:
+                                                                                    "blue darken-1",
+                                                                                  flat:
+                                                                                    ""
+                                                                                },
+                                                                                nativeOn: {
+                                                                                  click: function(
+                                                                                    $event
+                                                                                  ) {
+                                                                                    _vm.dialog_manage = false
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              [
+                                                                                _vm._v(
+                                                                                  "Cancelar"
+                                                                                )
+                                                                              ]
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "v-btn",
+                                                                              {
+                                                                                attrs: {
+                                                                                  color:
+                                                                                    "blue darken-1",
+                                                                                  flat:
+                                                                                    ""
+                                                                                },
+                                                                                nativeOn: {
+                                                                                  click: function(
+                                                                                    $event
+                                                                                  ) {
+                                                                                    _vm.dialog_manage = false
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              [
+                                                                                _vm._v(
+                                                                                  "Guardar"
+                                                                                )
+                                                                              ]
+                                                                            )
+                                                                          ],
+                                                                          1
+                                                                        )
+                                                                      ],
+                                                                      1
+                                                                    )
+                                                                  ],
+                                                                  1
                                                                 )
-                                                              ]
+                                                              ],
+                                                              1
                                                             )
                                                           ],
                                                           1
@@ -70506,7 +70960,7 @@ if (false) {
 }
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
         $user->save();
 
         $user = new User();
-        $user->name = 'Jose Chunqui 2';
+        $user->name = 'Jhon Doe';
         $user->role_id = 2;
         $user->institution_id = 1;
         $user->email = 'jn__jose@hotmail.com';
@@ -61,9 +61,18 @@ class DatabaseSeeder extends Seeder
         $data = file_get_contents($path);
         $form = new Form();
         $form->name = 'Prueba de Entrada';
-        $form->data = $data;
+        $form->data = json_decode($data);
         $form->course_id = 1;
         $form->key = 'ST265U-20172';
+        $form->save();
+
+        $path = storage_path()."/../json/questionnaire.json";
+        $data = file_get_contents($path);
+        $form = new Form();
+        $form->name = 'Prueba de Entrada';
+        $form->data = json_decode($data);
+        $form->course_id = 2;
+        $form->key = 'ST267U-20172';
         $form->save();
 
     }

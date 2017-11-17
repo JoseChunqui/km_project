@@ -134,7 +134,8 @@
       "answer": "",
       "required": false
     }
-  ]
+  ],
+  "active": true
 },
 {
   "section": "OPINION SOBRE CURSOS Y PROFESORES",
@@ -355,7 +356,8 @@
       "answer": "",
       "required": false
     }
-  ]
+  ],
+  "active": true
 },
 {
   "section": "FORMACIÓN EXTRA-ACADEMICA",
@@ -561,7 +563,8 @@
       ]
 
     }
-  ]
+  ],
+  "active": true
 },
 {
   "section":"CONOCIMIENTO Y USO DE HERRAMIENTAS",
@@ -918,6 +921,7 @@
         }
       ]
     }
-  ]
+  ],
+  "active": true
 }
 ]

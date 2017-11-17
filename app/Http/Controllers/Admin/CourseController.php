@@ -51,7 +51,7 @@ class CourseController extends Controller
         $data = file_get_contents($path);
         $form = new Form();
         $form->name = 'Prueba de Entrada';
-        $form->data = $data;
+        $form->data = json_decode($data);
         $form->course_id = $course->id;
         $form->key = ($request->code).'20171';
         $form->save();

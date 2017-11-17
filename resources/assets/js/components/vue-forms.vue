@@ -3,31 +3,37 @@
     <v-layout>
       <v-flex xs12 sm8 offset-sm2>
         <div class="mb-4">
-          <v-btn light disabled>Añadir Cuestionario</v-btn>
+          <!-- <v-btn light disabled>Añadir Cuestionario</v-btn> -->
           <v-dialog v-model="dialog" persistent max-width="500px">
-            <!-- <v-btn color="primary" dark slot="activator">Añadir Cuestionario</v-btn> -->
+            <v-btn color="primary" dark slot="activator">Añadir Cuestionario</v-btn>
             <v-form method="POST" autocomplete="off" class="container" :action="this.actionNewForm">
               <input type="hidden" name="_token" :value="this.csrfToken">
-              <div>
-                <!--  fake fields are a workaround for chrome/opera autofill getting the wrong fields -->
-                <input id="username" style="display:none" type="text" name="fakeusernameremembered">
-                <input id="password" style="display:none" type="password" name="fakepasswordremembered">
-              </div>
               <v-card>
                 <v-card-title>
-                  <span class="headline">Nuevo Docente</span>
+                  <span class="headline">Nuevo Cuestionario</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container grid-list-md>
                     <v-layout wrap>
                       <v-flex xs12>
-                        <v-text-field label="Nombre del Docente" name="name" required></v-text-field>
+                        <v-select
+                        :items="this.dataCourses"
+                        label="Curso"
+                        v-model="course_select"
+                        item-text="name"
+                        item-value="id"
+                        required
+                        ></v-select>
+                        <input type="hidden" name="course" :value="course_select">
                       </v-flex>
                       <v-flex xs12>
-                        <v-text-field label="Email" type="email" name="email" required></v-text-field>
+                        <v-text-field label="Nombre del Cuestionario" name="name" required></v-text-field>
                       </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Contraseña" type="password" name="password" required></v-text-field>
+                      <v-flex xs4>
+                        <v-text-field :value="show_code_course_selected()" disabled></v-text-field>
+                      </v-flex>
+                      <v-flex xs8>
+                        <v-text-field label="Clave del cuestionario" name="key" required></v-text-field>
                       </v-flex>
                     </v-layout>
                   </v-container>
@@ -42,7 +48,7 @@
             </v-form>
           </v-dialog>
         </div>
-        <div v-for="course in this.dataCourses">
+        <div v-for="course in dataCoursesLocale">
           <v-container grid-list-md>
             <span class="subheading">{{course.name}}</span>
             <v-container grid-list-md>
@@ -78,7 +84,35 @@
                           <v-flex xs12 sm4>
                             <div class="text-xs-center">
                               <v-btn small color="primary" dark :href="getFormShowUrl(form.id)">Ver Respuestas</v-btn>
-                              <v-btn small light disabled>Administrar</v-btn>
+                              <v-dialog v-model="dialog_manage" persistent max-width="500px">
+                                <v-btn color="primary" dark small slot="activator">Administrar</v-btn>
+                                <v-form method="POST" autocomplete="off" class="container" :action="this.actionNewForm">
+                                  <input type="hidden" name="_token" :value="this.csrfToken">
+                                  <v-card>
+                                    <v-card-title>
+                                      <span class="headline">Administrar Formulario</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                      <v-container grid-list-md>
+                                        <div hidden>
+                                          <textarea hidden name="data" :value="JSON.stringify(form.data)"></textarea>
+                                          <input hidden type="text" name="form" :value="form.id">
+                                        </div>
+                                        <v-layout wrap>
+                                          <v-flex xs12 v-for="section in form.data" :key="section.section" :id="section.section">
+                                            <v-checkbox v-bind:label="section.section" v-model="section.active" light :disabled="section.section == 'IDENTIFICACIÓN'"></v-checkbox>
+                                          </v-flex>
+                                        </v-layout>
+                                      </v-container>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                      <v-spacer></v-spacer>
+                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage = false">Cancelar</v-btn>
+                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage = false">Guardar</v-btn>
+                                    </v-card-actions>
+                                  </v-card>
+                                </v-form>
+                              </v-dialog>
                             </div>
                           </v-flex>
                         </v-layout>
@@ -89,8 +123,6 @@
               </v-layout>
             </v-container>
           </v-container>
-
-
         </div>
       </v-flex>
     </v-layout>
@@ -99,12 +131,29 @@
 
 <script>
   export default {
-    data: () => ({
-      dialog: false
-    }),
+    data () {
+      return {
+        dialog: false,
+        course_select : null,
+        dialog_manage : false,
+        dataCoursesLocale: this.dataCourses,
+        check_sections: []
+      }
+    },
     methods: {
       getFormShowUrl(id){
         return '/respuestas/'+id;
+      },
+      show_code_course_selected(){
+        var vue = this;
+        var code_to_return = '';
+        if(vue.course_select){
+          code_to_return = vue.dataCourses.find(function(course){
+            return course.id = vue.course_select;
+          }).code;
+          code_to_return += '-'
+        }
+        return code_to_return;
       }
     },
     props: {
@@ -113,7 +162,7 @@
       csrfToken: String
     },
     mounted: function(){
-      console.log(this.dataForms);
+      console.log(this.dataCourses);
     }
   }
 </script>

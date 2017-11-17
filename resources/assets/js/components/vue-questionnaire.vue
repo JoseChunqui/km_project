@@ -13,20 +13,19 @@
       <div class="container">
         <div v-if="!questionnaire_completed">
           <v-tabs dark grow v-model="active">
-            <v-tabs-bar class="cyan">
-              <v-tabs-item v-for="section in range" :key="section.section" :href="'#' + section.section" ripple>
+            <v-tabs-bar color="blue darken-2">
+              <v-tabs-item v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple>
                 <span class="caption"> {{ section.section }} </span>
               </v-tabs-item>
               <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs-bar>
             <v-tabs-items>
               <v-form>
-                <v-tabs-content v-for="section in range" :key="section.section" :id="section.section">
+                <v-tabs-content v-for="section in range" v-if="section.active" :key="section.section" :id="section.section">
                   <v-container fluid>
                     <v-card flat>
                       <v-card-text>
                         <div v-for="question in section.questions">
-
                           <div v-if="question.type == 'text'">
                             <div v-if="!view()">
                               <div v-if="question.required">
@@ -200,12 +199,12 @@
                               ></v-text-field>
                             </div>
                           </div>
-                          <div v-if="question.type == 'table'">
-                            <label>
+                          <div v-if="question.type == 'table'" class="mb-4 mt-4">
+                            <label class="mb-2 mt-2">
                               {{question.statement}}
                             </label>
-                            <div class="table__overflow elevation-10">
-                              <table class="datatable table">
+                            <div class="table__overflow elevation-1 mb-4 mt-4">
+                              <table class="datatable table bordered">
                                 <tbody>
                                   <tr v-for="file in question.files">
                                     <td v-for="column in file.columns">
@@ -227,14 +226,14 @@
                               </table>
                             </div>
                           </div>
-                          <div v-if="question.type == 'multiquestion'">
+                          <div v-if="question.type == 'multiquestion'" class="mb-4 mt-4">
                             <div v-for="sub_question in question.questions">
                               <div v-if="sub_question.type == 'table'">
-                                <label>
+                                <label class="mb-4 mt-4">
                                   {{sub_question.statement}}
                                 </label>
-                                <div class="table__overflow elevation-10">
-                                  <table class="datatable table">
+                                <div class="table__overflow elevation-1 mb-4 mt-4">
+                                  <table class="datatable table bordered">
                                     <tbody>
                                       <tr v-for="file in sub_question.files">
                                         <td v-for="column in file.columns">
@@ -275,6 +274,14 @@
   </v-card>
 
 </template>
+<style media="screen">
+  table.bordered tbody tr{
+    border: 1px solid black;
+  }
+  table.bordered tbody tr td{
+    border: 1px solid black;
+  }
+</style>
 
 <script>
   export default {
