@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/cuestionarios', 'Admin\FormController@index')->name('forms.index');
     Route::post('/cuestionarios/store', 'Admin\FormController@store')->name('forms.store');
+    Route::post('/cuestionarios/manage', 'Admin\FormController@manage')->name('forms.manage');
     Route::get('/respuestas/{idform}', 'Admin\QuestionnaireController@index');
     Route::get('/respuestas/{idform}/{idQ}', 'Admin\QuestionnaireController@show')->name('view_questionnaire');
 });

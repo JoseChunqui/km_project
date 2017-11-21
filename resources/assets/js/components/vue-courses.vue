@@ -64,13 +64,13 @@
         <td class="text-xs-center">
           <v-dialog v-model="dialog_details[props.index]" persistent max-width="500px">
             <v-btn color="primary" dark slot="activator">Detalles de Formularios</v-btn>
-            <div v-for="form in props.item.forms">
-              <v-form method="POST" autocomplete="off" class="container" :action="getFormEditUrl(form.id)">
-                <input type="hidden" name="_token" :value="csrfToken">
-                <v-card>
-                  <v-card-title>
-                    <span class="headline">Formularios asignados</span>
-                  </v-card-title>
+            <v-card>
+              <v-card-title>
+                <span class="headline">Formularios asignados</span>
+              </v-card-title>
+              <div v-for="form in props.item.forms">
+                <v-form method="POST" autocomplete="off" class="container" :action="getFormEditUrl(form.id)">
+                  <input type="hidden" name="_token" :value="csrfToken">
                   <v-card-text>
                     <v-container grid-list-md>
                       <v-layout wrap>
@@ -89,9 +89,9 @@
                     <v-btn color="blue darken-1" flat @click.native="dialog_details.splice(props.index,1,false)">Cancelar</v-btn>
                     <v-btn color="blue darken-1" flat @click.native="dialog_details.splice(props.index,1,false)" type="submit">Guardar Cambios</v-btn>
                   </v-card-actions>
-                </v-card>
-              </v-form>
-            </div>
+                </v-form>
+              </div>
+            </v-card>
           </v-dialog>
         </td>
       </template>
@@ -118,6 +118,12 @@
         ]
       }
     },
+    created: function(){
+      const vue = this;
+      vue.dataCourses.forEach(function(course){
+        vue.dialog_details.push(false);
+      });
+    },
     methods: {
       setInstitution(){
         var vue = this;
@@ -137,10 +143,7 @@
       csrfToken: String
     },
     mounted: function(){
-      const vue = this;
-      vue.dataCourses.forEach(function(course){
-        vue.dialog_details.push(false);
-      });
+      console.log(this.dialog_details);
       console.log(this.dataCourses);
     }
   }

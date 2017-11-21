@@ -30257,7 +30257,7 @@ module.exports.default = axios;
 /*!
  * Determine if an object is a Buffer
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
 
@@ -69001,6 +69001,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+  created: function created() {
+    var vue = this;
+    vue.dataCourses.forEach(function (course) {
+      vue.dialog_details.push(false);
+    });
+  },
   methods: {
     setInstitution: function setInstitution() {
       var vue = this;
@@ -69020,10 +69026,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     csrfToken: String
   },
   mounted: function mounted() {
-    var vue = this;
-    vue.dataCourses.forEach(function (course) {
-      vue.dialog_details.push(false);
-    });
+    console.log(this.dialog_details);
     console.log(this.dataCourses);
   }
 });
@@ -69332,36 +69335,37 @@ var render = function() {
                           [_vm._v("Detalles de Formularios")]
                         ),
                         _vm._v(" "),
-                        _vm._l(props.item.forms, function(form) {
-                          return _c(
-                            "div",
-                            [
-                              _c(
-                                "v-form",
-                                {
-                                  staticClass: "container",
-                                  attrs: {
-                                    method: "POST",
-                                    autocomplete: "off",
-                                    action: _vm.getFormEditUrl(form.id)
-                                  }
-                                },
+                        _c(
+                          "v-card",
+                          [
+                            _c("v-card-title", [
+                              _c("span", { staticClass: "headline" }, [
+                                _vm._v("Formularios asignados")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(props.item.forms, function(form) {
+                              return _c(
+                                "div",
                                 [
-                                  _c("input", {
-                                    attrs: { type: "hidden", name: "_token" },
-                                    domProps: { value: _vm.csrfToken }
-                                  }),
-                                  _vm._v(" "),
                                   _c(
-                                    "v-card",
+                                    "v-form",
+                                    {
+                                      staticClass: "container",
+                                      attrs: {
+                                        method: "POST",
+                                        autocomplete: "off",
+                                        action: _vm.getFormEditUrl(form.id)
+                                      }
+                                    },
                                     [
-                                      _c("v-card-title", [
-                                        _c(
-                                          "span",
-                                          { staticClass: "headline" },
-                                          [_vm._v("Formularios asignados")]
-                                        )
-                                      ]),
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "_token"
+                                        },
+                                        domProps: { value: _vm.csrfToken }
+                                      }),
                                       _vm._v(" "),
                                       _c(
                                         "v-card-text",
@@ -69491,12 +69495,12 @@ var render = function() {
                                 ],
                                 1
                               )
-                            ],
-                            1
-                          )
-                        })
+                            })
+                          ],
+                          2
+                        )
                       ],
-                      2
+                      1
                     )
                   ],
                   1
@@ -70161,12 +70165,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       course_select: null,
-      dialog_manage: false,
+      dialog_manage: [],
       dataCoursesLocale: this.dataCourses,
       check_sections: []
     };
   },
 
+  created: function created() {
+    var vue = this;
+    vue.dataCourses.forEach(function (course) {
+      course.forms.forEach(function (form) {
+        vue.dialog_manage.push(false);
+      });
+    });
+  },
   methods: {
     getFormShowUrl: function getFormShowUrl(id) {
       return '/respuestas/' + id;
@@ -70186,6 +70198,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: {
     dataCourses: Array,
     actionNewForm: String,
+    actionManageForm: String,
     csrfToken: String
   },
   mounted: function mounted() {
@@ -70443,7 +70456,7 @@ var render = function() {
                             _c(
                               "v-layout",
                               { attrs: { wrap: "" } },
-                              _vm._l(course.forms, function(form) {
+                              _vm._l(course.forms, function(form, index) {
                                 return _c(
                                   "v-flex",
                                   { key: form.id },
@@ -70485,13 +70498,34 @@ var render = function() {
                                                               small: "",
                                                               flat: ""
                                                             },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                form.active = !form.active
+                                                              }
+                                                            },
                                                             slot: "activator"
                                                           },
-                                                          [_vm._v("Activo")]
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                form.active
+                                                                  ? "Activo"
+                                                                  : "Desactivado"
+                                                              )
+                                                            )
+                                                          ]
                                                         ),
                                                         _vm._v(" "),
                                                         _c("span", [
-                                                          _vm._v("Desactivar")
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              form.active
+                                                                ? "Desactivar"
+                                                                : "Activar"
+                                                            )
+                                                          )
                                                         ])
                                                       ],
                                                       1
@@ -70619,14 +70653,21 @@ var render = function() {
                                                                 },
                                                                 model: {
                                                                   value:
-                                                                    _vm.dialog_manage,
+                                                                    _vm
+                                                                      .dialog_manage[
+                                                                      index
+                                                                    ],
                                                                   callback: function(
                                                                     $$v
                                                                   ) {
-                                                                    _vm.dialog_manage = $$v
+                                                                    _vm.$set(
+                                                                      _vm.dialog_manage,
+                                                                      index,
+                                                                      $$v
+                                                                    )
                                                                   },
                                                                   expression:
-                                                                    "dialog_manage"
+                                                                    "dialog_manage[index]"
                                                                 }
                                                               },
                                                               [
@@ -70661,8 +70702,8 @@ var render = function() {
                                                                         "POST",
                                                                       autocomplete:
                                                                         "off",
-                                                                      action: this
-                                                                        .actionNewForm
+                                                                      action:
+                                                                        _vm.actionManageForm
                                                                     }
                                                                   },
                                                                   [
@@ -70676,8 +70717,8 @@ var render = function() {
                                                                             "_token"
                                                                         },
                                                                         domProps: {
-                                                                          value: this
-                                                                            .csrfToken
+                                                                          value:
+                                                                            _vm.csrfToken
                                                                         }
                                                                       }
                                                                     ),
@@ -70719,12 +70760,6 @@ var render = function() {
                                                                               [
                                                                                 _c(
                                                                                   "div",
-                                                                                  {
-                                                                                    attrs: {
-                                                                                      hidden:
-                                                                                        ""
-                                                                                    }
-                                                                                  },
                                                                                   [
                                                                                     _c(
                                                                                       "textarea",
@@ -70859,7 +70894,11 @@ var render = function() {
                                                                                   click: function(
                                                                                     $event
                                                                                   ) {
-                                                                                    _vm.dialog_manage = false
+                                                                                    _vm.dialog_manage.splice(
+                                                                                      index,
+                                                                                      1,
+                                                                                      false
+                                                                                    )
                                                                                   }
                                                                                 }
                                                                               },
@@ -70879,13 +70918,19 @@ var render = function() {
                                                                                   color:
                                                                                     "blue darken-1",
                                                                                   flat:
-                                                                                    ""
+                                                                                    "",
+                                                                                  type:
+                                                                                    "submit"
                                                                                 },
                                                                                 nativeOn: {
                                                                                   click: function(
                                                                                     $event
                                                                                   ) {
-                                                                                    _vm.dialog_manage = false
+                                                                                    _vm.dialog_manage.splice(
+                                                                                      index,
+                                                                                      1,
+                                                                                      false
+                                                                                    )
                                                                                   }
                                                                                 }
                                                                               },

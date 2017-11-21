@@ -19,6 +19,7 @@ class CreateFormsTable extends Migration
             $table->string('name');
             $table->text('data');
             $table->string('key')->unique();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

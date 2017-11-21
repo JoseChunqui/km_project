@@ -53,7 +53,7 @@
             <span class="subheading">{{course.name}}</span>
             <v-container grid-list-md>
               <v-layout wrap>
-                <v-flex v-for="form in course.forms" :key="form.id">
+                <v-flex v-for="(form, index) in course.forms" :key="form.id">
                   <v-card class="elevation-5">
                     <v-card-title>
                       <v-layout wrap row>
@@ -62,8 +62,8 @@
                         </v-flex>
                         <v-flex class="text-xs-right">
                           <v-tooltip bottom>
-                            <v-btn small flat slot="activator">Activo</v-btn>
-                            <span>Desactivar</span>
+                            <v-btn small flat slot="activator" @click="form.active = !form.active">{{form.active ? 'Activo' : 'Desactivado'}}</v-btn>
+                            <span>{{form.active ? 'Desactivar' : 'Activar'}}</span>
                           </v-tooltip>
                         </v-flex>
                       </v-layout>
@@ -84,17 +84,17 @@
                           <v-flex xs12 sm4>
                             <div class="text-xs-center">
                               <v-btn small color="primary" dark :href="getFormShowUrl(form.id)">Ver Respuestas</v-btn>
-                              <v-dialog v-model="dialog_manage" persistent max-width="500px">
+                              <v-dialog v-model="dialog_manage[index]" persistent max-width="500px">
                                 <v-btn color="primary" dark small slot="activator">Administrar</v-btn>
-                                <v-form method="POST" autocomplete="off" class="container" :action="this.actionNewForm">
-                                  <input type="hidden" name="_token" :value="this.csrfToken">
+                                <v-form method="POST" autocomplete="off" class="container" :action="actionManageForm">
+                                  <input type="hidden" name="_token" :value="csrfToken">
                                   <v-card>
                                     <v-card-title>
                                       <span class="headline">Administrar Formulario</span>
                                     </v-card-title>
                                     <v-card-text>
                                       <v-container grid-list-md>
-                                        <div hidden>
+                                        <div>
                                           <textarea hidden name="data" :value="JSON.stringify(form.data)"></textarea>
                                           <input hidden type="text" name="form" :value="form.id">
                                         </div>
@@ -107,8 +107,8 @@
                                     </v-card-text>
                                     <v-card-actions>
                                       <v-spacer></v-spacer>
-                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage = false">Cancelar</v-btn>
-                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage = false">Guardar</v-btn>
+                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage.splice(index,1,false)">Cancelar</v-btn>
+                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage.splice(index,1,false)" type="submit">Guardar</v-btn>
                                     </v-card-actions>
                                   </v-card>
                                 </v-form>
@@ -135,10 +135,18 @@
       return {
         dialog: false,
         course_select : null,
-        dialog_manage : false,
+        dialog_manage : [],
         dataCoursesLocale: this.dataCourses,
         check_sections: []
       }
+    },
+    created: function(){
+      const vue = this;
+      vue.dataCourses.forEach(function(course){
+        course.forms.forEach(function(form){
+          vue.dialog_manage.push(false);
+        })
+      });
     },
     methods: {
       getFormShowUrl(id){
@@ -159,6 +167,7 @@
     props: {
       dataCourses: Array,
       actionNewForm: String,
+      actionManageForm: String,
       csrfToken: String
     },
     mounted: function(){

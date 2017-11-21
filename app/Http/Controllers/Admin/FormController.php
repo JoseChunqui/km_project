@@ -33,4 +33,35 @@ class FormController extends Controller
 
         return redirect()->route('courses.index');
     }
+
+    public function store(Request $request)
+    {
+        $form = new Form();
+        $course = Course::findOrFail($request->course);
+
+        $form->course_id = $course->id;
+        $form->name = $request->name;
+        $form->key = $course->code + '-' + $request->key;
+
+        $path = storage_path()."/../json/questionnaire.json";
+        $data = file_get_contents($path);
+        $form->data = json_decode($data);
+
+        $form->save();
+
+        return redirect()->route('forms.index');
+    }
+
+    public function manage(Request $request)
+    {
+        $form_id = $request->form;
+        $data = json_decode($request->data);
+
+        $form = Form::findOrFail($form_id);
+        $form->data = $data;
+
+        $form->save();
+
+        return redirect()->route('forms.index');
+    }
 }
