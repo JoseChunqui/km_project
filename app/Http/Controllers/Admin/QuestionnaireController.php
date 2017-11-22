@@ -16,13 +16,17 @@ class QuestionnaireController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id, Request $request)
+    public function index(Request $request)
     {
-        $questionnaires = Questionnaire::with('form')->whereHas('form', function($form) use($id){
-          $form->where('id', $id);
-        })->get();
-
-        return view('admin.questionnaires', compact('questionnaires'));
+        $form_id = $request->form;
+        $url_valid = $request->url_valid;
+        if ($url_valid == 'admlink')
+        {
+          $questionnaires = Questionnaire::whereHas('form', function($form) use($form_id){
+            $form->where('id', $form_id);
+          })->get();
+          return view('admin.answers', compact('questionnaires'));
+        }
     }
 
     public function show($idForm, $idQuestionnaire, Request $request)

@@ -64,4 +64,18 @@ class FormController extends Controller
 
         return redirect()->route('forms.index');
     }
+
+    public function changeState(Request $request)
+    {
+        if ($request->ajax()){
+          $form_id = $request->form;
+          $form = Form::findOrFail($form_id);
+          $form->active = ! $form->active;
+          $form->save();
+          return response()->json([
+            'success' => true,
+          ]);
+        }
+
+    }
 }

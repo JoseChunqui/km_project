@@ -39,6 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cuestionarios', 'Admin\FormController@index')->name('forms.index');
     Route::post('/cuestionarios/store', 'Admin\FormController@store')->name('forms.store');
     Route::post('/cuestionarios/manage', 'Admin\FormController@manage')->name('forms.manage');
-    Route::get('/respuestas/{idform}', 'Admin\QuestionnaireController@index');
-    Route::get('/respuestas/{idform}/{idQ}', 'Admin\QuestionnaireController@show')->name('view_questionnaire');
+    Route::post('/cuestionarios/estado', 'Admin\FormController@changeState')->name('forms.changeState');
+
+    Route::post('/respuestas', 'Admin\QuestionnaireController@index')->name('answers.index');
+    Route::post('/respuesta', 'Admin\QuestionnaireController@show')->name('answers.show');
+
 });

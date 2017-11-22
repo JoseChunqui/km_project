@@ -6,6 +6,8 @@
  */
 import 'vuetify/dist/vuetify.min.css'
 
+import Notifications from 'vue-notification'
+
 require('./libraries');
 
 /**
@@ -16,6 +18,7 @@ require('./libraries');
  window.Vue = require('vue');
  window.Vuetify = require('vuetify');
  window.VeeValidate = require('vee-validate');
+
  const config = {
   errorBagName: 'vee_errors', // change if property conflicts.
   fieldsBagName: 'fields',
@@ -38,8 +41,9 @@ require('./libraries');
   aria: true
 };
 
- Vue.use(VeeValidate, config);
- Vue.use(Vuetify);
+  Vue.use(Notifications)
+  Vue.use(VeeValidate, config);
+  Vue.use(Vuetify);
 
  Vue.component('login-form', require('./components/login/login-form.vue'));
  Vue.component('email-form', require('./components/login/email-form.vue'));
@@ -52,6 +56,9 @@ require('./libraries');
  Vue.component('vue-courses', require('./components/vue-courses.vue'));
  Vue.component('vue-users', require('./components/vue-users.vue'));
  Vue.component('vue-forms', require('./components/vue-forms.vue'));
+ Vue.component('vue-answers', require('./components/vue-answers.vue'));
+
+
 
  const app = new Vue({
    el: '#app'

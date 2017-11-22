@@ -59,8 +59,8 @@
       drawer: true,
       items: [
         { icon: 'domain', text: 'Instituciones', link: '/instituciones' },
-        { icon: 'import_contacts', text: 'Cursos', link: '/cursos' },
         { icon: 'people', text: 'Docentes', link: '/docentes' },
+        { icon: 'import_contacts', text: 'Cursos', link: '/cursos' },
         { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
       ]
     }),

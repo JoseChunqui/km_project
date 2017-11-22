@@ -40,7 +40,7 @@ class QuestionnaireController extends Controller
       $questionnaire = new Questionnaire();
       $questionnaire->token = $request->token;
       $questionnaire->form_id = $this->getFormFromToken($request->token);
-      $questionnaire->data = $request->data;
+      $questionnaire->data = json_decode($request->data);
       $questionnaire->save();
     }
 
