@@ -14,4 +14,8 @@ class Form extends Model
     {
       return $this->hasMany('App\Questionnaire');
     }
+    public function course()
+    {
+      return $this->belongsto('App\Course');
+    }
 }

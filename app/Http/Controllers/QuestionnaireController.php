@@ -51,11 +51,16 @@ class QuestionnaireController extends Controller
         //Búsqueda en DB del formulario
         $form = Form::where('key', $key)->first();
         if($form){
-          Mail::to($email)->send(new Cuestionario($this->generateToken($email, $form->id)));
-          echo "Formulario enviado a su correo electrónico. Revise su bandeja de entrada";
+          if($form->active){
+            Mail::to($email)->send(new Cuestionario($this->generateToken($email, $form->id)));
+            $message = "El link del cuestionario ha sido enviado a su correo electrónico. Revise su bandeja de entrada";
+          }else{
+            $message = "El cuestionario al que desea acceder está desactivado de momento.";
+          }
         }else{
-          echo "La clave de formulario ingresada es incorrecta";
+          $message = "La clave del cuestionario que acaba de ingresar es incorrecta";
         }
+        return view('guest-message',compact('message'));
     }
     function generateToken($email, $form_id)
     {

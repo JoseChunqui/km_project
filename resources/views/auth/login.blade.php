@@ -4,7 +4,7 @@
   <v-app id="inspire">
     <v-container grid-list-xl text-xs-center >
       <v-layout row wrap>
-        <v-flex xs12 sm4 offset-sm4>
+        <v-flex xs12 sm12 md6 lg4 offset-md3 offset-lg4>
           <login-form
           action-form="{{ route('login') }}"
           method-form="POST"

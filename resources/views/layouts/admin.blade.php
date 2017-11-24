@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="app">
-      <admin-layout logout-link="{{ route('logout') }}" l-csrf-token="{{ csrf_token() }}">
+      <admin-layout logout-link="{{ route('logout') }}" l-csrf-token="{{ csrf_token() }}" is-admin="{{Auth::user()->isAdmin() ? 'true' : 'false'}}">
         @yield('content')
       </admin-layout>
     </div>

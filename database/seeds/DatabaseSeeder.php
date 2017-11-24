@@ -39,28 +39,28 @@ class DatabaseSeeder extends Seeder
         $course = new Course();
         $course->name = 'Administración del Conocimiento';
         $course->user_id = 2;
-        $course->code = 'ST267U';
+        $course->code = 'ST265W';
         $course->save();
 
         $user = new User();
-        $user->name = 'Jose Chunqui';
+        $user->name = 'Jhon Doe';
         $user->role_id = 1;
-        $user->email = 'jose.chunqui.v@uni.pe';
+        $user->email = 'jhon_doe@uni.pe';
         $user->password = bcrypt('159159');
         $user->save();
 
         $user = new User();
-        $user->name = 'Jhon Doe';
+        $user->name = 'James Doe';
         $user->role_id = 2;
         $user->institution_id = 1;
-        $user->email = 'jn__jose@hotmail.com';
+        $user->email = 'james_doe@uni.pe';
         $user->password = bcrypt('159159');
         $user->save();
 
         $path = storage_path()."/../json/questionnaire.json";
         $data = file_get_contents($path);
         $form = new Form();
-        $form->name = 'Prueba de Entrada';
+        $form->name = 'Cuestionario KM 20172';
         $form->data = json_decode($data);
         $form->course_id = 1;
         $form->key = 'ST265U-20172';
@@ -69,10 +69,10 @@ class DatabaseSeeder extends Seeder
         $path = storage_path()."/../json/questionnaire.json";
         $data = file_get_contents($path);
         $form = new Form();
-        $form->name = 'Prueba de Entrada';
+        $form->name = 'Cuestionario KM 20172W';
         $form->data = json_decode($data);
         $form->course_id = 2;
-        $form->key = 'ST267U-20172';
+        $form->key = 'ST265W-20172';
         $form->save();
 
     }

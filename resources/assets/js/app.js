@@ -57,8 +57,8 @@ require('./libraries');
  Vue.component('vue-users', require('./components/vue-users.vue'));
  Vue.component('vue-forms', require('./components/vue-forms.vue'));
  Vue.component('vue-answers', require('./components/vue-answers.vue'));
-
-
+ Vue.component('vue-home', require('./components/vue-home.vue'));
+ Vue.component('vue-guest-message', require('./components/vue-guest-message.vue'));
 
  const app = new Vue({
    el: '#app'

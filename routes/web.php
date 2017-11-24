@@ -15,33 +15,42 @@ Route::get('/', function(){
   return view('welcome');
 });
 
+Route::get('/getAccess', function(){
+  return view('welcome');
+});
+
 Route::post('/questionnaire_save', 'QuestionnaireController@store')->name('save_q');
 Route::post('/getAccess', 'QuestionnaireController@SendQuestionnaire')->name('getAccess');
 Route::get('/cuestionario/{token}', 'QuestionnaireController@create');
 
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/instituciones', 'Admin\InstitutionController@index')->name('institutions.index');
-    Route::post('/instituciones/store', 'Admin\InstitutionController@store')->name('institutions.store');
+  Route::post('/forms/edit/{id}', 'Admin\FormController@update');
+  Route::get('/cuestionarios', 'Admin\FormController@index')->name('forms.index');
+  Route::post('/cuestionarios/store', 'Admin\FormController@store')->name('forms.store');
+  Route::post('/cuestionarios/manage', 'Admin\FormController@manage')->name('forms.manage');
+  Route::post('/cuestionarios/estado', 'Admin\FormController@changeState')->name('forms.changeState');
 
-    Route::get('/cursos', 'Admin\CourseController@index')->name('courses.index');
-    Route::post('/cursos/store', 'Admin\CourseController@store')->name('courses.store');
+  Route::get('/respuestas', 'Admin\QuestionnaireController@index')->name('answers.index');
+  Route::post('/respuestas', 'Admin\QuestionnaireController@export_to_excel')->name('answers.export_to_excel');
+  Route::get('/respuesta', 'Admin\QuestionnaireController@show')->name('answers.show');
 
-    Route::get('/docentes', 'Admin\UserController@index')->name('users.index');
-    Route::post('/docentes/store', 'Admin\UserController@store')->name('users.store');
+});
 
-    Route::post('/forms/edit/{id}', 'Admin\FormController@update');
+Route::group(['middleware' => ['auth','admin']], function(){
+  //Manage Users
+  Route::get('/docentes', 'Admin\UserController@index')->name('users.index');
+  Route::post('/docentes/store', 'Admin\UserController@store')->name('users.store');
 
-    Route::get('/cuestionarios', 'Admin\FormController@index')->name('forms.index');
-    Route::post('/cuestionarios/store', 'Admin\FormController@store')->name('forms.store');
-    Route::post('/cuestionarios/manage', 'Admin\FormController@manage')->name('forms.manage');
-    Route::post('/cuestionarios/estado', 'Admin\FormController@changeState')->name('forms.changeState');
+  //Manage institutions
+  Route::get('/instituciones', 'Admin\InstitutionController@index')->name('institutions.index');
+  Route::post('/instituciones/store', 'Admin\InstitutionController@store')->name('institutions.store');
 
-    Route::post('/respuestas', 'Admin\QuestionnaireController@index')->name('answers.index');
-    Route::post('/respuesta', 'Admin\QuestionnaireController@show')->name('answers.show');
-
+  //Manage Courses
+  Route::get('/cursos', 'Admin\CourseController@index')->name('courses.index');
+  Route::post('/cursos/store', 'Admin\CourseController@store')->name('courses.store');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $user = Auth::user();
+        $institution = $user->institution;
+        $courses = $user->courses;
+
+        return view('admin.dashboard', compact('user', 'institution', 'courses'));
     }
 }

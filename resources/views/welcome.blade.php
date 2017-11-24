@@ -4,7 +4,7 @@
     <v-app id="inspire">
       <div class="container mt-5">
         <v-layout row wrap>
-          <v-flex xs12 sm12 md6 lg4 offset-md3 offset-lg4>
+          <v-flex xs12 sm12 md6 lg4 offset-md3 offset-lg4 v-cloak>
             <form action="{{route('getAccess')}}" method="post">
               {{ csrf_field() }}
               <v-card color="blue-grey darken-2" class="white--text">
@@ -16,14 +16,14 @@
                     <div>
                       Ingresa la clave del cuestionario
                     </div>
-                    <v-text-field label="Clave" class="white--text" name="clave" dark>
+                    <v-text-field label="Clave" class="white--text" name="clave" dark required>
                     </v-text-field>
                   </div>
                   <div class="mt-4">
                     <div>
                       Ingresa tu correo electrónico
                     </div>
-                    <v-text-field label="E-mail" class="white--text" name="email" dark>
+                    <v-text-field label="E-mail" class="white--text" name="email" dark required>
                     </v-text-field>
                   </div>
                 </v-card-text>

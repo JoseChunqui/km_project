@@ -16,7 +16,7 @@ class FormController extends Controller
     public function index(Request $request)
     {
         $current_user_id = Auth::user()->id;
-        $courses = Course::with('forms.questionnaires')->where('user_id', $current_user_id)->get();
+        $courses = Course::with('forms.questionnaires')->where('user_id', $current_user_id)->orderby('id','DESC')->get();
         return view('admin.forms', compact('courses'));
     }
 
@@ -28,10 +28,15 @@ class FormController extends Controller
 
     public function update($id, Request $request){
         $form = Form::findOrFail($id);
-        $form->key = $request->clave;
-        $form->save();
-
-        return redirect()->route('courses.index');
+        $new_key =  $form->course->code . '-' . $request->clave;
+        $form_exists = Form::where('key', $new_key)->first();
+        if(! $form_exists){
+          $form->key = $new_key;
+          $form->save();
+        }else{
+          $request->session()->flash('warning', 'La clave de formulario ya existe. Esta debe ser única');
+        }
+        return redirect()->route('forms.index');
     }
 
     public function store(Request $request)

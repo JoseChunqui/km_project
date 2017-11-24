@@ -41,6 +41,8 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+      try {
+
         $course = new Course();
         $course->user_id = $request->user;
         $course->name = $request->name;
@@ -50,11 +52,20 @@ class CourseController extends Controller
         $path = storage_path()."/../json/questionnaire.json";
         $data = file_get_contents($path);
         $form = new Form();
-        $form->name = 'Prueba de Entrada';
+        $form->name = 'Cuestionario KM';
         $form->data = json_decode($data);
         $form->course_id = $course->id;
-        $form->key = ($request->code).'20171';
+        $form->key = ($request->code).'20172';
         $form->save();
+
+        $request->session()->flash('success', 'Curso creado correctamente. Se generó un cuestionario para dicho curso de forma automática');
+
+      } catch (\Exception $e) {
+
+        $request->session()->flash('warning', 'Ya existe otro cursos registrado en el sistema. Pruebe colocando otro código de curso');
+        
+      }
+
 
 
         return redirect()->route('courses.index');

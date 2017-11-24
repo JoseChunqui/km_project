@@ -27,12 +27,6 @@
         Cuestionario
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>apps</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>notifications</v-icon>
-      </v-btn>
       <v-form id="logout-form" :action="this.logoutLink" method="POST">
         <input type="hidden" name="_token" :value="this.lCsrfToken">
         <v-btn color="red" dark @click="logout">Salir
@@ -57,13 +51,25 @@
     data: () => ({
       dialog: false,
       drawer: true,
-      items: [
-        { icon: 'domain', text: 'Instituciones', link: '/instituciones' },
-        { icon: 'people', text: 'Docentes', link: '/docentes' },
-        { icon: 'import_contacts', text: 'Cursos', link: '/cursos' },
-        { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
-      ]
+      items: []
     }),
+    mounted: function(){
+      if(this.isAdmin == 'true'){
+        this.items = [
+          { icon: 'home', text: 'Inicio', link: '/home'},
+          { icon: 'domain', text: 'Instituciones', link: '/instituciones' },
+          { icon: 'people', text: 'Docentes', link: '/docentes' },
+          { icon: 'import_contacts', text: 'Cursos', link: '/cursos' },
+          { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
+        ]
+      }else{
+        this.items = [
+          { icon: 'home', text: 'Inicio', link: '/home'},
+          { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
+        ]
+      }
+      console.log(this.isAdmin);
+    },
 
     methods: {
       logout() {
@@ -79,7 +85,8 @@
       lCsrfToken: String,
       respuestasLink: String,
       institucionesLink: String,
-      cursosLink: String
+      cursosLink: String,
+      isAdmin: String
     }
   }
 </script>

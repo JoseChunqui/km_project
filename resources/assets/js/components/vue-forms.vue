@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md>
     <v-layout>
-      <v-flex xs12 sm12 lg8 offset-lg2>
+      <v-flex xs12 sm12 md12 lg8 offset-lg2>
         <div class="mb-4">
           <!-- <v-btn light disabled>Añadir Cuestionario</v-btn> -->
           <v-dialog v-model="dialog" persistent max-width="500px">
@@ -66,72 +66,107 @@
                     <v-card-text>
                       <v-container>
                         <v-layout wrap>
-                          <v-flex xs12 sm3>
-                            <div class="mt-1">
+                          <v-flex xs12 md3>
+                            <div class="mt-1 text-xs-center">
                               <strong>Clave:</strong>
                               <v-tooltip bottom>
-                                <v-btn flat slot="activator">{{form.key}}</v-btn>
+                                <v-btn flat slot="activator" @click="dialog_change_password.splice(index,1,true)">{{form.key}}</v-btn>
                                 <span>Cambiar Clave</span>
                               </v-tooltip>
+                              <v-dialog v-model="dialog_change_password[index]" persistent max-width="500px">
+                                <v-card>
+                                  <v-card-title>
+                                    <span class="headline">Cambiar Clave</span>
+                                  </v-card-title>
+                                  <v-form method="POST" autocomplete="off" class="container" :action="getFormEditUrl(form.id)">
+                                    <input type="hidden" name="_token" :value="csrfToken">
+                                    <v-card-text>
+                                      <v-container grid-list-md>
+                                        <v-layout wrap>
+                                          <v-flex xs12>
+                                            <v-text-field label="Nombre del formulario" name="name" required readonly :value="form.name"></v-text-field>
+                                          </v-flex>
+                                          <v-flex xs4>
+                                            <v-text-field :value="course.code+'-'" disabled></v-text-field>
+                                          </v-flex>
+                                          <v-flex xs8>
+                                            <v-text-field label="Clave del cuestionario" name="clave" :value="getKeyForm(form.key, course.code)" required></v-text-field>
+                                          </v-flex>
+                                        </v-layout>
+                                      </v-container>
+                                      <small>*Indica que son campos requeridos</small><br>
+                                      <small>**La clave del cuestionario siempre lleva como prefijo el código del curso.</small>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                      <v-spacer></v-spacer>
+                                      <v-btn color="blue darken-1" flat @click.native="dialog_change_password.splice(index,1,false)">Cancelar</v-btn>
+                                      <v-btn color="blue darken-1" flat @click.native="dialog_change_password.splice(index,1,false)" type="submit">Guardar Cambios</v-btn>
+                                    </v-card-actions>
+                                  </v-form>
+                                </v-card>
+                              </v-dialog>
                             </div>
                           </v-flex>
-                          <v-flex xs12 sm3>
-                            <div class="mt-1">
+                          <v-flex xs12 md3>
+                            <div class="mt-1 text-xs-center">
                               <v-tooltip bottom>
-                                <v-btn flat slot="activator">
+                                <v-btn @click="trigger_answers_index_form()" flat slot="activator">
                                   # de Respuestas: {{form.questionnaires.length}}
                                 </v-btn>
                                 <span>Ver respuestas</span>
                               </v-tooltip>
                             </div>
                           </v-flex>
-                          <v-flex xs12 sm6>
-                            <div class="text-xs-right">
-                              <v-form method="post" :action="answersIndexUrl">
-                                <div hidden>
-                                  <input type="text" name="_token" :value="csrfToken">
-                                  <input type="text" name="form" :value="form.id">
-                                  <input type="text" name="url_valid" value="admlink">
-                                </div>
-                                <v-btn small color="primary" dark type="submit">Ver Respuestas</v-btn>
-                              </v-form>
-                              <v-dialog v-model="dialog_manage[index]" persistent max-width="500px">
-                                <v-btn color="primary" dark small slot="activator">Administrar</v-btn>
-                                <v-form method="POST" autocomplete="off" class="container" :action="actionManageForm">
-                                  <input type="hidden" name="_token" :value="csrfToken">
-                                  <v-card>
-                                    <v-card-title>
-                                      <span class="headline">Administrar Formulario</span>
-                                    </v-card-title>
-                                    <v-card-text>
-                                      <v-container grid-list-md>
-                                        <div>
-                                          <textarea hidden name="data" :value="JSON.stringify(form.data)"></textarea>
-                                          <input hidden type="text" name="form" :value="form.id">
-                                        </div>
-                                        <v-layout wrap>
-                                          <v-flex xs12 v-for="section in form.data" :key="section.section" :id="section.section">
-                                            <v-checkbox v-bind:label="section.section" v-model="section.active" light :disabled="section.section == 'IDENTIFICACIÓN'"></v-checkbox>
-                                          </v-flex>
-                                        </v-layout>
-                                      </v-container>
-                                    </v-card-text>
-                                    <v-card-actions>
-                                      <v-spacer></v-spacer>
-                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage.splice(index,1,false)">Cancelar</v-btn>
-                                      <v-btn color="blue darken-1" flat @click.native="dialog_manage.splice(index,1,false)" type="submit">Guardar</v-btn>
-                                    </v-card-actions>
-                                  </v-card>
+                          <v-flex xs12 md6>
+                            <v-layout row wrap>
+                              <v-flex class="mt-2 text-xs-center">
+                                <v-form id="answersIndexForm" method="get" :action="answersIndexUrl">
+                                  <div hidden>
+                                    <input type="text" name="form" :value="form.id">
+                                  </div>
+                                  <v-btn small color="primary" dark type="submit">Ver Respuestas</v-btn>
                                 </v-form>
-                              </v-dialog>
-                              <!-- delete -->
-                              <v-tooltip bottom>
-                                <v-btn flat icon color="red" slot="activator" @click="delete_form(form.id, course, index)">
-                                  <v-icon>delete</v-icon>
-                                </v-btn>
-                                <span>Eliminar Cuestionario</span>
-                              </v-tooltip>
-                            </div>
+                              </v-flex>
+                              <v-flex class="mt-2 text-xs-center">
+                                <v-dialog v-model="dialog_manage[index]" persistent max-width="500px">
+                                  <v-btn color="primary" dark small slot="activator">Administrar</v-btn>
+                                  <v-form method="POST" autocomplete="off" class="container" :action="actionManageForm">
+                                    <input type="hidden" name="_token" :value="csrfToken">
+                                    <v-card>
+                                      <v-card-title>
+                                        <span class="headline">Administrar Formulario</span>
+                                      </v-card-title>
+                                      <v-card-text>
+                                        <v-container grid-list-md>
+                                          <div>
+                                            <textarea hidden name="data" :value="JSON.stringify(form.data)"></textarea>
+                                            <input hidden type="text" name="form" :value="form.id">
+                                          </div>
+                                          <v-layout wrap>
+                                            <v-flex xs12 v-for="section in form.data" :key="section.section" :id="section.section">
+                                              <v-checkbox v-bind:label="section.section" v-model="section.active" light :disabled="section.section == 'IDENTIFICACIÓN'"></v-checkbox>
+                                            </v-flex>
+                                          </v-layout>
+                                        </v-container>
+                                      </v-card-text>
+                                      <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="blue darken-1" flat @click.native="dialog_manage.splice(index,1,false)">Cancelar</v-btn>
+                                        <v-btn color="blue darken-1" flat @click.native="dialog_manage.splice(index,1,false)" type="submit">Guardar</v-btn>
+                                      </v-card-actions>
+                                    </v-card>
+                                  </v-form>
+                                </v-dialog>
+                              </v-flex>
+                              <!-- <v-flex class="mt-1 text-xs-center">
+                                <v-tooltip bottom>
+                                  <v-btn flat icon color="red" slot="activator" @click="delete_form(form.id, course, index)">
+                                    <v-icon>delete</v-icon>
+                                  </v-btn>
+                                  <span>Eliminar Cuestionario</span>
+                                </v-tooltip>
+                              </v-flex> -->
+                            </v-layout>
                           </v-flex>
                         </v-layout>
                       </v-container>
@@ -158,6 +193,7 @@
         dialog: false,
         course_select : null,
         dialog_manage : [],
+        dialog_change_password: [],
         dataCoursesLocale: this.dataCourses,
         check_sections: []
       }
@@ -167,6 +203,7 @@
       vue.dataCourses.forEach(function(course){
         course.forms.forEach(function(form){
           vue.dialog_manage.push(false);
+          vue.dialog_change_password.push(false);
         })
       });
     },
@@ -174,6 +211,17 @@
       //
     },
     methods: {
+      getKeyForm(key, code){
+        return key.replace(code+'-','');
+      },
+      getFormEditUrl(id){
+        return '/forms/edit/'+id;
+      },
+
+      trigger_answers_index_form(){
+        document.getElementById("answersIndexForm").submit();
+      },
+
       show_code_course_selected(){
         var vue = this;
         var code_to_return = '';

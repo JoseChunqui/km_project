@@ -1,16 +1,16 @@
 <template>
   <v-card class="card--flex-toolbar">
     <v-toolbar card color="white" prominent>
-      <v-toolbar-title class="body-2 grey--text">Administración del Conocimiento</v-toolbar-title>
+      <v-toolbar-title class="body-2 grey--text hidden-xs-only">Administración del Conocimiento</v-toolbar-title>
       <v-spacer></v-spacer>
-      <div class="mr-4" v-if="!view()">
+      <div class="mr-4 text-xs-center" v-if="!view()">
         <v-btn @click.native="next">Siguiente</v-btn>
         <v-btn  :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length && !allow" @click.native="save">Guardar</v-btn>
       </div>
     </v-toolbar>
     <v-divider></v-divider>
     <v-card-text>
-      <div class="container">
+      <div >
         <div v-if="!questionnaire_completed">
           <v-tabs dark grow v-model="active">
             <v-tabs-bar color="blue darken-2">
@@ -26,7 +26,7 @@
                     <v-card flat>
                       <v-card-text>
                         <div v-for="question in section.questions">
-                          <div v-if="question.type == 'text'">
+                          <div v-if="question.type == 'text'" class="flex sm6 offset-sm3">
                             <div v-if="!view()">
                               <div v-if="question.required">
                                 <v-text-field
@@ -62,7 +62,7 @@
                               ></v-text-field>
                             </div>
                           </div>
-                          <div v-if="question.type == 'select'">
+                          <div v-if="question.type == 'select'" class="flex sm6 offset-sm3">
                             <div v-if="!view()">
                               <div v-if="question.required">
                                 <v-select
@@ -99,7 +99,7 @@
                               ></v-text-field>
                             </div>
                           </div>
-                          <div v-if="question.type == 'number'">
+                          <div v-if="question.type == 'number'"  class="flex sm6 offset-sm3">
                             <div v-if="!view()">
                               <div v-if="question.required">
                                 <v-text-field
@@ -133,7 +133,7 @@
                               ></v-text-field>
                             </div>
                           </div>
-                          <div v-if="question.type == 'e-mail'">
+                          <div v-if="question.type == 'e-mail'"  class="flex sm6 offset-sm3">
                             <div v-if="!view()">
                               <div v-if="question.required">
                                 <v-text-field
@@ -170,7 +170,7 @@
                               ></v-text-field>
                             </div>
                           </div>
-                          <div v-if="question.type == 'textarea'">
+                          <div v-if="question.type == 'textarea'" class="flex sm6 offset-sm3">
                             <div v-if="question.required">
                               <v-text-field
                               :label="question.statement"
