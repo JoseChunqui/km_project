@@ -17,13 +17,15 @@ require('./libraries');
  */
  window.Vue = require('vue');
  window.Vuetify = require('vuetify');
- window.VeeValidate = require('vee-validate');
-
+ // window.VeeValidate = require('vee-validate');
+ import VeeValidate, { Validator } from 'vee-validate';
+ import m_es from 'vee-validate/dist/locale/es';
+ Validator.addLocale(m_es);
  const config = {
   errorBagName: 'vee_errors', // change if property conflicts.
   fieldsBagName: 'fields',
   delay: 0,
-  locale: 'en',
+  locale: 'es',
   dictionary: null,
   strict: true,
   classes: false,
@@ -38,7 +40,10 @@ require('./libraries');
   events: 'input|blur',
   inject: true,
   validity: false,
-  aria: true
+  aria: true,
+  dictionary: {
+    es: { messages: m_es }
+  }
 };
 
   Vue.use(Notifications)

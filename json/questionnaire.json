@@ -6,25 +6,41 @@
       "statement": "Apellidos",
       "type": "text",
       "answer": "",
-      "required": true
+      "required": true,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Nombres",
       "type": "text",
       "answer": "",
-      "required": true
+      "required": true,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
-      "statement": "Código",
-      "type": "text",
+      "statement": "DNI",
+      "type": "number",
       "answer": "",
-      "required": true
+      "required": true,
+      "restrictions" : {
+        "key" : "DNI",
+        "value" : ""
+      }
     },
     {
       "statement": "Especialidad",
       "type": "text",
       "answer": "",
-      "required": true
+      "required": true,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Ciclo Relativo",
@@ -72,67 +88,111 @@
         }
       ],
       "answer": "",
-      "required": true
+      "required": true,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Edad",
       "type": "number",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "Age",
+        "value" : ""
+      }
     },
     {
       "statement": "Teléfono (casa/trabajo)",
       "type": "number",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "Phone",
+        "value" : ""
+      }
     },
     {
       "statement": "Teléfono Celular",
       "type": "number",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "Celular",
+        "value" : ""
+      }
     },
     {
       "statement": "E-mail",
       "type": "e-mail",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "Email",
+        "value" : ""
+      }
     },
     {
       "statement": "Otros datos (pagina web, blogs, Facebook, skype, etc)",
       "type": "textarea",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Distrito donde vive",
       "type": "text",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Colegio de Procedencia",
       "type": "text",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Academia Pre-Universitaria",
       "type": "text",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Orden de Mérito de Ingreso a la UNI",
-      "type": "text",
+      "type": "number",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "Max",
+        "value" : "1000"
+      }
     },
     {
       "statement": "Promedio ponderado acumulado",
-      "type": "text",
+      "type": "number",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "vigesimal",
+        "value" : ""
+      }
     }
   ],
   "active": true
@@ -150,19 +210,31 @@
               "value": "Nro.",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Curso",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Profesor",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -172,19 +244,31 @@
               "value": "#1",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -194,19 +278,31 @@
               "value": "#2",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -216,19 +312,31 @@
               "value": "#3",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         }
@@ -244,19 +352,31 @@
               "value": "Nro.",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Cualidad",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Sustento",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -266,19 +386,31 @@
               "value": "#1",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -288,19 +420,31 @@
               "value": "#2",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -310,19 +454,31 @@
               "value": "#3",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -332,19 +488,31 @@
               "value": "#4",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         }
@@ -354,7 +522,11 @@
       "statement": "¿Qué expectativas tiene del curso?",
       "type": "textarea",
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     }
   ],
   "active": true
@@ -384,7 +556,11 @@
         }
       ],
       "answer": "",
-      "required": false
+      "required": false,
+      "restrictions" : {
+        "key" : "None",
+        "value" : ""
+      }
     },
     {
       "statement": "Actividades Extra-académicas",
@@ -396,31 +572,51 @@
               "value": "Actividad",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Descripción",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Lugar",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Fecha Inicio",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Fecha Fin",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -430,31 +626,51 @@
               "value": "Prácticas",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -464,31 +680,51 @@
               "value": "Ayudantía",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -498,31 +734,51 @@
               "value": "Maratones/Concursos de Programación (Hackathon, IEEEXtreme Programming, etc)",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -532,31 +788,51 @@
               "value": "Otros (Centros Culturales,etc)",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         }
@@ -583,13 +859,21 @@
                   "value": "Lenguaje de Programación",
                   "editable": false,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 },
                 {
                   "value": "Auto calificación (escala de 0 a 20)",
                   "editable": false,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 }
               ]
             },
@@ -599,13 +883,21 @@
                 "value": "Java",
                 "editable": false,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "None",
+                  "value" : ""
+                }
               },
               {
                 "value": "",
                 "editable": true,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "vigesimal",
+                  "value" : ""
+                }
               }
             ]
           },
@@ -615,13 +907,21 @@
                 "value": "PHP",
                 "editable": false,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "None",
+                  "value" : ""
+                }
               },
               {
                 "value": "",
                 "editable": true,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "vigesimal",
+                  "value" : ""
+                }
               }
             ]
           },
@@ -631,13 +931,21 @@
                 "value": "Python",
                 "editable": false,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "None",
+                  "value" : ""
+                }
               },
               {
                 "value": "",
                 "editable": true,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "vigesimal",
+                  "value" : ""
+                }
               }
             ]
           },
@@ -647,13 +955,21 @@
                 "value": "Otros",
                 "editable": true,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "None",
+                  "value" : ""
+                }
               },
               {
                 "value": "",
                 "editable": true,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "vigesimal",
+                  "value" : ""
+                }
               }
             ]
           },
@@ -663,13 +979,21 @@
                 "value": "Otros",
                 "editable": true,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "None",
+                  "value" : ""
+                }
               },
               {
                 "value": "",
                 "editable": true,
                 "answer": "",
-                "required": false
+                "required": false,
+                "restrictions" : {
+                  "key" : "vigesimal",
+                  "value" : ""
+                }
               }
             ]
           }
@@ -685,13 +1009,21 @@
                   "value": "Gestor de Base de Datos",
                   "editable": false,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 },
                 {
                   "value": "Auto calificación (escala de 0 a 20)",
                   "editable": false,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 }
               ]
             },
@@ -701,13 +1033,21 @@
                   "value": "MySql",
                   "editable": false,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 },
                 {
                   "value": "",
                   "editable": true,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
               ]
             },
@@ -717,13 +1057,21 @@
                   "value": "Oracle",
                   "editable": false,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 },
                 {
                   "value": "",
                   "editable": true,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 }
               ]
             },
@@ -733,13 +1081,21 @@
                   "value": "Informix",
                   "editable": false,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 },
                 {
                   "value": "",
                   "editable": true,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
               ]
             },
@@ -749,13 +1105,21 @@
                   "value": "Otros",
                   "editable": true,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 },
                 {
                   "value": "",
                   "editable": true,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
               ]
             },
@@ -765,13 +1129,21 @@
                   "value": "Otros",
                   "editable": true,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
                 },
                 {
                   "value": "",
                   "editable": true,
                   "answer": "",
-                  "required": false
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
               ]
             }
@@ -789,31 +1161,51 @@
               "value": "Sistema Informático o Prototipo",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Breve descripción de la funcionalidad",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Herramienta de programación utilizada (Java, PHP, etc.)",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Gestor de Base de Datos (MySql, Oracle, etc.)",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "Fines: académicos o extra-académicos",
               "editable": false,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -823,31 +1215,51 @@
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -857,31 +1269,51 @@
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
@@ -891,31 +1323,51 @@
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
               "value": "",
               "editable": true,
               "answer": "",
-              "required": false
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         }

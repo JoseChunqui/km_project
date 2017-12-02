@@ -25,18 +25,18 @@
                   <v-container fluid>
                     <v-card flat>
                       <v-card-text>
-                        <div v-for="question in section.questions">
+                        <div v-for="(question,index) in section.questions">
                           <div v-if="question.type == 'text'" class="flex sm6 offset-sm3">
                             <div v-if="!view()">
                               <div v-if="question.required">
                                 <v-text-field
                                 :label="question.statement"
                                 :v-model="slugify(question.statement)"
-                                :counter="100"
+                                :counter="question.restrictions.key == 'DNI' ? 8 : 100"
                                 :readonly="view()"
                                 v-validate="'required'"
                                 :value = "question.answer"
-                                @input="value => { question.answer = value }"
+                                @input="value => { question.answer = value, ch_validate(index,section.questions,question.restrictions)}"
                                 :data-vv-name="slugify(question.statement)"
                                 :error-messages="vee_errors.collect(slugify(question.statement))"
                                 required
@@ -49,7 +49,7 @@
                                 :counter="100"
                                 :value = "[view() ? (question.answer == ''? '-' : question.answer) : '']"
                                 :readonly="view()"
-                                @input="value => { question.answer = value }"
+                                @input="value => { question.answer = value, question.answer = value, ch_validate(index,section.questions,question.restrictions) }"
                                 ></v-text-field>
                               </div>
                             </div>
@@ -71,7 +71,7 @@
                                 :label="question.statement"
                                 v-validate="'required'"
                                 :value = "question.answer"
-                                @input="value => { question.answer = value }"
+                                @input="value => { question.answer = value, ch_validate(index,section.questions,question.restrictions) }"
                                 :data-vv-name="slugify(question.statement)"
                                 :error-messages="vee_errors.collect(slugify(question.statement))"
                                 single-line
@@ -106,11 +106,11 @@
                                 type="number"
                                 :label="question.statement"
                                 :v-model="slugify(question.statement)"
-                                v-validate="'required'"
+                                v-validate="ch_validate2(question.restrictions)"
                                 :value = "question.answer"
                                 :data-vv-name="slugify(question.statement)"
                                 :error-messages="vee_errors.collect(slugify(question.statement))"
-                                @input="value => { question.answer = value }"
+                                @input="value => { question.answer = value, ch_validate(index,section.questions,question.restrictions)}"
                                 required
                                 ></v-text-field>
                               </div>
@@ -120,7 +120,7 @@
                                 :label="question.statement"
                                 :value = "question.answer"
                                 :v-model="slugify(question.statement)"
-                                @input="value => { question.answer = value }"
+                                @input="value => { question.answer = value, question.answer = value, ch_validate(index,section.questions,question.restrictions) }"
                                 ></v-text-field>
                               </div>
                             </div>
@@ -303,6 +303,25 @@
       }
     },
     methods: {
+      ch_validate2(restrictions){
+        if(restrictions.key == "None"){
+          return 'required'
+        }else if(restrictions.key == "DNI"){
+          return 'required|digits:{8}'
+        }
+        else if(restrictions.key == "Age"){
+          return 'required|between:15,99'
+        }
+        else if(restrictions.key == "Phone"){
+          return 'required|digits:{7}'
+        }
+        else if(restrictions.key == "Celular"){
+          return 'required|digits:{9}'
+        }
+        else if(restrictions.key == "vigesimal"){
+          return 'required|digits:{9}'
+        }
+      },
       slugify(string) {
         return string
         .toString()
@@ -315,9 +334,12 @@
         .replace(/-+$/, "");
       },
       next () {
-        this.active = this.tabs[(this.tabs.indexOf(this.active) + 1) % this.tabs.length]
-        if(this.tabs.indexOf(this.active) +1 == this.tabs.length){
-          this.allow = true;
+        this.$validator.validateAll();
+        if(this.vee_errors.items['length'] == 0){
+          this.active = this.tabs[(this.tabs.indexOf(this.active) + 1) % this.tabs.length]
+          if(this.tabs.indexOf(this.active) +1 == this.tabs.length){
+            this.allow = true;
+          }
         }
       },
       save () {
