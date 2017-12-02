@@ -26,69 +26,48 @@
                     <v-card flat>
                       <v-card-text>
                         <div v-for="(question,index) in section.questions">
-                          <div v-if="question.type == 'text'" class="flex sm6 offset-sm3">
+                          <div v-if="question.type == 'text' || question.type == 'textarea'" class="flex sm6 offset-sm3">
                             <div v-if="!view()">
-                              <div v-if="question.required">
-                                <v-text-field
-                                :label="question.statement"
-                                :v-model="slugify(question.statement)"
-                                :counter="question.restrictions.key == 'DNI' ? 8 : 100"
-                                :readonly="view()"
-                                v-validate="'required'"
-                                :value = "question.answer"
-                                @input="value => { question.answer = value, ch_validate(index,section.questions,question.restrictions)}"
-                                :data-vv-name="slugify(question.statement)"
-                                :error-messages="vee_errors.collect(slugify(question.statement))"
-                                required
-                                ></v-text-field>
-                              </div>
-                              <div v-else>
-                                <v-text-field
-                                :label="question.statement"
-                                :v-model="slugify(question.statement)"
-                                :counter="100"
-                                :value = "[view() ? (question.answer == ''? '-' : question.answer) : '']"
-                                :readonly="view()"
-                                @input="value => { question.answer = value, question.answer = value, ch_validate(index,section.questions,question.restrictions) }"
-                                ></v-text-field>
-                              </div>
+                              <v-text-field
+                              :label="question.statement"
+                              :v-model="slugify(question.statement)"
+                              :counter="question.type == 'textarea' ? 400 : 100"
+                              v-validate="ch_validate2(question.restrictions, question.required)"
+                              :value = "question.answer"
+                              @input="value => { question.answer = value }"
+                              :data-vv-name="question.statement"
+                              :data-vv-scope="slugify(section.section)"
+                              :error-messages="vee_errors.collect(question.statement)"
+                              :required = "question.required"
+                              :multi-line = "question.type == 'textarea'"
+                              ></v-text-field>
                             </div>
                             <div v-else>
                               <v-text-field
                               :label="question.statement"
                               :v-model="slugify(question.statement)"
                               :value = "question.answer"
+                              :multi-line = "question.type == 'textarea'"
                               readonly
                               ></v-text-field>
                             </div>
                           </div>
                           <div v-if="question.type == 'select'" class="flex sm6 offset-sm3">
                             <div v-if="!view()">
-                              <div v-if="question.required">
-                                <v-select
-                                v-bind:items="question.options"
-                                :v-model="slugify(question.statement)"
-                                :label="question.statement"
-                                v-validate="'required'"
-                                :value = "question.answer"
-                                @input="value => { question.answer = value, ch_validate(index,section.questions,question.restrictions) }"
-                                :data-vv-name="slugify(question.statement)"
-                                :error-messages="vee_errors.collect(slugify(question.statement))"
-                                single-line
-                                required
-                                bottom
-                                ></v-select>
-                              </div>
-                              <div v-else>
-                                <v-select
-                                v-bind:items="question.options"
-                                :v-model="slugify(question.statement)"
-                                :label="question.statement"
-                                @input="value => { question.answer = value }"
-                                single-line
-                                bottom
-                                ></v-select>
-                              </div>
+                              <v-select
+                              v-bind:items="question.options"
+                              :v-model="slugify(question.statement)"
+                              :label="question.statement"
+                              v-validate="ch_validate2(question.restrictions, question.required)"
+                              :value = "question.answer"
+                              @input="value => { question.answer = value }"
+                              :data-vv-name="slugify(question.statement)"
+                              :data-vv-scope="slugify(section.section)"
+                              :error-messages="vee_errors.collect(slugify(question.statement))"
+                              single-line
+                              :required = "question.required"
+                              bottom
+                              ></v-select>
                             </div>
                             <div v-else>
                               <v-text-field
@@ -101,101 +80,75 @@
                           </div>
                           <div v-if="question.type == 'number'"  class="flex sm6 offset-sm3">
                             <div v-if="!view()">
-                              <div v-if="question.required">
-                                <v-text-field
-                                type="number"
-                                :label="question.statement"
-                                :v-model="slugify(question.statement)"
-                                v-validate="ch_validate2(question.restrictions)"
-                                :value = "question.answer"
-                                :data-vv-name="slugify(question.statement)"
-                                :error-messages="vee_errors.collect(slugify(question.statement))"
-                                @input="value => { question.answer = value, ch_validate(index,section.questions,question.restrictions)}"
-                                required
-                                ></v-text-field>
-                              </div>
-                              <div v-else>
-                                <v-text-field
-                                type="number"
-                                :label="question.statement"
-                                :value = "question.answer"
-                                :v-model="slugify(question.statement)"
-                                @input="value => { question.answer = value, question.answer = value, ch_validate(index,section.questions,question.restrictions) }"
-                                ></v-text-field>
-                              </div>
-                            </div>
-                            <div v-else>
                               <v-text-field
-                              type="text"
-                              :label="question.statement"
-                              :value = "question.answer == ''? '-' : question.answer"
-                              readonly
-                              ></v-text-field>
-                            </div>
-                          </div>
-                          <div v-if="question.type == 'e-mail'"  class="flex sm6 offset-sm3">
-                            <div v-if="!view()">
-                              <div v-if="question.required">
-                                <v-text-field
-                                type="email"
-                                :label="question.statement"
-                                :v-model="slugify(question.statement)"
-                                :value = "question.answer"
-                                :error-messages="vee_errors.collect(slugify(question.statement))"
-                                v-validate="'required|email'"
-                                :data-vv-name="slugify(question.statement)"
-                                @input="value => { question.answer = value }"
-                                required
-                                ></v-text-field>
-                              </div>
-                              <div v-else>
-                                <v-text-field
-                                type="email"
-                                :label="question.statement"
-                                :v-model="slugify(question.statement)"
-                                :value = "question.answer"
-                                :error-messages="vee_errors.collect(slugify(question.statement))"
-                                v-validate="'email'"
-                                :data-vv-name="slugify(question.statement)"
-                                @input="value => { question.answer = value }"
-                                ></v-text-field>
-                              </div>
-                            </div>
-                            <div v-else>
-                              <v-text-field
-                              type="text"
-                              :label="question.statement"
-                              :value = "question.answer == ''? '-' : question.answer"
-                              readonly
-                              ></v-text-field>
-                            </div>
-                          </div>
-                          <div v-if="question.type == 'textarea'" class="flex sm6 offset-sm3">
-                            <div v-if="question.required">
-                              <v-text-field
+                              type="number"
                               :label="question.statement"
                               :v-model="slugify(question.statement)"
-                              :counter="100"
-                              :value = "[view() ? (question.answer == ''? '-' : question.answer) : '']"
-                              v-validate="'required'"
+                              v-validate="ch_validate2(question.restrictions, question.required)"
+                              :value = "question.answer"
                               :data-vv-name="slugify(question.statement)"
+                              :data-vv-scope="slugify(section.section)"
                               :error-messages="vee_errors.collect(slugify(question.statement))"
-                              :readonly="view()"
                               @input="value => { question.answer = value }"
-                              multi-line
-                              required
+                              :required = "question.required"
                               ></v-text-field>
-
                             </div>
                             <div v-else>
                               <v-text-field
+                              type="text"
                               :label="question.statement"
-                              :v-model="slugify(question.statement)"
-                              :counter="100"
-                              :value = "[view() ? (question.answer == ''? '-' : question.answer) : '']"
-                              :readonly="view()"
-                              @input="value => { question.answer = value }"
-                              multi-line
+                              :value = "question.answer == ''? '-' : question.answer"
+                              readonly
+                              ></v-text-field>
+                            </div>
+                          </div>
+                          <div v-if="question.type == 'date'" class="flex sm6 offset-sm3 mt-2">
+                            <div v-if="!view()">
+                                <v-menu
+                                lazy
+                                :close-on-content-click="false"
+                                :v-model="cat(slugify(question.statement),'-menu')"
+                                transition="scale-transition"
+                                offset-y
+                                full-width
+                                :nudge-right="40"
+                                max-width="290px"
+                                min-width="290px"
+                                >
+                                <v-text-field
+                                slot="activator"
+                                :label="question.statement"
+                                :data-vv-name="slugify(question.statement)"
+                                :data-vv-scope="slugify(section.section)"
+                                data-vv-delay="10"
+                                v-validate="ch_validate2(question.restrictions, question.required)"
+                                :error-messages="vee_errors.collect(slugify(question.statement))"
+                                v-model="dateFormatted"
+                                @blur="fecha_nacimiento = parseDate(dateFormatted)"
+                                @imput="value => { question.answer = value }"
+                                :value = "question.answer"
+                                prepend-icon="event"
+                                :required = "question.required"
+                                ></v-text-field>
+                                <v-date-picker v-model="fecha_nacimiento"
+                                  @input="dateFormatted = formatDate($event); question.answer = formatDate($event)"
+                                  no-title scrollable actions>
+                                  <template slot-scope="{ save, cancel }">
+                                    <v-card-actions>
+                                      <v-spacer></v-spacer>
+                                      <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+                                      <v-btn flat color="primary" @click="save">OK</v-btn>
+                                    </v-card-actions>
+                                  </template>
+                                </v-date-picker>
+                              </v-menu>
+                            </div>
+                            <div v-else>
+                              <v-text-field
+                              type="text"
+                              :label="question.statement"
+                              :value = "question.answer == ''? '-' : question.answer"
+                              readonly
                               ></v-text-field>
                             </div>
                           </div>
@@ -206,16 +159,29 @@
                             <div class="table__overflow elevation-1 mb-4 mt-4">
                               <table class="datatable table bordered">
                                 <tbody>
-                                  <tr v-for="file in question.files">
-                                    <td v-for="column in file.columns">
+                                  <tr v-for="(file, index_fil) in question.files">
+                                    <td v-for="(column,index_col) in file.columns">
                                       <div v-if="column.editable">
-                                        <v-text-field
-                                        :label="column.value"
-                                        :value = "[view() ?  column.answer : '']"
-                                        :readonly="view()"
-                                        @input="value => { column.answer = value }"
-                                        :required = "question.required"
-                                        ></v-text-field>
+                                        <div v-if="!view()">
+                                          <v-text-field
+                                          :label="column.value"
+                                          :data-vv-name="cat(section.section , cat(String(index),cat(String(index_fil),String(index_col))))"
+                                          :data-vv-scope="slugify(section.section)"
+                                          v-validate="ch_validate2(column.restrictions, column.required)"
+                                          :error-messages="vee_errors.collect(cat(section.section , cat(String(index),cat(String(index_fil),String(index_col)))))"
+                                          :value = "column.answer"
+                                          @input="value => { column.answer = value }"
+                                          :required = "column.required"
+                                          ></v-text-field>
+                                        </div>
+                                        <div v-else>
+                                          <v-text-field
+                                          type="text"
+                                          :label="question.statement"
+                                          :value = "question.answer == ''? '-' : question.answer"
+                                          readonly
+                                          ></v-text-field>
+                                        </div>
                                       </div>
                                       <div v-else>
                                         <span>{{column.value}}</span>
@@ -227,7 +193,7 @@
                             </div>
                           </div>
                           <div v-if="question.type == 'multiquestion'" class="mb-4 mt-4">
-                            <div v-for="sub_question in question.questions">
+                            <div v-for="(sub_question, sub_index) in question.questions">
                               <div v-if="sub_question.type == 'table'">
                                 <label class="mb-4 mt-4">
                                   {{sub_question.statement}}
@@ -235,16 +201,29 @@
                                 <div class="table__overflow elevation-1 mb-4 mt-4">
                                   <table class="datatable table bordered">
                                     <tbody>
-                                      <tr v-for="file in sub_question.files">
-                                        <td v-for="column in file.columns">
+                                      <tr v-for="(file, index_fil) in sub_question.files">
+                                        <td v-for="(column,index_col) in file.columns">
                                           <div v-if="column.editable">
-                                            <v-text-field
-                                            :label="column.value"
-                                            :value = "[view() ?  column.answer : '']"
-                                            :readonly="view()"
-                                            @input="value => { column.answer = value }"
-                                            :required = "question.required"
-                                            ></v-text-field>
+                                            <div v-if="!view()">
+                                              <v-text-field
+                                              :label="column.value"
+                                              :data-vv-name="cat(section.section , cat(String(index),cat(String(sub_index),cat(String(index_fil),String(index_col)))))"
+                                              :data-vv-scope="slugify(section.section)"
+                                              v-validate="ch_validate2(column.restrictions, column.required)"
+                                              :error-messages="vee_errors.collect(cat(section.section , cat(String(index),cat(String(sub_index),cat(String(index_fil),String(index_col))))))"
+                                              :value = "column.answer"
+                                              @input="value => { column.answer = value }"
+                                              :required = "column.required"
+                                              ></v-text-field>
+                                            </div>
+                                            <div v-else>
+                                              <v-text-field
+                                              type="text"
+                                              :label="question.statement"
+                                              :value = "question.answer == ''? '-' : question.answer"
+                                              readonly
+                                              ></v-text-field>
+                                            </div>
                                           </div>
                                           <div v-else>
                                             <span>{{column.value}}</span>
@@ -294,7 +273,9 @@
         visualization: this.functionForm,
         tabs:[],
         active: null,
-        name: ''
+        name: '',
+        fecha_nacimiento : '1990-01-01',
+        dateFormatted: null
       }
     },
     created: function(){
@@ -303,24 +284,52 @@
       }
     },
     methods: {
-      ch_validate2(restrictions){
+      parseDate (date) {
+        if (!date) {
+          return null
+        }
+        const [day, month, year] = date.split('/')
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+      },
+      formatDate (date) {
+        if (!date) {
+          return null
+        }
+
+        const [year, month, day] = date.split('-')
+        return `${day}/${month}/${year}`
+      },
+      cat(text1, text2){
+        return text1.concat(text2)
+      },
+      ch_validate2(restrictions, required = false){
+        var custom_validate = ''
         if(restrictions.key == "None"){
-          return 'required'
+          //
         }else if(restrictions.key == "DNI"){
-          return 'required|digits:{8}'
+          custom_validate = 'digits:8'
         }
         else if(restrictions.key == "Age"){
-          return 'required|between:15,99'
+          custom_validate = 'between:15,99'
         }
         else if(restrictions.key == "Phone"){
-          return 'required|digits:{7}'
+          custom_validate = 'digits:7'
         }
         else if(restrictions.key == "Celular"){
-          return 'required|digits:{9}'
+          custom_validate = 'digits:9'
         }
         else if(restrictions.key == "vigesimal"){
-          return 'required|digits:{9}'
+          custom_validate = 'between:0,20'
         }
+        else if(restrictions.key == "Email"){
+          custom_validate = 'email'
+        }
+        // else if(restrictions.key == "Date"){
+        //   custom_validate = 'email'
+        // }
+        return  required ? 'required'+ '|' + custom_validate : custom_validate
+
+
       },
       slugify(string) {
         return string
@@ -334,13 +343,16 @@
         .replace(/-+$/, "");
       },
       next () {
-        this.$validator.validateAll();
-        if(this.vee_errors.items['length'] == 0){
-          this.active = this.tabs[(this.tabs.indexOf(this.active) + 1) % this.tabs.length]
-          if(this.tabs.indexOf(this.active) +1 == this.tabs.length){
-            this.allow = true;
+        const vue = this;
+        console.log(vue.range);
+        vue.$validator.validateAll(vue.slugify(vue.active)).then((result) => {
+          if (result) {
+            vue.active = vue.tabs[(vue.tabs.indexOf(vue.active) + 1) % vue.tabs.length]
+            if(vue.tabs.indexOf(vue.active) +1 == vue.tabs.length){
+              vue.allow = true;
+            }
           }
-        }
+        });
       },
       save () {
         this.$validator.validateAll();
@@ -363,7 +375,7 @@
           })
 
         }else{
-          this.active = this.tabs[0]
+          // this.active = this.tabs[0]
           console.log("no valido");
         }
       },

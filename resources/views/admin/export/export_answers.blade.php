@@ -34,7 +34,7 @@
         @foreach ($questionnaires[0]->data as $section)
           @foreach ($section->questions as $question)
             @if($section->active)
-              @if(in_array($question->type,["text","select","number","e-mail","textarea"]))
+              @if(in_array($question->type,["text","select","number","textarea","date"]))
                 @if($i == 0)
                   <th rowspan="2">
                     {{isset($question->statement) ? $question->statement : 'Error'}}
@@ -93,7 +93,7 @@
           @foreach ($questionnaire->data as $section)
             @if($section->active)
               @foreach ($section->questions as $question)
-                @if(in_array($question->type,["text","select","number","e-mail","textarea"]))
+                @if(in_array($question->type,["text","select","number","e-mail","textarea","date"]))
                   @if($i==1)
                     <td rowspan="{{$levels}}">
                       {{isset($question->answer) ? $question->answer : 'Error'}}
