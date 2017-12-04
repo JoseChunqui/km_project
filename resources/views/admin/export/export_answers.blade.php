@@ -93,7 +93,7 @@
           @foreach ($questionnaire->data as $section)
             @if($section->active)
               @foreach ($section->questions as $question)
-                @if(in_array($question->type,["text","select","number","e-mail","textarea","date"]))
+                @if(in_array($question->type,["text","select","number","textarea","date"]))
                   @if($i==1)
                     <td rowspan="{{$levels}}">
                       {{isset($question->answer) ? $question->answer : 'Error'}}

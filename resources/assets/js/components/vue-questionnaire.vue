@@ -1,11 +1,25 @@
 <template>
   <v-card class="card--flex-toolbar">
-    <v-toolbar card color="white" prominent>
-      <v-toolbar-title class="body-2 grey--text hidden-xs-only">Administración del Conocimiento</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <div class="mr-4 text-xs-center" v-if="!view()">
-        <v-btn @click.native="next">Siguiente</v-btn>
-        <v-btn  :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length && !allow" @click.native="save">Guardar</v-btn>
+
+    <v-snackbar
+      :timeout = "Number(1500)"
+      color="error"
+      top
+      v-model="v_alert"
+      >
+      Faltan llenar o corregir algunos campos en esta sección
+      <!-- <v-btn dark flat @click.native="v_alert = false">Cerrar</v-btn> -->
+    </v-snackbar>
+
+    <v-toolbar card color="white" prominent class="text-xs-center">
+      <v-toolbar-title class="body-2 grey--text hidden-md-and-down">Administración del Conocimiento</v-toolbar-title>
+      <v-spacer class="hidden-md-and-down"></v-spacer>
+      <v-flex class="mr-0 text-lg-right" v-if="!view()">
+        <v-btn @click.native="previus" :disabled="! previus_allow">Anterior</v-btn>
+        <v-btn @click.native="next" :disabled="! next_allow">Siguiente</v-btn>
+        <v-btn :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length && allow" @click.native="save">Guardar</v-btn>
+      </v-flex>
+      <div class="mr-4 hidden-md-and-down">
       </div>
     </v-toolbar>
     <v-divider></v-divider>
@@ -13,15 +27,23 @@
       <div >
         <div v-if="!questionnaire_completed">
           <v-tabs dark grow v-model="active">
-            <v-tabs-bar color="blue darken-2">
-              <v-tabs-item v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple>
-                <span class="caption"> {{ section.section }} </span>
+            <v-tabs-bar color="blue darken-2" class="hidden-md-and-down">
+              <v-tabs-item v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple disabled >
+                <span class="caption diabled-text-white"> {{ section.section }} </span>
               </v-tabs-item>
               <v-tabs-slider color="yellow"></v-tabs-slider>
             </v-tabs-bar>
-            <v-tabs-items>
+            <div class="hidden-lg-and-up text-xs-center">
+              <div class="title">
+                {{active}}
+              </div>
+              <div class="">
+                {{progress_tab}}
+              </div>
+            </div>
+            <v-tabs-items touchless>
               <v-form>
-                <v-tabs-content v-for="section in range" v-if="section.active" :key="section.section" :id="section.section">
+                <v-tabs-content v-for="(section, index_sec) in range" v-if="section.active" :key="section.section" :id="section.section">
                   <v-container fluid>
                     <v-card flat>
                       <v-card-text>
@@ -61,9 +83,9 @@
                               v-validate="ch_validate2(question.restrictions, question.required)"
                               :value = "question.answer"
                               @input="value => { question.answer = value }"
-                              :data-vv-name="slugify(question.statement)"
+                              :data-vv-name="question.statement"
                               :data-vv-scope="slugify(section.section)"
-                              :error-messages="vee_errors.collect(slugify(question.statement))"
+                              :error-messages="vee_errors.collect(question.statement)"
                               single-line
                               :required = "question.required"
                               bottom
@@ -86,9 +108,9 @@
                               :v-model="slugify(question.statement)"
                               v-validate="ch_validate2(question.restrictions, question.required)"
                               :value = "question.answer"
-                              :data-vv-name="slugify(question.statement)"
+                              :data-vv-name="question.statement"
                               :data-vv-scope="slugify(section.section)"
-                              :error-messages="vee_errors.collect(slugify(question.statement))"
+                              :error-messages="vee_errors.collect(question.statement)"
                               @input="value => { question.answer = value }"
                               :required = "question.required"
                               ></v-text-field>
@@ -118,11 +140,11 @@
                                 <v-text-field
                                 slot="activator"
                                 :label="question.statement"
-                                :data-vv-name="slugify(question.statement)"
+                                :data-vv-name="question.statement"
                                 :data-vv-scope="slugify(section.section)"
                                 data-vv-delay="10"
                                 v-validate="ch_validate2(question.restrictions, question.required)"
-                                :error-messages="vee_errors.collect(slugify(question.statement))"
+                                :error-messages="vee_errors.collect(question.statement)"
                                 v-model="dateFormatted"
                                 @blur="fecha_nacimiento = parseDate(dateFormatted)"
                                 @imput="value => { question.answer = value }"
@@ -163,16 +185,59 @@
                                     <td v-for="(column,index_col) in file.columns">
                                       <div v-if="column.editable">
                                         <div v-if="!view()">
-                                          <v-text-field
-                                          :label="column.value"
-                                          :data-vv-name="cat(section.section , cat(String(index),cat(String(index_fil),String(index_col))))"
-                                          :data-vv-scope="slugify(section.section)"
-                                          v-validate="ch_validate2(column.restrictions, column.required)"
-                                          :error-messages="vee_errors.collect(cat(section.section , cat(String(index),cat(String(index_fil),String(index_col)))))"
-                                          :value = "column.answer"
-                                          @input="value => { column.answer = value }"
-                                          :required = "column.required"
-                                          ></v-text-field>
+                                          <div v-if="column.restrictions.key == 'Date'">
+                                            <v-menu
+                                            lazy
+                                            :close-on-content-click="false"
+                                            transition="scale-transition"
+                                            offset-y
+                                            full-width
+                                            :nudge-right="40"
+                                            max-width="290px"
+                                            min-width="290px"
+                                            >
+                                            <v-text-field
+                                            slot="activator"
+                                            :value = "column.answer"
+                                            @input="$set(column,'answer', $event)"
+                                            :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col))"
+                                            :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col)"
+                                            :data-vv-scope="slugify(section.section)"
+                                            v-validate="ch_validate2(column.restrictions, column.required)"
+                                            :data-vv-value-path="column.answer"
+                                            :ref="vv_name_cell(index_sec,index,index_fil,index_col)"
+
+                                            data-vv-delay="10"
+                                            prepend-icon="event"
+                                            :required = "column.required"
+                                            ></v-text-field>
+                                            <v-date-picker
+                                              @input="$set(column,'answer', formatDate($event));removeError(vv_name_cell(index_sec,index,index_fil,index_col)) "
+                                              :value="parseDate(column.answer)"
+                                              no-title scrollable actions
+                                              >
+                                              <template slot-scope="{ save, cancel }">
+                                                <v-card-actions>
+                                                  <v-spacer></v-spacer>
+                                                  <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+                                                  <v-btn flat color="primary" @click="save">OK</v-btn>
+                                                </v-card-actions>
+                                              </template>
+                                            </v-date-picker>
+                                          </v-menu>
+                                          </div>
+                                          <div v-else>
+                                            <v-text-field
+                                            :label="column.value"
+                                            :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col)"
+                                            :data-vv-scope="slugify(section.section)"
+                                            v-validate="ch_validate2(column.restrictions, column.required)"
+                                            :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col))"
+                                            :value = "column.answer"
+                                            @input="value => { column.answer = value }"
+                                            :required = "column.required"
+                                            ></v-text-field>
+                                          </div>
                                         </div>
                                         <div v-else>
                                           <v-text-field
@@ -207,10 +272,10 @@
                                             <div v-if="!view()">
                                               <v-text-field
                                               :label="column.value"
-                                              :data-vv-name="cat(section.section , cat(String(index),cat(String(sub_index),cat(String(index_fil),String(index_col)))))"
+                                              :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col,sub_index)"
                                               :data-vv-scope="slugify(section.section)"
                                               v-validate="ch_validate2(column.restrictions, column.required)"
-                                              :error-messages="vee_errors.collect(cat(section.section , cat(String(index),cat(String(sub_index),cat(String(index_fil),String(index_col))))))"
+                                              :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col,sub_index))"
                                               :value = "column.answer"
                                               @input="value => { column.answer = value }"
                                               :required = "column.required"
@@ -268,14 +333,17 @@
     data () {
       return {
         questionnaire_completed: false,
-        allow: false,
+        allow: true,
         range: this.dataRange,
         visualization: this.functionForm,
         tabs:[],
         active: null,
         name: '',
         fecha_nacimiento : '1990-01-01',
-        dateFormatted: null
+        dateFormatted: null,
+        previus_allow : false,
+        next_allow : true,
+        v_alert : false
       }
     },
     created: function(){
@@ -283,19 +351,65 @@
         this.tabs.push(this.range[counter].section);
       }
     },
+    computed: {
+      progress_tab : function() {
+        return String(this.tabs.indexOf(this.active) + 1) + ' de ' + String(this.tabs.length)
+      }
+    },
+    watch :{
+      active : function (){
+        const vue = this;
+
+        if(vue.tabs.indexOf(vue.active) == 0){
+          this.previus_allow = false;
+        }else{
+          this.previus_allow = true;
+        }
+
+        if(vue.tabs.indexOf(vue.active) + 1 == vue.tabs.length){
+          vue.next_allow = false;
+        }else{
+          vue.next_allow = true;
+        }
+      }
+    },
     methods: {
+      vv_name_cell(index_sec,index_question, index_fil, index_col, index_subquestion = null){
+        var sub_return = ''
+        sub_return = 'Celda-' + String(index_sec) + String(index_question) + String(index_fil) + String(index_col);
+        if(index_subquestion){
+          sub_return = sub_return + String(index_subquestion);
+        }
+        return sub_return;
+      },
+
+      removeError(field){
+        var current_error = this.vee_errors.items.find(function(error){
+          return error.field == field;
+        });
+        var index = this.vee_errors.items.indexOf(current_error);
+        if (index > -1) {
+          this.vee_errors.items.splice(index, 1);
+        }
+      },
+
       parseDate (date) {
         if (!date) {
           return null
+        }else{
+          if(date.split('/').length < 3){
+            return null
+          }else{
+            const [day, month, year] = date.split('/')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+          }
         }
-        const [day, month, year] = date.split('/')
-        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
       },
       formatDate (date) {
         if (!date) {
           return null
         }
-
+        this.vee_errors.clear();
         const [year, month, day] = date.split('-')
         return `${day}/${month}/${year}`
       },
@@ -342,18 +456,27 @@
         .replace(/^-+/, "")
         .replace(/-+$/, "");
       },
+      previus () {
+        const vue = this;
+        vue.active = vue.tabs[(vue.tabs.indexOf(vue.active) - 1) % vue.tabs.length];
+      },
       next () {
         const vue = this;
-        console.log(vue.range);
         vue.$validator.validateAll(vue.slugify(vue.active)).then((result) => {
           if (result) {
             vue.active = vue.tabs[(vue.tabs.indexOf(vue.active) + 1) % vue.tabs.length]
-            if(vue.tabs.indexOf(vue.active) +1 == vue.tabs.length){
-              vue.allow = true;
-            }
+          }else{
+            this.v_alert = true
           }
         });
       },
+      disable_tab(section) {
+        const vue = this;
+        vue.$validator.validateAll(section).then((result) =>{
+          return result;
+        });
+      },
+
       save () {
         this.$validator.validateAll();
         console.log(this.slugify('E-mail'));
@@ -369,6 +492,7 @@
           })
           .then(function (response) {
             vm.questionnaire_completed = true
+            vm.allow = false
           })
           .catch(function (error) {
             console.log(error)
@@ -395,8 +519,12 @@
     },
     mounted: function() {
 
-      console.log(this.vee_errors);
-      console.log('mounted');
     }
   }
 </script>
+
+<style scoped>
+  .diabled-text-white{
+    color: #fafafade !important
+  }
+</style>
