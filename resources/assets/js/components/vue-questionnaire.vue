@@ -17,7 +17,7 @@
       <v-flex class="mr-0 text-lg-right" v-if="!view()">
         <v-btn @click.native="previus" :disabled="! previus_allow">Anterior</v-btn>
         <v-btn @click.native="next" :disabled="! next_allow">Siguiente</v-btn>
-        <v-btn :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length && allow" @click.native="save">Guardar</v-btn>
+        <v-btn v-if="!questionnaire_completed" :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length" @click.native="save">Guardar</v-btn>
       </v-flex>
       <div class="mr-4 hidden-md-and-down">
       </div>
@@ -28,7 +28,7 @@
         <div v-if="!questionnaire_completed">
           <v-tabs dark grow v-model="active">
             <v-tabs-bar color="blue darken-2" class="hidden-md-and-down">
-              <v-tabs-item v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple disabled >
+              <v-tabs-item v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple :disabled="!view()" >
                 <span class="caption diabled-text-white"> {{ section.section }} </span>
               </v-tabs-item>
               <v-tabs-slider color="yellow"></v-tabs-slider>
@@ -333,7 +333,6 @@
     data () {
       return {
         questionnaire_completed: false,
-        allow: true,
         range: this.dataRange,
         visualization: this.functionForm,
         tabs:[],
@@ -492,7 +491,6 @@
           })
           .then(function (response) {
             vm.questionnaire_completed = true
-            vm.allow = false
           })
           .catch(function (error) {
             console.log(error)
