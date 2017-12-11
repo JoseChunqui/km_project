@@ -37,11 +37,28 @@ class QuestionnaireController extends Controller
     }
     public function store(Request $request)
     {
-      $questionnaire = new Questionnaire();
-      $questionnaire->token = $request->token;
-      $questionnaire->form_id = $this->getFormFromToken($request->token);
-      $questionnaire->data = json_decode($request->data);
-      $questionnaire->save();
+      if ($request->ajax()){
+        try {
+          $questionnaire = new Questionnaire();
+          $questionnaire->token = $request->token;
+          $questionnaire->form_id = $this->getFormFromToken($request->token);
+          $questionnaire->data = json_decode($request->data);
+          $questionnaire->save();
+
+          return response()->json([
+            'success' => true,
+          ]);
+
+        } catch (\Exception $e) {
+
+          return response()->json([
+            'success' => false,
+          ]);
+          
+        }
+
+      }
+
     }
 
     public function SendQuestionnaire(Request $request)

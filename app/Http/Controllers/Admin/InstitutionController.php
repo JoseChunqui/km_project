@@ -37,10 +37,19 @@ class InstitutionController extends Controller
      */
     public function store(Request $request)
     {
-        $institution = new Institution();
-        $institution->name = $request->name;
-        $institution->abbreviation = $request->abbreviation;
-        $institution->save();
+        try {
+          $institution = new Institution();
+          $institution->name = $request->name;
+          $institution->abbreviation = $request->abbreviation;
+          $institution->save();
+
+          $request->session()->flash('success', 'La institución ha sido creada con éxito');
+
+        } catch (\Exception $e) {
+
+          $request->session()->flash('warning', 'Ha ocurrido un error. Posiblemente la institución que ha querido crear ya existe. Intente de nuevo o contacte al administrador del sistema');
+
+        }
 
         return redirect()->route('institutions.index');
     }

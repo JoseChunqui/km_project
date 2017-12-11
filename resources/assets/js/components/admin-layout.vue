@@ -40,6 +40,22 @@
           <slot>
             <!-- Content -->
           </slot>
+          <v-snackbar
+            :timeout = "Number(3000)"
+            color="success"
+            top
+            v-model="notify_success"
+            >
+            {{ notifySuccessMessage }}
+          </v-snackbar>
+          <v-snackbar
+            :timeout = "Number(7000)"
+            color="error"
+            top
+            v-model="notify_warning"
+            >
+            {{ notifyWarningMessage }}
+          </v-snackbar>
         </v-container>
       </v-content>
     </main>
@@ -51,7 +67,9 @@
     data: () => ({
       dialog: false,
       drawer: true,
-      items: []
+      items: [],
+      notify_success : false,
+      notify_warning : false
     }),
     mounted: function(){
       if(this.isAdmin == 'true'){
@@ -68,7 +86,15 @@
           { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
         ]
       }
-      console.log(this.isAdmin);
+
+      if(this.notifySuccessKey == 'true'){
+        this.notify_success = true;
+      }
+      if(this.notifyWarningKey == 'true'){
+        this.notify_warning = true;
+      }
+
+
     },
 
     methods: {
@@ -86,7 +112,11 @@
       respuestasLink: String,
       institucionesLink: String,
       cursosLink: String,
-      isAdmin: String
+      isAdmin: String,
+      notifySuccessKey: String,
+      notifySuccessMessage: String,
+      notifyWarningKey: String,
+      notifyWarningMessage: String
     }
   }
 </script>

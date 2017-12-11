@@ -241,13 +241,23 @@
           form : form.id
         })
         .then(response => {
-          form.active = ! form.active;
-          this.$notify({
-            group: 'success',
-            type: 'success',
-            title: 'Modificación realizada con éxito',
-            text: 'Se cambió el estado del cuestionario'
-          });
+          if(response.data.success){
+            form.active = ! form.active;
+            this.$notify({
+              group: 'success',
+              type: 'success',
+              title: 'Modificación realizada con éxito',
+              text: 'Se cambió el estado del cuestionario'
+            });
+          }else{
+            this.$notify({
+              group: 'error',
+              type: 'error',
+              title: 'Ha ocurrido un error',
+              text: 'No se ha podido realziar los cambios solicitados, intente de nuevo'
+            });
+          }
+
         })
         .catch(e => {
           this.$notify({

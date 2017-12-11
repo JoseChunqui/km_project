@@ -15,8 +15,8 @@ class CreateInstitutionsTable extends Migration
     {
         Schema::create('institutions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('abbreviation');
+            $table->string('name')->unique();
+            $table->string('abbreviation')->nullable();
             $table->timestamps();
         });
     }

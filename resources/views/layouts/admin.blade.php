@@ -9,7 +9,12 @@
   </head>
   <body>
     <div id="app">
-      <admin-layout logout-link="{{ route('logout') }}" l-csrf-token="{{ csrf_token() }}" is-admin="{{Auth::user()->isAdmin() ? 'true' : 'false'}}">
+      <admin-layout logout-link="{{ route('logout') }}" l-csrf-token="{{ csrf_token() }}" is-admin="{{Auth::user()->isAdmin() ? 'true' : 'false'}}"
+         notify-success-key="{{Session::has('success') ? 'true' : 'false'}}"
+         notify-warning-key="{{Session::has('warning') ? 'true' : 'false'}}"
+         notify-success-message="{{Session::has('success') ? Session::get('success') : ''}}"
+         notify-warning-message="{{Session::has('warning') ? Session::get('warning') : ''}}"
+         >
         @yield('content')
       </admin-layout>
     </div>

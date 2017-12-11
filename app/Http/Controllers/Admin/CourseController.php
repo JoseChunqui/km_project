@@ -8,6 +8,7 @@ use App\User;
 use App\Form;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
 class CourseController extends Controller
 {
@@ -42,6 +43,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
       try {
+        DB::beginTransaction();
 
         $course = new Course();
         $course->user_id = $request->user;
@@ -60,10 +62,14 @@ class CourseController extends Controller
 
         $request->session()->flash('success', 'Curso creado correctamente. Se generó un cuestionario para dicho curso de forma automática');
 
+        DB::commit();
+
       } catch (\Exception $e) {
 
-        $request->session()->flash('warning', 'Ya existe otro cursos registrado en el sistema. Pruebe colocando otro código de curso');
-        
+        DB::rollBack();
+
+        $request->session()->flash('warning', 'Ha ocurrido un error. Recuerde que el código de curso es único. Intente de nuevo o contacte al administrador del sistema');
+
       }
 
 

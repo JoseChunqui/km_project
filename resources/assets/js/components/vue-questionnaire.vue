@@ -11,13 +11,18 @@
       <!-- <v-btn dark flat @click.native="v_alert = false">Cerrar</v-btn> -->
     </v-snackbar>
 
+    <div role="notifications">
+      <notifications group="success" position="top center"/>
+      <notifications group="error" position="top center"/>
+    </div>
+
     <v-toolbar card color="white" prominent class="text-xs-center">
       <v-toolbar-title class="body-2 grey--text hidden-md-and-down">Administración del Conocimiento</v-toolbar-title>
       <v-spacer class="hidden-md-and-down"></v-spacer>
       <v-flex class="mr-0 text-lg-right" v-if="!view()">
-        <v-btn @click.native="previus" :disabled="! previus_allow">Anterior</v-btn>
-        <v-btn @click.native="next" :disabled="! next_allow">Siguiente</v-btn>
-        <v-btn v-if="!questionnaire_completed" :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length" @click.native="save">Guardar</v-btn>
+        <v-btn v-if="!this.questionnaire_completed" @click.native="previus" :disabled="! previus_allow">Anterior</v-btn>
+        <v-btn v-if="!this.questionnaire_completed" @click.native="next" :disabled="! next_allow">Siguiente</v-btn>
+        <v-btn v-if="!this.questionnaire_completed" :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length" @click.native="save">Guardar</v-btn>
       </v-flex>
       <div class="mr-4 hidden-md-and-down">
       </div>
@@ -147,7 +152,7 @@
                                 :error-messages="vee_errors.collect(question.statement)"
                                 v-model="dateFormatted"
                                 @blur="fecha_nacimiento = parseDate(dateFormatted)"
-                                @imput="value => { question.answer = value }"
+                                @input="value => { question.answer = value }"
                                 :value = "question.answer"
                                 prepend-icon="event"
                                 :required = "question.required"
@@ -242,8 +247,7 @@
                                         <div v-else>
                                           <v-text-field
                                           type="text"
-                                          :label="question.statement"
-                                          :value = "question.answer == ''? '-' : question.answer"
+                                          :value = "column.answer == ''? '-' : column.answer"
                                           readonly
                                           ></v-text-field>
                                         </div>
@@ -284,8 +288,7 @@
                                             <div v-else>
                                               <v-text-field
                                               type="text"
-                                              :label="question.statement"
-                                              :value = "question.answer == ''? '-' : question.answer"
+                                              :value = "column.answer == ''? '-' : column.answer"
                                               readonly
                                               ></v-text-field>
                                             </div>
@@ -311,7 +314,7 @@
           </v-tabs>
         </div>
         <div v-else>
-          Gracias por llenar el cuestionario.
+          Gracias por llenar el cuestionario
         </div>
       </div>
     </v-card-text>
@@ -490,15 +493,33 @@
               data: JSON.stringify(this.range)
           })
           .then(function (response) {
-            vm.questionnaire_completed = true
+            if(response.data.success){
+              vm.questionnaire_completed = true
+            }else{
+              this.$notify({
+                group: 'error',
+                type: 'error',
+                title: 'Ha ocurrido un error',
+                text: 'No se ha podido guardar el cuestionario. Intente nuevamente o notifique al docente.'
+              });
+            }
           })
           .catch(function (error) {
-            console.log(error)
+            this.$notify({
+              group: 'error',
+              type: 'error',
+              title: 'Ha ocurrido un error',
+              text: 'No se ha podido guardar el cuestionario. Intente nuevamente o notifique al docente.'
+            });
           })
 
         }else{
-          // this.active = this.tabs[0]
-          console.log("no valido");
+          this.$notify({
+            group: 'error',
+            type: 'error',
+            title: 'Corriga',
+            text: 'Faltan llenar o corregir algunos campos en esta sección'
+          });
         }
       },
       view () {

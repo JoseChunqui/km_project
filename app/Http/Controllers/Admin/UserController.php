@@ -22,13 +22,24 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-      $user = new User();
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = bcrypt($request->password);
-      $user->institution_id = $request->institution;
-      $user->role_id = Role::where('name','=','user')->first()->id;
-      $user->save();
+      try {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->institution_id = $request->institution;
+        $user->role_id = Role::where('name','=','user')->first()->id;
+        $user->save();
+
+        $request->session()->flash('success', 'Docente creado correctamente');
+
+      } catch (\Exception $e) {
+
+        $request->session()->flash('warning', 'Ha ocurrido un error. Recuerde que el email es único. Intente nuevamente o contacte al administrador del sistema');
+
+      }
+
+
       return redirect()->route('users.index');
     }
 }
