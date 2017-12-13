@@ -51,10 +51,9 @@
                   @foreach ($question->files[0]->columns as $column)
                     <th>
                       @if($column->editable)
-                        {{isset($column->answer) ? $column->answer : 'Error'}}
+                        {{isset($column->value) ? $column->value.'' : ''}} {{isset($column->answer) ? $column->answer : 'Error'}}
                       @else
-
-                        {{isset($column->value) ? $column->value : 'Error'}}: {{isset($column->answer) ? $column->answer : 'Error'}}
+                        {{isset($column->value) ? $column->value : 'Error'}}:
                       @endif
                     </th>
                   @endforeach

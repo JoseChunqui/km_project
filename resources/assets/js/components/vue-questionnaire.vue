@@ -22,7 +22,7 @@
       <v-flex class="mr-0 text-lg-right" v-if="!view()">
         <v-btn v-if="!this.questionnaire_completed" @click.native="previus" :disabled="! previus_allow">Anterior</v-btn>
         <v-btn v-if="!this.questionnaire_completed" @click.native="next" :disabled="! next_allow">Siguiente</v-btn>
-        <v-btn v-if="!this.questionnaire_completed" :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length" @click.native="save">Guardar</v-btn>
+        <v-btn v-if="!this.questionnaire_completed" :disabled="this.tabs.indexOf(this.active) +1 != this.tabs.length" @click.native="save">Finalizar</v-btn>
       </v-flex>
       <div class="mr-4 hidden-md-and-down">
       </div>
@@ -32,8 +32,9 @@
       <div >
         <div v-if="!questionnaire_completed">
           <v-tabs dark grow v-model="active">
-            <v-tabs-bar color="blue darken-2" class="hidden-md-and-down">
-              <v-tabs-item v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple :disabled="!view()" >
+            <v-tabs-bar class="hidden-md-and-down">
+              <v-tabs-item activeClass="blue darken-2" class="light-blue darken-1" v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple :disabled="!view()" >
+              <!-- <v-tabs-item activeClass="blue darken-2" class="light-blue darken-1" v-for="section in range" v-if="section.active" :key="section.section" :href="'#' + section.section" ripple> -->
                 <span class="caption diabled-text-white"> {{ section.section }} </span>
               </v-tabs-item>
               <v-tabs-slider color="yellow"></v-tabs-slider>
@@ -53,12 +54,13 @@
                     <v-card flat>
                       <v-card-text>
                         <div v-for="(question,index) in section.questions">
-                          <div v-if="question.type == 'text' || question.type == 'textarea'" class="flex sm6 offset-sm3">
+                          <div v-if="question.type == 'text' || question.type == 'textarea' || question.type == 'number'" :class="{'flex sm6 offset-sm3': question.statement !== '¿Qué expectativas tiene del curso?'}">
                             <div v-if="!view()">
                               <v-text-field
+                              :type="question.type == 'number' ? 'number' : 'text'"
                               :label="question.statement"
                               :v-model="slugify(question.statement)"
-                              :counter="question.type == 'textarea' ? 400 : 100"
+                              :counter="question.type == 'textarea' ? 400 : (question.type == 'text' ? 100 : '')"
                               v-validate="ch_validate2(question.restrictions, question.required)"
                               :value = "question.answer"
                               @input="value => { question.answer = value }"
@@ -105,10 +107,10 @@
                               ></v-text-field>
                             </div>
                           </div>
-                          <div v-if="question.type == 'number'"  class="flex sm6 offset-sm3">
+                          <!-- <div v-if="question.type == 'number'"  class="flex sm6 offset-sm3">
                             <div v-if="!view()">
                               <v-text-field
-                              type="number"
+                              :type="question.type"
                               :label="question.statement"
                               :v-model="slugify(question.statement)"
                               v-validate="ch_validate2(question.restrictions, question.required)"
@@ -128,7 +130,7 @@
                               readonly
                               ></v-text-field>
                             </div>
-                          </div>
+                          </div> -->
                           <div v-if="question.type == 'date'" class="flex sm6 offset-sm3 mt-2">
                             <div v-if="!view()">
                                 <v-menu
@@ -190,7 +192,7 @@
                                     <td v-for="(column,index_col) in file.columns">
                                       <div v-if="column.editable">
                                         <div v-if="!view()">
-                                          <div v-if="column.restrictions.key == 'Date'">
+                                          <div v-if="column.type == 'Date'">
                                             <v-menu
                                             lazy
                                             :close-on-content-click="false"
@@ -200,24 +202,26 @@
                                             :nudge-right="40"
                                             max-width="290px"
                                             min-width="290px"
+                                            :disabled="file.disabled"
                                             >
                                             <v-text-field
                                             slot="activator"
+                                            :ref="vv_name_cell(index_sec,index,index_fil,index_col)"
                                             :value = "column.answer"
                                             @input="$set(column,'answer', $event)"
-                                            :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col))"
+                                            :data-vv-as="truncate_string(question.files[0].columns[index_col].value,25)"
                                             :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col)"
+                                            :name="vv_name_cell(index_sec,index,index_fil,index_col)"
                                             :data-vv-scope="slugify(section.section)"
-                                            v-validate="ch_validate2(column.restrictions, column.required)"
+                                            v-validate="ch_validate2(column.restrictions, column.required, vv_name_cell(index_sec,index,index_fil,index_col))"
+                                            :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col))"
                                             :data-vv-value-path="column.answer"
-                                            :ref="vv_name_cell(index_sec,index,index_fil,index_col)"
-
-                                            data-vv-delay="10"
+                                            data-vv-delay="1000"
                                             prepend-icon="event"
-                                            :required = "column.required"
+                                            :disabled="file.disabled"
                                             ></v-text-field>
                                             <v-date-picker
-                                              @input="$set(column,'answer', formatDate($event));removeError(vv_name_cell(index_sec,index,index_fil,index_col)) "
+                                              @input="$set(column,'answer', formatDate($event));removeError(vv_name_cell(index_sec,index,index_fil,index_col));"
                                               :value="parseDate(column.answer)"
                                               no-title scrollable actions
                                               >
@@ -231,9 +235,11 @@
                                             </v-date-picker>
                                           </v-menu>
                                           </div>
-                                          <div v-else>
+                                          <div v-else-if="column.type == 'text' || column.type == 'textarea' || column.type == 'number'">
                                             <v-text-field
+                                            :type="column.type == 'number' ? 'number' : 'text'"
                                             :label="column.value"
+                                            :data-vv-as="truncate_string(question.files[0].columns[index_col].value, 25) + ' ' + truncate_string(file.columns[0].value,25)"
                                             :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col)"
                                             :data-vv-scope="slugify(section.section)"
                                             v-validate="ch_validate2(column.restrictions, column.required)"
@@ -241,7 +247,18 @@
                                             :value = "column.answer"
                                             @input="value => { column.answer = value }"
                                             :required = "column.required"
+                                            :disabled="file.disabled"
                                             ></v-text-field>
+                                          </div>
+                                          <div class="text-xs-center" v-else-if="column.type == 'toogle'">
+                                            <v-btn
+                                              :class="{'blue-grey darken-1' : !file.disabled, 'light-green lighten-2' : file.disabled }"
+                                              dark
+                                              small
+                                              @click.native = "disable_file_table(file,slugify(section.section))"
+                                              >
+                                              {{!file.disabled ? column.value : 'Activar'}}
+                                            </v-btn>
                                           </div>
                                         </div>
                                         <div v-else>
@@ -274,16 +291,61 @@
                                         <td v-for="(column,index_col) in file.columns">
                                           <div v-if="column.editable">
                                             <div v-if="!view()">
-                                              <v-text-field
-                                              :label="column.value"
-                                              :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col,sub_index)"
-                                              :data-vv-scope="slugify(section.section)"
-                                              v-validate="ch_validate2(column.restrictions, column.required)"
-                                              :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col,sub_index))"
-                                              :value = "column.answer"
-                                              @input="value => { column.answer = value }"
-                                              :required = "column.required"
-                                              ></v-text-field>
+                                              <div v-if="column.type == 'Date'">
+                                                <v-menu
+                                                lazy
+                                                :close-on-content-click="false"
+                                                transition="scale-transition"
+                                                offset-y
+                                                full-width
+                                                :nudge-right="40"
+                                                max-width="290px"
+                                                min-width="290px"
+                                                >
+                                                <v-text-field
+                                                slot="activator"
+                                                :value = "column.answer"
+                                                @input="$set(column,'answer', $event)"
+                                                :data-vv-as="truncate_string(sub_question.files[0].columns[index_col].value,40)"
+                                                :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col,sub_index)"
+                                                :data-vv-scope="slugify(section.section)"
+                                                v-validate="ch_validate2(column.restrictions, column.required, vv_name_cell(index_sec,index,index_fil,index_col,sub_index))"
+                                                :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col,sub_index))"
+                                                :data-vv-value-path="column.answer"
+                                                data-vv-delay="1000"
+                                                prepend-icon="event"
+                                                :disabled="file.disabled"
+                                                ></v-text-field>
+                                                <v-date-picker
+                                                  @input="$set(column,'answer', formatDate($event));removeError(vv_name_cell(index_sec,index,index_fil,index_col,sub_index))"
+                                                  :value="parseDate(column.answer)"
+                                                  no-title scrollable actions
+                                                  >
+                                                  <template slot-scope="{ save, cancel }">
+                                                    <v-card-actions>
+                                                      <v-spacer></v-spacer>
+                                                      <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+                                                      <v-btn flat color="primary" @click="save">OK</v-btn>
+                                                    </v-card-actions>
+                                                  </template>
+                                                </v-date-picker>
+                                              </v-menu>
+                                              </div>
+                                              <div v-else-if="column.type == 'text' || column.type == 'textarea' || column.type == 'number'">
+                                                <v-text-field
+                                                :label="column.value"
+                                                style="font-size:12px;"
+                                                :type="column.type == 'number' ? 'number' : 'text'"
+                                                :data-vv-as="truncate_string(sub_question.files[0].columns[index_col].value, 40) + ' ' + truncate_string(file.columns[0].value, 40)"
+                                                :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col,sub_index)"
+                                                :data-vv-scope="slugify(section.section)"
+                                                v-validate="ch_validate2(column.restrictions, column.required)"
+                                                :error-messages="vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col,sub_index))"
+                                                :value = "column.answer"
+                                                @input="value => { column.answer = value }"
+                                                :disabled="file.disabled"
+                                                ></v-text-field>
+                                              </div>
                                             </div>
                                             <div v-else>
                                               <v-text-field
@@ -376,22 +438,38 @@
       }
     },
     methods: {
+      truncate_string(string, max_lenght = 25){
+        var to_be_returned = string;
+        if(string.length > max_lenght){
+          to_be_returned = string.substring(0,max_lenght) + '...';
+        }
+        // console.log(to_be_returned);
+        return to_be_returned ;
+      },
       vv_name_cell(index_sec,index_question, index_fil, index_col, index_subquestion = null){
         var sub_return = ''
-        sub_return = 'Celda-' + String(index_sec) + String(index_question) + String(index_fil) + String(index_col);
+        sub_return = 'celda-' + String(index_sec) + String(index_question) + String(index_fil) + String(index_col);
         if(index_subquestion){
           sub_return = sub_return + String(index_subquestion);
         }
         return sub_return;
       },
+      disable_file_table(file, section){
+        this.$set(file,'disabled',!file.disabled);
+        for (var counter_i in file.columns){
+          this.$set(file.columns[counter_i],'answer','');
+        }
+        if(section){
+          this.vee_errors.clear(section)
+        }
+      },
 
-      removeError(field){
-        var current_error = this.vee_errors.items.find(function(error){
-          return error.field == field;
-        });
-        var index = this.vee_errors.items.indexOf(current_error);
-        if (index > -1) {
-          this.vee_errors.items.splice(index, 1);
+      removeError(field = null){
+        if(field){
+          this.$refs[field][0].focus();
+
+        }else{
+          this.vee_errors.clear()
         }
       },
 
@@ -418,7 +496,7 @@
       cat(text1, text2){
         return text1.concat(text2)
       },
-      ch_validate2(restrictions, required = false){
+      ch_validate2(restrictions, required = false, self = null){
         var custom_validate = ''
         if(restrictions.key == "None"){
           //
@@ -440,9 +518,21 @@
         else if(restrictions.key == "Email"){
           custom_validate = 'email'
         }
-        // else if(restrictions.key == "Date"){
-        //   custom_validate = 'email'
-        // }
+        else if(restrictions.key == "Date"){
+          custom_validate = 'date_format:DD/MM/YYYY'
+          if(restrictions.value == 'after:previus'){
+            if(self){
+              var current_target = 'celda-'+(self.split('celda-')[1] - 1);
+              custom_validate = custom_validate + '|' + 'after:' + (String(current_target))
+            }
+          }
+
+          if(restrictions.value == 'before:today'){
+            const today = moment().format('DD/MM/YYYY');
+            custom_validate = custom_validate + '|' + 'before:' + today
+          }
+
+        }
         return  required ? 'required'+ '|' + custom_validate : custom_validate
 
 
@@ -480,47 +570,45 @@
       },
 
       save () {
-        this.$validator.validateAll();
-        console.log(this.slugify('E-mail'));
-        console.log(this.vee_errors.items['length']);
+        const vm = this;
+        vm.$validator.validateAll(vm.slugify(vm.active)).then((result) => {
+          if (result) {
+            axios.post(this.saveLink, {
+                csrf_token: vm.csrfToken,
+                token: window.location.pathname.split("/").pop(),
+                data: JSON.stringify(this.range)
+            })
+            .then(function (response) {
+              if(response.data.success){
+                vm.questionnaire_completed = true
+                vm.$notify({
+                  group: 'success',
+                  type: 'success',
+                  title: 'Cuestionario KM',
+                  text: 'Su informacion se ha grabado satisfactoriamente. Gracias por su participacion'
+                });
 
-        if(this.vee_errors.items['length'] == 0){
-          console.log("valido");
-          const vm = this;
-          axios.post(this.saveLink, {
-              csrf_token: vm.csrfToken,
-              token: window.location.pathname.split("/").pop(),
-              data: JSON.stringify(this.range)
-          })
-          .then(function (response) {
-            if(response.data.success){
-              vm.questionnaire_completed = true
-            }else{
-              this.$notify({
+              }else{
+                vm.$notify({
+                  group: 'error',
+                  type: 'error',
+                  title: 'Ha ocurrido un error',
+                  text: 'No se ha podido guardar el cuestionario. Intente nuevamente o notifique al docente.'
+                });
+              }
+            })
+            .catch(function (error) {
+              vm.$notify({
                 group: 'error',
                 type: 'error',
                 title: 'Ha ocurrido un error',
                 text: 'No se ha podido guardar el cuestionario. Intente nuevamente o notifique al docente.'
               });
-            }
-          })
-          .catch(function (error) {
-            this.$notify({
-              group: 'error',
-              type: 'error',
-              title: 'Ha ocurrido un error',
-              text: 'No se ha podido guardar el cuestionario. Intente nuevamente o notifique al docente.'
-            });
-          })
-
-        }else{
-          this.$notify({
-            group: 'error',
-            type: 'error',
-            title: 'Corriga',
-            text: 'Faltan llenar o corregir algunos campos en esta sección'
-          });
-        }
+            })
+          }else{
+            this.v_alert = true;
+          }
+        });
       },
       view () {
         if(this.visualization == 'show'){

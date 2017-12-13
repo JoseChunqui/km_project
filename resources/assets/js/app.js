@@ -15,12 +15,14 @@ require('./libraries');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+ window.moment = require('moment');
  window.Vue = require('vue');
  window.Vuetify = require('vuetify');
  // window.VeeValidate = require('vee-validate');
  import VeeValidate, { Validator } from 'vee-validate';
  import m_es from 'vee-validate/dist/locale/es';
- Validator.addLocale(m_es);
+ Validator.localize('es',m_es);
  const config = {
   errorBagName: 'vee_errors', // change if property conflicts.
   fieldsBagName: 'fields',
@@ -41,14 +43,10 @@ require('./libraries');
   inject: true,
   validity: false,
   aria: true,
-  dictionary: {
-    es: { messages: m_es }
-  }
 };
-
-  Vue.use(Notifications)
-  Vue.use(VeeValidate, config);
-  Vue.use(Vuetify);
+ Vue.use(Notifications)
+ Vue.use(VeeValidate, config);
+ Vue.use(Vuetify);
 
  Vue.component('login-form', require('./components/login/login-form.vue'));
  Vue.component('email-form', require('./components/login/email-form.vue'));

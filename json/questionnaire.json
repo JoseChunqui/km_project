@@ -205,9 +205,11 @@
       "type": "table",
       "files": [
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Nro.",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -218,6 +220,7 @@
             },
             {
               "value": "Curso",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -228,6 +231,7 @@
             },
             {
               "value": "Profesor",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -239,9 +243,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "#1",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -252,6 +258,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -262,6 +269,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -273,9 +281,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "#2",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -286,6 +296,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -296,6 +307,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -307,9 +319,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "#3",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -320,6 +334,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -330,6 +345,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -347,9 +363,11 @@
       "type": "table",
       "files": [
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Nro.",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -360,6 +378,7 @@
             },
             {
               "value": "Cualidad",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -370,6 +389,7 @@
             },
             {
               "value": "Sustento",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -381,9 +401,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "#1",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -394,6 +416,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -404,6 +427,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -415,9 +439,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "#2",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -428,6 +454,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -438,6 +465,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -449,9 +477,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "#3",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -462,6 +492,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -472,6 +503,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -483,9 +515,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "#4",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -496,6 +530,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -506,6 +541,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -567,9 +603,22 @@
       "type": "table",
       "files": [
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Actividad",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "Ocurrencia",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -580,6 +629,7 @@
             },
             {
               "value": "Descripción",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -590,6 +640,7 @@
             },
             {
               "value": "Lugar",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -600,6 +651,7 @@
             },
             {
               "value": "Fecha Inicio",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -610,6 +662,7 @@
             },
             {
               "value": "Fecha Fin",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -621,9 +674,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Prácticas",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -633,7 +688,19 @@
               }
             },
             {
+              "value": "No realizada",
+              "type": "toogle",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -644,6 +711,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -654,30 +722,34 @@
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "before:today"
               }
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "after:previus"
               }
             }
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Ayudantía",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -687,7 +759,19 @@
               }
             },
             {
+              "value": "No realizada",
+              "type": "toogle",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -698,6 +782,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -708,30 +793,34 @@
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "before:today"
               }
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "after:previus"
               }
             }
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Maratones/Concursos de Programación (Hackathon, IEEEXtreme Programming, etc)",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -741,7 +830,19 @@
               }
             },
             {
+              "value": "No realizada",
+              "type": "toogle",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -752,6 +853,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -762,30 +864,34 @@
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "before:today"
               }
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "after:previus"
               }
             }
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Otros (Centros Culturales,etc)",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -795,7 +901,19 @@
               }
             },
             {
+              "value": "No realizada",
+              "type": "toogle",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -806,6 +924,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -816,22 +935,24 @@
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "before:today"
               }
             },
             {
               "value": "",
+              "type": "Date",
               "editable": true,
               "answer": "",
               "required": true,
               "restrictions" : {
                 "key" : "Date",
-                "value" : ""
+                "value" : "after:previus"
               }
             }
           ]
@@ -854,9 +975,11 @@
           "type":"table",
           "files":[
             {
+              "disabled": false,
               "columns": [
                 {
                   "value": "Lenguaje de Programación",
+                  "type": "text",
                   "editable": false,
                   "answer": "",
                   "required": true,
@@ -867,6 +990,7 @@
                 },
                 {
                   "value": "Auto calificación (escala de 0 a 20)",
+                  "type": "text",
                   "editable": false,
                   "answer": "",
                   "required": true,
@@ -877,136 +1001,153 @@
                 }
               ]
             },
-          {
-            "columns": [
-              {
-                "value": "Java",
-                "editable": false,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "None",
-                  "value" : ""
+            {
+              "disabled": false,
+              "columns": [
+                {
+                  "value": "Java",
+                  "type": "text",
+                  "editable": false,
+                  "answer": "",
+                  "required": true,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
+                },
+                {
+                  "value": "",
+                  "type": "number",
+                  "editable": true,
+                  "answer": "",
+                  "required": true,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
-              },
-              {
-                "value": "",
-                "editable": true,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "vigesimal",
-                  "value" : ""
+              ]
+            },
+            {
+              "disabled": false,
+              "columns": [
+                {
+                  "value": "PHP",
+                  "type": "text",
+                  "editable": false,
+                  "answer": "",
+                  "required": true,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
+                },
+                {
+                  "value": "",
+                  "type": "number",
+                  "editable": true,
+                  "answer": "",
+                  "required": true,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
-              }
-            ]
-          },
-          {
-            "columns": [
-              {
-                "value": "PHP",
-                "editable": false,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "None",
-                  "value" : ""
+              ]
+            },
+            {
+              "disabled": false,
+              "columns": [
+                {
+                  "value": "Python",
+                  "type": "text",
+                  "editable": false,
+                  "answer": "",
+                  "required": true,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
+                },
+                {
+                  "value": "",
+                  "type": "number",
+                  "editable": true,
+                  "answer": "",
+                  "required": true,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
-              },
-              {
-                "value": "",
-                "editable": true,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "vigesimal",
-                  "value" : ""
+              ]
+            },
+            {
+              "disabled": false,
+              "columns": [
+                {
+                  "value": "Otros",
+                  "type": "text",
+                  "editable": true,
+                  "answer": "",
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
+                },
+                {
+                  "value": "",
+                  "type": "number",
+                  "editable": true,
+                  "answer": "",
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
-              }
-            ]
-          },
-          {
-            "columns": [
-              {
-                "value": "Python",
-                "editable": false,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "None",
-                  "value" : ""
+              ]
+            },
+            {
+              "disabled": false,
+              "columns": [
+                {
+                  "value": "Otros",
+                  "type": "text",
+                  "editable": true,
+                  "answer": "",
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "None",
+                    "value" : ""
+                  }
+                },
+                {
+                  "value": "",
+                  "type": "number",
+                  "editable": true,
+                  "answer": "",
+                  "required": false,
+                  "restrictions" : {
+                    "key" : "vigesimal",
+                    "value" : ""
+                  }
                 }
-              },
-              {
-                "value": "",
-                "editable": true,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "vigesimal",
-                  "value" : ""
-                }
-              }
-            ]
-          },
-          {
-            "columns": [
-              {
-                "value": "Otros",
-                "editable": true,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "None",
-                  "value" : ""
-                }
-              },
-              {
-                "value": "",
-                "editable": true,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "vigesimal",
-                  "value" : ""
-                }
-              }
-            ]
-          },
-          {
-            "columns": [
-              {
-                "value": "Otros",
-                "editable": true,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "None",
-                  "value" : ""
-                }
-              },
-              {
-                "value": "",
-                "editable": true,
-                "answer": "",
-                "required": true,
-                "restrictions" : {
-                  "key" : "vigesimal",
-                  "value" : ""
-                }
-              }
-            ]
-          }
-        ]
+              ]
+            }
+          ]
         },
         {
           "statement": "Gestores de Base de Datos (Ejem: Oracle, MySQL, etc).Autocalifique su nivel.",
           "type":"table",
           "files":[
             {
+              "disabled": false,
               "columns": [
                 {
                   "value": "Gestor de Base de Datos",
+                  "type": "text",
                   "editable": false,
                   "answer": "",
                   "required": true,
@@ -1017,6 +1158,7 @@
                 },
                 {
                   "value": "Auto calificación (escala de 0 a 20)",
+                  "type": "text",
                   "editable": false,
                   "answer": "",
                   "required": true,
@@ -1028,9 +1170,11 @@
               ]
             },
             {
+              "disabled": false,
               "columns": [
                 {
                   "value": "MySql",
+                  "type": "text",
                   "editable": false,
                   "answer": "",
                   "required": true,
@@ -1041,6 +1185,7 @@
                 },
                 {
                   "value": "",
+                  "type": "number",
                   "editable": true,
                   "answer": "",
                   "required": true,
@@ -1052,9 +1197,11 @@
               ]
             },
             {
+              "disabled": false,
               "columns": [
                 {
                   "value": "Oracle",
+                  "type": "text",
                   "editable": false,
                   "answer": "",
                   "required": true,
@@ -1065,6 +1212,7 @@
                 },
                 {
                   "value": "",
+                  "type": "number",
                   "editable": true,
                   "answer": "",
                   "required": true,
@@ -1076,9 +1224,11 @@
               ]
             },
             {
+              "disabled": false,
               "columns": [
                 {
                   "value": "Informix",
+                  "type": "text",
                   "editable": false,
                   "answer": "",
                   "required": true,
@@ -1089,6 +1239,7 @@
                 },
                 {
                   "value": "",
+                  "type": "number",
                   "editable": true,
                   "answer": "",
                   "required": true,
@@ -1100,12 +1251,14 @@
               ]
             },
             {
+              "disabled": false,
               "columns": [
                 {
                   "value": "Otros",
+                  "type": "text",
                   "editable": true,
                   "answer": "",
-                  "required": true,
+                  "required": false,
                   "restrictions" : {
                     "key" : "None",
                     "value" : ""
@@ -1113,9 +1266,10 @@
                 },
                 {
                   "value": "",
+                  "type": "number",
                   "editable": true,
                   "answer": "",
-                  "required": true,
+                  "required": false,
                   "restrictions" : {
                     "key" : "vigesimal",
                     "value" : ""
@@ -1124,12 +1278,14 @@
               ]
             },
             {
+              "disabled": false,
               "columns": [
                 {
                   "value": "Otros",
+                  "type": "text",
                   "editable": true,
                   "answer": "",
-                  "required": true,
+                  "required": false,
                   "restrictions" : {
                     "key" : "None",
                     "value" : ""
@@ -1137,9 +1293,10 @@
                 },
                 {
                   "value": "",
+                  "type": "number",
                   "editable": true,
                   "answer": "",
-                  "required": true,
+                  "required": false,
                   "restrictions" : {
                     "key" : "vigesimal",
                     "value" : ""
@@ -1152,13 +1309,15 @@
       ]
     },
     {
-      "statement": "Lenguajes de Programación (Ejemplo: Java, PHP, etc). Autocalifique su nivel",
+      "statement": "Mencione alguno (s) sistema(s) informatico(s) o prototipo que ha desarrollado, precisando las herramientas solicitadas y si fue con fines académicos o extra-académicos",
       "type":"table",
       "files":[
         {
+          "disabled": false,
           "columns": [
             {
               "value": "Sistema Informático o Prototipo",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -1169,6 +1328,7 @@
             },
             {
               "value": "Breve descripción de la funcionalidad",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -1179,6 +1339,7 @@
             },
             {
               "value": "Herramienta de programación utilizada (Java, PHP, etc.)",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -1189,6 +1350,7 @@
             },
             {
               "value": "Gestor de Base de Datos (MySql, Oracle, etc.)",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -1199,6 +1361,7 @@
             },
             {
               "value": "Fines: académicos o extra-académicos",
+              "type": "text",
               "editable": false,
               "answer": "",
               "required": true,
@@ -1210,9 +1373,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1223,6 +1388,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1233,6 +1399,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1243,6 +1410,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1253,6 +1421,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1264,9 +1433,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1277,6 +1448,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1287,6 +1459,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1297,6 +1470,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1307,6 +1481,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1318,9 +1493,11 @@
           ]
         },
         {
+          "disabled": false,
           "columns": [
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1331,6 +1508,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1341,6 +1519,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1351,6 +1530,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
@@ -1361,6 +1541,7 @@
             },
             {
               "value": "",
+              "type": "text",
               "editable": true,
               "answer": "",
               "required": true,
