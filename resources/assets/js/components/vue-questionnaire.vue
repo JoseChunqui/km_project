@@ -253,12 +253,28 @@
                                           <div class="text-xs-center" v-else-if="column.type == 'toogle'">
                                             <v-btn
                                               :class="{'blue-grey darken-1' : !file.disabled, 'light-green lighten-2' : file.disabled }"
-                                              dark
+                                              :dark = "check_row_in_table(file)"
                                               small
                                               @click.native = "disable_file_table(file,slugify(section.section))"
+                                              :disabled = "!check_row_in_table(file)"
                                               >
-                                              {{!file.disabled ? column.value : 'Activar'}}
+                                              {{!file.disabled ? (check_row_in_table(file) ? column.value : 'Realizada') : 'Activar'}}
                                             </v-btn>
+                                          </div>
+                                          <div v-else-if="column.type == 'select'">
+                                            <v-select
+                                            v-bind:items="column.options"
+                                            :label="column.value"
+                                            v-validate="ch_validate2(column.restrictions, column.required)"
+                                            :value = "column.answer"
+                                            @input="value => { column.answer = value }"
+                                            :data-vv-as="truncate_string(question.files[0].columns[index_col].value, 25) + ' ' + truncate_string(file.columns[0].value,25)"
+                                            :data-vv-name="vv_name_cell(index_sec,index,index_fil,index_col)"
+                                            :data-vv-scope="slugify(section.section)"
+                                            :error-messages = "vee_errors.collect(vv_name_cell(index_sec,index,index_fil,index_col))"
+                                            single-line
+                                            bottom
+                                            ></v-select>
                                           </div>
                                         </div>
                                         <div v-else>
@@ -278,7 +294,7 @@
                               </table>
                             </div>
                           </div>
-                          <div v-if="question.type == 'multiquestion'" class="mb-4 mt-4">
+                          <!-- <div v-if="question.type == 'multiquestion'" class="mb-4 mt-4">
                             <div v-for="(sub_question, sub_index) in question.questions">
                               <div v-if="sub_question.type == 'table'">
                                 <label class="mb-4 mt-4">
@@ -365,7 +381,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                         </div>
                       </v-card-text>
                     </v-card>
@@ -438,6 +454,16 @@
       }
     },
     methods: {
+      check_row_in_table(file){
+        var to_be_returned = true;
+        for (var counter_i in file.columns){
+          if(file.columns[counter_i].answer !== ""){
+            to_be_returned = false;
+          }
+        }
+        return to_be_returned;
+      },
+
       truncate_string(string, max_lenght = 25){
         var to_be_returned = string;
         if(string.length > max_lenght){
@@ -633,5 +659,8 @@
 <style scoped>
   .diabled-text-white{
     color: #fafafade !important
+  }
+  .input-group--text-field input, .input-group--text-field textarea{
+    font-size: 10px !important
   }
 </style>

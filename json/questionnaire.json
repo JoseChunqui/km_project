@@ -967,342 +967,336 @@
   "section":"CONOCIMIENTO Y USO DE HERRAMIENTAS",
   "questions":[
     {
-      "statement": "Conocimiento de Herramientas",
-      "type": "multiquestion",
-      "questions":[
+      "statement": "Lenguajes de Programación (Ejemplo: Java, PHP, etc). Autocalifique su nivel",
+      "type":"table",
+      "files":[
         {
-          "statement": "Lenguajes de Programación (Ejemplo: Java, PHP, etc). Autocalifique su nivel",
-          "type":"table",
-          "files":[
+          "disabled": false,
+          "columns": [
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Lenguaje de Programación",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "Auto calificación (escala de 0 a 20)",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "Lenguaje de Programación",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Java",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
-            },
-            {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "PHP",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
-            },
-            {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Python",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
-            },
-            {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Otros",
-                  "type": "text",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
-            },
-            {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Otros",
-                  "type": "text",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "Auto calificación (escala de 0 a 20)",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             }
           ]
         },
         {
-          "statement": "Gestores de Base de Datos (Ejem: Oracle, MySQL, etc).Autocalifique su nivel.",
-          "type":"table",
-          "files":[
+          "disabled": false,
+          "columns": [
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Gestor de Base de Datos",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "Auto calificación (escala de 0 a 20)",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "Java",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "MySql",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "PHP",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Oracle",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Python",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Informix",
-                  "type": "text",
-                  "editable": false,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": true,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Otros",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Otros",
-                  "type": "text",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Otros",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
             },
             {
-              "disabled": false,
-              "columns": [
-                {
-                  "value": "Otros",
-                  "type": "text",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "None",
-                    "value" : ""
-                  }
-                },
-                {
-                  "value": "",
-                  "type": "number",
-                  "editable": true,
-                  "answer": "",
-                  "required": false,
-                  "restrictions" : {
-                    "key" : "vigesimal",
-                    "value" : ""
-                  }
-                }
-              ]
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "statement": "Gestores de Base de Datos (Ejem: Oracle, MySQL, etc).Autocalifique su nivel.",
+      "type":"table",
+      "files":[
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Gestor de Base de Datos",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "Auto calificación (escala de 0 a 20)",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "MySql",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Oracle",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Informix",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Otros",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Otros",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "number",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "vigesimal",
+                "value" : ""
+              }
             }
           ]
         }
@@ -1421,7 +1415,17 @@
             },
             {
               "value": "",
-              "type": "text",
+              "type": "select",
+              "options": [
+                {
+                  "text": "Académicos",
+                  "value": "Académicos"
+                },
+                {
+                  "text": "Extra-Académicos",
+                  "value": "Extra-Académicos"
+                }
+              ],
               "editable": true,
               "answer": "",
               "required": true,
@@ -1481,7 +1485,17 @@
             },
             {
               "value": "",
-              "type": "text",
+              "type": "select",
+              "options": [
+                {
+                  "text": "Académicos",
+                  "value": "Académicos"
+                },
+                {
+                  "text": "Extra-Académicos",
+                  "value": "Extra-Académicos"
+                }
+              ],
               "editable": true,
               "answer": "",
               "required": true,
@@ -1541,7 +1555,17 @@
             },
             {
               "value": "",
-              "type": "text",
+              "type": "select",
+              "options": [
+                {
+                  "text": "Académicos",
+                  "value": "Académicos"
+                },
+                {
+                  "text": "Extra-Académicos",
+                  "value": "Extra-Académicos"
+                }
+              ],
               "editable": true,
               "answer": "",
               "required": true,
