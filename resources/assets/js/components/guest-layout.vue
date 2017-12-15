@@ -7,7 +7,7 @@
         </v-toolbar-title> -->
       </v-toolbar>
       <v-layout row>
-        <v-flex xs12 md10 xl8 offset-xl2 offset-md1>
+        <v-flex xs12 md10 xl10 offset-xl1 offset-md1>
           <slot>
             <!--Content-->
           </slot>

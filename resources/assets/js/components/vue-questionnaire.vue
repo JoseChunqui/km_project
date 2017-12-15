@@ -185,6 +185,7 @@
                             <label class="mb-2 mt-2">
                               {{question.statement}}
                             </label>
+                            <span class="caption mb-2 hidden-sm-and-up">(Deslícese hacia la derecha en la tabla)</span>
                             <div class="table__overflow elevation-1 mb-4 mt-4">
                               <table class="datatable table bordered">
                                 <tbody>

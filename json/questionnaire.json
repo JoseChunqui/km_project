@@ -599,7 +599,7 @@
       }
     },
     {
-      "statement": "Actividades Extra-académicas",
+      "statement": "Actividades Extra-académicas. En caso de no haber realizado alguna actividad, presione el botón NO REALIZADA",
       "type": "table",
       "files": [
         {
@@ -677,7 +677,7 @@
           "disabled": false,
           "columns": [
             {
-              "value": "Prácticas",
+              "value": "Prácticas 1",
               "type": "text",
               "editable": false,
               "answer": "",
@@ -748,7 +748,7 @@
           "disabled": false,
           "columns": [
             {
-              "value": "Ayudantía",
+              "value": "Prácticas 2",
               "type": "text",
               "editable": false,
               "answer": "",
@@ -819,7 +819,220 @@
           "disabled": false,
           "columns": [
             {
-              "value": "Maratones/Concursos de Programación (Hackathon, IEEEXtreme Programming, etc)",
+              "value": "Ayudantía 1",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "No realizada",
+              "type": "toogle",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "Date",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "Date",
+                "value" : "before:today"
+              }
+            },
+            {
+              "value": "",
+              "type": "Date",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "Date",
+                "value" : "after:previus"
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Ayudantía 2",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "No realizada",
+              "type": "toogle",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "Date",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "Date",
+                "value" : "before:today"
+              }
+            },
+            {
+              "value": "",
+              "type": "Date",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "Date",
+                "value" : "after:previus"
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Maratones/Concursos de Programación (Hackathon, IEEEXtreme Programming, etc) 1",
+              "type": "text",
+              "editable": false,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "No realizada",
+              "type": "toogle",
+              "editable": true,
+              "answer": "",
+              "required": false,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "text",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "None",
+                "value" : ""
+              }
+            },
+            {
+              "value": "",
+              "type": "Date",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "Date",
+                "value" : "before:today"
+              }
+            },
+            {
+              "value": "",
+              "type": "Date",
+              "editable": true,
+              "answer": "",
+              "required": true,
+              "restrictions" : {
+                "key" : "Date",
+                "value" : "after:previus"
+              }
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "columns": [
+            {
+              "value": "Maratones/Concursos de Programación (Hackathon, IEEEXtreme Programming, etc) 2",
               "type": "text",
               "editable": false,
               "answer": "",
