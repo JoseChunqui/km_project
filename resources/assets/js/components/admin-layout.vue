@@ -74,16 +74,16 @@
     mounted: function(){
       if(this.isAdmin == 'true'){
         this.items = [
-          { icon: 'home', text: 'Inicio', link: '/home'},
-          { icon: 'domain', text: 'Instituciones', link: '/instituciones' },
-          { icon: 'people', text: 'Docentes', link: '/docentes' },
-          { icon: 'import_contacts', text: 'Cursos', link: '/cursos' },
-          { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
+          { icon: 'home', text: 'Inicio', link: this.dataUrls[0]},
+          { icon: 'domain', text: 'Instituciones', link: this.dataUrls[1] },
+          { icon: 'people', text: 'Docentes', link: this.dataUrls[2] },
+          { icon: 'import_contacts', text: 'Cursos', link: this.dataUrls[3] },
+          { icon: 'layers', text: 'Cuestionarios', link: this.dataUrls[4] }
         ]
       }else{
         this.items = [
-          { icon: 'home', text: 'Inicio', link: '/home'},
-          { icon: 'layers', text: 'Cuestionarios', link: '/cuestionarios' }
+          { icon: 'home', text: 'Inicio', link: this.dataUrls[0]},
+          { icon: 'layers', text: 'Cuestionarios', link: this.dataUrls[4] }
         ]
       }
 
@@ -116,7 +116,8 @@
       notifySuccessKey: String,
       notifySuccessMessage: String,
       notifyWarningKey: String,
-      notifyWarningMessage: String
+      notifyWarningMessage: String,
+      dataUrls: Array,
     }
   }
 </script>
